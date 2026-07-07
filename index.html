@@ -118,7 +118,7 @@
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: 12px;
       margin-bottom: 16px;
     }
@@ -439,6 +439,7 @@
       <div class="stat"><div class="value" id="stat-updates">0</div><div class="label">进展记录</div></div>
       <button class="stat action" id="stat-high-card" type="button"><div class="value" id="stat-high">0</div><div class="label">Viatris高相关</div></button>
       <div class="stat"><div class="value" id="stat-latest">-</div><div class="label">最新新闻日期</div></div>
+      <div class="stat"><div class="value" id="stat-page-updated">2026.07.07</div><div class="label">本页更新</div></div>
     </section>
 
     <main class="layout">
@@ -1203,6 +1204,8 @@
       "看 BD 新闻不能只看总金额，首付款比例、权益范围、临床阶段和开发责任更能反映资产质量。"
 ];
 
+    const dashboardUpdated = "2026-07-07";
+
     const tabs = ["全部", "政策/支付", "药品/创新药", "医疗器械/诊断", "BD/投融资", "组织/合规", "渠道/患者", "数字医疗/AI"];
     let activeTab = "全部";
 
@@ -1220,6 +1223,7 @@
       statHigh: document.getElementById("stat-high"),
       statHighCard: document.getElementById("stat-high-card"),
       statLatest: document.getElementById("stat-latest"),
+      statPageUpdated: document.getElementById("stat-page-updated"),
       takeaways: document.getElementById("weeklyTakeaways"),
       watchList: document.getElementById("watchList"),
       discussionPoints: document.getElementById("discussionPoints")
@@ -1368,6 +1372,7 @@
       els.statHigh.textContent = high;
       els.statHighCard.classList.toggle("active", els.highOnly.checked);
       els.statLatest.textContent = latest === "-" ? "-" : formatDate(latest);
+      els.statPageUpdated.textContent = formatDate(dashboardUpdated);
     }
 
     function render() {
@@ -1381,7 +1386,7 @@
 
     function init() {
       const latestDate = newsData.map(item => item.date).sort().at(-1);
-      els.updated.textContent = `最近更新：${formatDate(latestDate)} · ${newsData.length}个事件`;
+      els.updated.textContent = `本页更新：${formatDate(dashboardUpdated)} · ${newsData.length}个事件`;
       renderMonths();
       render();
       els.search.addEventListener("input", render);
