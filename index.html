@@ -453,6 +453,10 @@
           <ul class="side-list" id="weeklyTakeaways"></ul>
         </div>
         <div class="side-card">
+          <h3>可复用观点</h3>
+          <ul class="side-list" id="discussionPoints"></ul>
+        </div>
+        <div class="side-card">
           <h3>后续重点追踪</h3>
           <ul class="side-list" id="watchList"></ul>
         </div>
@@ -803,6 +807,12 @@
       "2026主线四：MNC中国机会与风险并存，合规、数据、临床伦理和地缘审查会越来越影响总部决策。"
     ];
 
+    const discussionPoints = [
+      "中国医药市场不是单纯控费，而是“成熟药精细治理 + 创新药分层支付 + 院外可及性提升”同时发生。",
+      "判断创新药不能把获批等同于成功，要拆成科学突破、注册成功、支付可及、商业放量四个阶段。",
+      "MNC中国战略正在从销售市场视角，转向“增长市场 + 创新资产来源地 + 合规高压区”的复合视角。"
+    ];
+
     const tabs = ["全部", "政策/支付", "药品/创新药", "医疗器械/诊断", "BD/投融资", "组织/合规", "渠道/患者", "数字医疗/AI"];
     let activeTab = "全部";
 
@@ -821,7 +831,8 @@
       statHighCard: document.getElementById("stat-high-card"),
       statLatest: document.getElementById("stat-latest"),
       takeaways: document.getElementById("weeklyTakeaways"),
-      watchList: document.getElementById("watchList")
+      watchList: document.getElementById("watchList"),
+      discussionPoints: document.getElementById("discussionPoints")
     };
 
     function formatDate(dateText) {
@@ -951,6 +962,7 @@
 
     function renderSide(filtered) {
       els.takeaways.innerHTML = weeklyTakeaways.map(x => `<li>${x}</li>`).join("");
+      els.discussionPoints.innerHTML = discussionPoints.map(x => `<li>${x}</li>`).join("");
       const watchItems = filtered
         .flatMap(item => item.watch.slice(0, 2).map(w => ({ title: item.title, watch: w, date: item.date })))
         .slice(0, 8);
