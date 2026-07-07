@@ -1,9 +1,6 @@
 name: Daily Pharma News Update
 
 on:
-  schedule:
-    # Beijing 10:00 on workdays = UTC 02:00.
-    - cron: "0 2 * * 1-5"
   workflow_dispatch:
 
 permissions:
