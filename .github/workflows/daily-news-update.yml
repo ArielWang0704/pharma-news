@@ -5,3 +5,10 @@ on:
 
 permissions:
   contents: write
+
+jobs:
+  manual-placeholder:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scheduled update is paused
+        run: echo "Scheduled API update is paused. No automatic news update is running."
