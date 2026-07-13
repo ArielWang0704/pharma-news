@@ -271,6 +271,25 @@
       font-size: 13px;
     }
 
+    .detail-content {
+      display: grid;
+      gap: 10px;
+      color: #344054;
+      line-height: 1.65;
+      font-size: 13px;
+    }
+
+    .detail-content p {
+      margin: 0;
+    }
+
+    .detail-content .section-title {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
     .timeline {
       display: grid;
       gap: 8px;
@@ -1510,6 +1529,53 @@
       return String(impact || "").includes("高");
     }
 
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function formatDetailText(text) {
+      const sectionLabels = [
+        "一句话结论",
+        "发生了什么",
+        "必要背景",
+        "本次目录的关键变化 / Highlight",
+        "本次目录的关键变化",
+        "为什么重要",
+        "对Viatris为什么高相关",
+        "对Viatris高相关",
+        "行业/岗位能力启发",
+        "行业/岗位启发",
+        "岗位启发",
+        "后续观察点"
+      ];
+      const pattern = new RegExp(`(${sectionLabels.map(label => label.replaceAll("/", "\\/")).join("|")})：`, "g");
+      const normalized = String(text || "").trim().replace(pattern, "\n$1：");
+      const sections = normalized.split(/\n+/).map(x => x.trim()).filter(Boolean);
+      const labelSet = new Set(sectionLabels);
+
+      if (sections.length > 1) {
+        return sections.map(section => {
+          const match = section.match(/^(.+?)：(.*)$/);
+          if (match && labelSet.has(match[1])) {
+            return `<p><span class="section-title">${escapeHtml(match[1])}</span>${escapeHtml(match[2].trim())}</p>`;
+          }
+          return `<p>${escapeHtml(section)}</p>`;
+        }).join("");
+      }
+
+      const sentences = normalized.match(/[^。！？]+[。！？]?/g) || [normalized];
+      const paragraphs = [];
+      for (let i = 0; i < sentences.length; i += 2) {
+        paragraphs.push(sentences.slice(i, i + 2).join(""));
+      }
+      return paragraphs.map(paragraph => `<p>${escapeHtml(paragraph.trim())}</p>`).join("");
+    }
+
     function renderCard(item) {
       const tagHtml = item.tags.map(tag => `<span class="badge">${tag}</span>`).join("");
       const timelineHtml = item.updates
@@ -1543,7 +1609,7 @@
             <summary>展开新闻详解、新闻价值、启发观点和后续进展</summary>
             <div class="detail-box" style="margin-bottom:12px;">
               <h3>新闻详解</h3>
-              <p>${item.detail}</p>
+              <div class="detail-content">${formatDetailText(item.detail)}</div>
             </div>
             <div class="detail-grid">
               <div class="detail-box">
