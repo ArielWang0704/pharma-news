@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>中国医药健康市场雷达</title>
+  <style>
+    html, body { margin: 0; width: 100%; height: 100%; background: #f6f8fb; overflow: hidden; }
+    #radarFrame { width: 100%; height: 100vh; border: 0; display: block; visibility: hidden; }
+  </style>
+</head>
+<body>
+  <iframe id="radarFrame" src="archive.html?v=20260825-fix1" title="中国医药健康市场雷达"></iframe>
+  <script>
+    const frame = document.getElementById('radarFrame');
+
+    const newEvents = [
+      {
+        id: 'mnc-china-operating-model-reorganization-202608', category: '组织/合规', date: '2026-08-24',
+        title: 'MNC中国组织重构加速：渠道重新分层，中国也更直接进入全球决策链',
+        tags: ['MNC','诺和诺德','勃林格殷格翰','诺华','组织架构','院外渠道','广阔市场'], viatrisImpact: '高',
+        summary: '过去一周多家MNC出现与中国相关的组织调整：诺和诺德重新拆分医院、零售/线上/私立医疗和广阔市场；勃林格殷格翰提升大中华区业务层级并加强中国早研；诺华国际业务CCO、前中国区总裁张颖离任。背后共同反映MNC正在重新定义中国市场的渠道、资源和决策位置。',
+        why: '医院、院外和广阔市场正在变成不同能力体系，中国研发和市场洞察也更直接接入全球总部。',
+        role: '看MNC组织调整不要只记录谁升职或离职，而要看资源、客户场景和P&L往哪里迁移；这对成熟品牌、零售和基层覆盖具有benchmark价值，但不代表Viatris应照搬同一结构。',
+        watch: ['Novo新兴渠道事业部负责人和实际资源配置','零售、线上和私立医疗是否形成统一P&L','基药扩容是否推动MNC增加广阔市场投入','Boehringer中国早研中心实际项目','其他MNC是否继续把中国升格为独立区域','MNC中国商业组织是否继续从产品线向渠道/客户场景重构'],
+        updates: [
+          {date:'2026-08-17',text:'诺和诺德大中国区新架构生效，整合医院事业部，新增新兴渠道事业部，并调整商务与广阔市场事业部及Consumer Engagement团队。'},
+          {date:'2026-08-19',text:'诺华国际业务首席商务官、前诺华中国区总裁张颖决定离任并寻求外部发展机会。'},
+          {date:'2026-08-20',text:'勃林格殷格翰升级中国战略并计划在上海张江设立新的研发中心；大中华区此前已从新兴市场板块独立出来。'}
+        ],
+        sources: [
+          {label:'每日经济新闻：多家跨国药企上调中国战略权重',url:'https://www.nbd.com.cn/articles/2026-08-24/4552400.html'},
+          {label:'21世纪经济报道：张颖离任诺华，跨国药企棋局生变',url:'https://finance.eastmoney.com/a/202608203847835018.html'}
+        ],
+        detail: '一句话结论：MNC中国组织正在从按产品线管理进一步转向按医院、院外和广阔市场场景分层。发生了什么：诺和诺德将医院、零售/线上/私立医疗和广阔市场重新拆分组织；勃林格殷格翰提升大中华区业务层级并计划在上海张江设立新的研发中心；诺华国际业务CCO、前中国区总裁张颖离任。组织逻辑：医院渠道和院外渠道正在变成不同能力体系，零售、线上健康管理和私立医疗成为独立增长场景，基药和基层市场也开始获得专门资源。全球连接：中国研发、临床和市场洞察越来越直接接入全球总部，中国也更直接进入全球决策链。管理启发：看组织调整不要只记录谁升职或哪个部门更名，要看资源、客户场景和P&L往哪里迁移。对Viatris高相关：Novo的渠道组织逻辑对成熟品牌、零售、广阔市场和基层覆盖具有benchmark价值，但不代表应照搬同一结构。'
+      },
+      {
+        id: 'nhsa-medical-insurance-15th-five-year-plan-20260819', category: '政策/支付', date: '2026-08-19',
+        title: '医保“十五五”规划发布：未来五年从扩大覆盖进一步转向精细支付和基金可持续',
+        tags: ['十五五','医疗保障','医保改革','支付方式改革','集采','商业健康保险'], viatrisImpact: '',
+        summary: '国家医保局发布《全民医疗保障“十五五”规划》，未来五年将继续推进医保目录动态调整、支付方式改革、医药价格治理、药耗集采及多层次医疗保障，医保政策进一步从单点工具走向系统协同。',
+        why: '以后医保目录、价格、集采、DRG/DIP和商保应放在同一个政策框架中理解，支付治理会更直接影响产品和渠道。',
+        role: '分析医保政策要从支付规则、患者流、处方/用药再连接到产品与渠道，而不能只看单一目录或单次谈判。',
+        watch: ['医保目录动态调整机制','DRG/DIP 3.0','集采扩围与规则优化','商保与基本医保分层','集采药进入基层、民营医院和零售终端'],
+        updates: [{date:'2026-08-19',text:'国家医保局发布《全民医疗保障“十五五”规划》及政策解读，未来五年进一步突出基金可持续、精细支付、价格治理、集采和多层次保障。'}],
+        sources: [
+          {label:'国家医保局：关于印发《全民医疗保障“十五五”规划》的通知',url:'https://www.nhsa.gov.cn/art/2026/8/19/art_104_21827.html'},
+          {label:'国家医保局：《全民医疗保障“十五五”规划》解读',url:'https://www.nhsa.gov.cn/art/2026/8/19/art_105_21829.html'}
+        ],
+        detail: '一句话结论：医保“十五五”规划把未来五年医保改革进一步放进基金可持续、精细支付和多层次保障的系统框架。发生了什么：国家医保局发布《全民医疗保障“十五五”规划》及解读，回顾“十四五”末基本医保参保率稳定在95%左右、医保药品目录达到3253种、跨省异地就医直接结算率达到90%。规划重点：未来将继续推进医保目录动态调整、支付方式改革、医药价格治理、药耗集采和商业医疗保险协同。集采方向：继续扩围并强调稳临床、保质量、反内卷、防围标，同时推动中选药进入基层、民营医院和定点零售药店。为什么重要：以后医保目录、价格、集采、DRG/DIP和商保应放在同一个政策框架中理解。后续观察点：关注目录动态调整、DRG/DIP 3.0、集采规则优化及商保分层支付。'
+      },
+      {
+        id: 'hengrui-h1-2026-vbp-innovation-mix', category: '药品/创新药', date: '2026-08-19',
+        title: '恒瑞H1仿制药收入下降16%、创新药增长16%：集采开始改变企业资源配置',
+        tags: ['恒瑞医药','仿制药','创新药','集采','业务转型'], viatrisImpact: '',
+        summary: '恒瑞2026H1收入约155亿元，同比下降1.94%；仿制药收入下降16.07%至约51亿元，而创新药收入增长16.38%至约88亿元、占药品收入63%以上。集采影响正在从单个产品价格进一步传导至企业利润池和资本配置。',
+        why: '集采长期影响不仅是价格下降，而是产品利润池变化、企业资源配置变化和研发/商业投入结构变化。',
+        role: '成熟品牌企业需要用品牌、供应、渠道效率、患者管理和生命周期管理证明专利后产品价值。',
+        watch: ['仿制药收入和利润池变化','创新药与非肿瘤创新药增长持续性','集采对企业研发和商业投入的影响','成熟品牌企业的生命周期管理策略'],
+        updates: [{date:'2026-08-19',text:'恒瑞发布2026年半年度业绩，仿制药收入同比下降16.07%，创新药收入同比增长16.38%，业务结构变化受到市场关注。'}],
+        sources: [{label:'Reuters：Hengrui profit growth squeezed by bulk-buying programmes',url:'https://ca.marketscreener.com/news/china-s-top-drugmaker-hengrui-sees-profit-growth-squeezed-by-bulk-procurement-programs-ce7859d2da8cf420'}],
+        detail: '一句话结论：恒瑞H1仿制药下降、创新药增长，显示集采影响已从价格层传导到利润池和资源配置。发生了什么：恒瑞H1收入约155亿元，同比下降1.94%，净利润同比增长0.34%；仿制药收入约51亿元，同比下降16.07%，创新药收入约88亿元，同比增长16.38%，占药品收入63.16%。结构变化：公司减少传统仿制药板块投入，非肿瘤创新药收入同比增长73.97%。为什么重要：集采长期影响可以概括为产品利润池变化、企业资源配置变化以及研发和商业投入结构变化。行业启发：恒瑞的答案是从仿制向创新迁移，成熟品牌企业则需要用品牌、供应、渠道效率、患者管理和生命周期管理证明专利后产品价值。'
+      },
+      {
+        id: 'grassroots-drg-dip-drug-follows-disease-20260817', category: '政策/支付', date: '2026-08-17',
+        title: '基层病种“同病同付”联动基药和集采：药品开始真正跟着患者向基层走',
+        tags: ['基层医疗','DRG','DIP','同病同付','药随病走','基药','集采','慢病'], viatrisImpact: '高',
+        summary: '国家医保局披露首批基层病种方向，包括DRG 31个病组、DIP 127个病种，并提出统筹区内“同病同付”。国家卫健委同时明确按照“药随病走”“同病同药同治”扩大基层用药，优先配备基药，并联动集采和医保目录药品。',
+        why: '基层支付、患者流和药品配备开始形成联动路径，成熟慢病品牌的机会与集采仿制药承接压力会同时扩大。',
+        role: '基药真正形成商业影响，需要“病人下沉、钱下沉、药下沉”三个条件同时成立。',
+        watch: ['DRG 31组和DIP 127病种正式名单','各省具体支付标准','慢病患者基层迁移','基层药品实际配备','原研成熟品牌与集采仿制药的份额变化','基层与零售药店的处方承接关系'],
+        updates: [{date:'2026-08-17',text:'国家医保局介绍首批基层病种方向，涉及DRG 31个病组、DIP 127个病种，并围绕基层支付和药品配备解释“同病同付”与“药随病走”。'}],
+        sources: [{label:'国家医保局：医保支持基层医疗卫生服务发展政策解读暨基层病种遴选情况介绍活动图文实录（上）',url:'https://www.nhsa.gov.cn/art/2026/8/21/art_14_21867.html'}],
+        detail: '一句话结论：基层病种“同病同付”正在把支付、患者流和药品配备连接起来。发生了什么：国家医保局披露首批基层病种方向，包括DRG 31个病组、DIP 127个病种，后续将随3.0版分组正式发布。适用范围：基层病种主要针对适宜在二级及以下机构诊疗的常见病、多发病和部分慢病，涉及高血压、糖尿病、冠心病和呼吸系统感染等方向。同病同付：同一统筹区相同疾病在不同等级机构获得相对一致的医保支付标准，从支付端减少患者必须去大医院的激励。药品联动：同时明确“药随病走”“同病同药同治”，基层优先配备基药，并积极配备集采中选和医保目录药品。商业影响：患者向基层下沉、医保支付跟随、药品跟随，机会与压力并存，新增需求未必流向原研品牌，可能更多由集采仿制药承接。对Viatris高相关：关注高血压、冠心病场景以及阿托伐他汀、氨氯地平的竞争格局。'
+      },
+      {
+        id: 'sandoz-henlius-biosimilar-global-license-20260817', category: 'BD/投融资', date: '2026-08-17',
+        title: 'Sandoz引进复宏汉霖三款生物类似药：中国能力进入全球LOE产业链',
+        tags: ['Sandoz','复宏汉霖','生物类似药','LOE','全球商业化'], viatrisImpact: '',
+        summary: 'Sandoz获得复宏汉霖三款生物类似药中国以外全球商业化权益，首付款最高7700万美元，整体交易潜在价值约3.14亿美元，覆盖evolocumab、belimumab和cetuximab生物类似药。',
+        why: '这不是一般的中国创新药license-out，而是中国生物类似药研发和制造能力进入全球药企LOE战略。',
+        role: '中国医药出海要区分创新资产、生物类似药、成熟品牌商业化合作和制造供应链出海。',
+        watch: ['三款产品后续开发进度','Sandoz是否进一步扩大中国biosimilar合作','全球生物药LOE窗口','中国研发制造能力在全球成熟药产业链中的角色'],
+        updates: [{date:'2026-08-17',text:'Sandoz与复宏汉霖达成生物类似药合作，覆盖三款初始产品及更广泛平台合作，Sandoz获得中国以外全球商业化权益。'}],
+        sources: [
+          {label:'复宏汉霖：与Sandoz达成生物类似药战略合作',url:'https://www.prnewswire.com/news-releases/henlius-and-sandoz-enter-strategic-collaboration-to-unlock-global-value-of-biosimilars-platform-302852556.html'},
+          {label:'Reuters：Sandoz to license three biosimilar drugs from Shanghai Henlius Biotech',url:'https://ca.marketscreener.com/news/sandoz-to-license-three-biosimilar-drugs-from-shanghai-henlius-biotech-ce7859dfde8cfe26'}
+        ],
+        detail: '一句话结论：Sandoz与复宏汉霖的合作显示中国生物类似药能力开始进入全球LOE产业链。发生了什么：Sandoz获得三款生物类似药中国以外全球商业化权益，产品对应evolocumab、belimumab和cetuximab，首付款最高7700万美元。交易结构：开发里程碑最高1.6亿美元、商业里程碑最高7700万美元，总潜在价值约3.14亿美元。必要背景：三款产品分别对应Repatha、Benlysta和Erbitux，覆盖降脂、狼疮和结直肠癌等成熟生物药市场。为什么重要：这与一般创新药license-out不同，本质上是中国生物类似药研发制造能力进入全球药企LOE战略。行业启发：中国医药出海应区分创新资产、生物类似药、成熟品牌商业化合作和制造供应链出海。'
+      },
+      {
+        id: 'viatris-q2-2026-greater-china-growth', category: '药品/创新药', date: '2026-08-06',
+        title: 'Viatris Q2 Greater China运营增长16%：中国继续成为集团重要增长贡献区域',
+        tags: ['Viatris','Greater China','成熟品牌','Q2业绩','中国市场'], viatrisImpact: '高',
+        summary: 'Viatris 2026Q2 Greater China净销售额7.138亿美元，同比增长21%、运营口径增长16%，明显高于集团整体增速。公司明确指出Greater China强劲增长是本季度收入增长的重要推动因素，Brands业务也受益于Greater China表现。',
+        why: '中国仍是Viatris全球组合中的重要增长贡献区域，但公开财报没有披露中国品牌级拆分，不能自行判断具体由立普妥、络活喜或西乐葆贡献。',
+        role: '分析Viatris中国增长时，应继续拆品牌、渠道、销量/价格、库存和一次性因素，而不是只用总额推断单品表现。',
+        watch: ['Greater China增长的品牌构成','医院、零售和电商渠道结构','成熟品牌量价变化','基药、集采和基层用药变化对H2的影响','高增长是否具有持续性'],
+        updates: [{date:'2026-08-06',text:'Viatris发布2026Q2业绩，Greater China净销售额7.138亿美元，报告口径增长21%、运营口径增长16%，公司将其列为本季度重要增长驱动。'}],
+        sources: [{label:'Viatris官方：Viatris Reports Second-Quarter 2026 Financial Results',url:'https://newsroom.viatris.com/2026-08-06-Viatris-Reports-Second-Quarter-2026-Financial-Results'}],
+        detail: '一句话结论：Greater China是Viatris 2026Q2重要增长贡献区域，但公开财报不足以拆到具体品牌。发生了什么：集团Q2总收入37.57亿美元，同比增长约5%、运营口径增长约4%；Greater China净销售额7.138亿美元，去年同期为5.889亿美元，报告口径增长21%、运营口径增长16%。全球组合背景：Brands全球净销售额24.18亿美元，同比增长6%、运营增长4%，公司明确将Greater China强劲增长列为本季度主要增长驱动。为什么重要：中国仍是Viatris全球组合中的重要增长区域，且成熟品牌业务在中国的渠道和生命周期管理继续有战略价值。边界说明：网页不自行判断立普妥、络活喜、西乐葆等具体品牌贡献，因为公开财报没有披露中国品牌级拆分。后续观察点：继续拆品牌、医院/零售/电商渠道、销量与价格、库存及一次性因素，并观察高增长是否延续。'
+      }
+    ];
+
+    const takeaways = [
+      '医保“十五五”规划发布，未来五年医保改革进一步从扩大覆盖转向基金可持续、精细支付、集采提效和多层次保障。',
+      '基层病种“同病同付”开始与基药、集采和医保目录药品联动，患者流、医保支付和药品配备开始形成完整下沉路径。',
+      'MNC中国组织正在从单纯按产品线管理，进一步向医院、零售/线上/私立医疗、广阔市场等不同渠道场景分化，同时中国研发和市场洞察更直接进入全球决策。',
+      '恒瑞H1仿制药收入下降16%、创新药增长16%，集采正在从价格层进一步改变中国药企的利润池和资源配置。',
+      '中国医药出海不再只有创新药license-out，生物类似药研发制造能力也开始进入全球药企LOE战略。'
+    ];
+    const discussions = [
+      '医保政策影响要沿“支付规则 → 患者流 → 处方/用药 → 产品与渠道”链条判断，而不能只看目录。',
+      '基药真正形成商业价值，需要病人下沉、钱下沉和药下沉三个条件同时成立。',
+      '看MNC组织调整，不要只看谁升职或哪个部门更名，要看资源、客户场景和P&L往哪里迁移。',
+      '集采的长期产业影响不仅是降价，还会改变利润池、研发投入和企业战略。',
+      '中国医药出海要区分创新资产、生物类似药、商业化合作和制造供应链，不应全部混成license-out。'
+    ];
+    const followups = [
+      '9月1日新版基药正式实施后，各地基层医疗机构实际配备和使用变化。',
+      'DRG 31组、DIP 127个基层病种正式名单及地方支付标准。',
+      '基层新增慢病药量最终流向原研成熟品牌还是集采仿制药。',
+      '诺和诺德新兴渠道事业部及广阔市场事业部的实际资源配置和业务边界。',
+      '2026医保及商保创新药目录谈判、竞价和价格协商结果。',
+      '第12批集采各省执行时间、医院切量及Viatris/竞品mapping。',
+      'GLP-1中国C端获客、院外渠道与处方药推广合规边界。'
+    ];
+
+    function injectUpdates() {
+      const win = frame.contentWindow;
+      const doc = frame.contentDocument;
+      const payload = JSON.stringify({newEvents, takeaways, discussions, followups});
+      const patchScript = doc.createElement('script');
+      patchScript.textContent = `
+        (() => {
+          const payload = ${payload};
+          payload.newEvents.forEach(item => {
+            const idx = newsData.findIndex(x => x.id === item.id);
+            if (idx >= 0) newsData[idx] = Object.assign(newsData[idx], item);
+            else newsData.unshift(item);
+          });
+
+          const appendUpdate = (id, update, watchAdds = [], patch = {}) => {
+            const item = newsData.find(x => x.id === id);
+            if (!item) return;
+            Object.assign(item, patch);
+            if (!item.updates.some(u => u.date === update.date && u.text === update.text)) item.updates.push(update);
+            watchAdds.forEach(w => { if (!item.watch.includes(w)) item.watch.push(w); });
+          };
+
+          appendUpdate('nr-vbp-round12',
+            {date:'2026-08-06',text:'第12批国家组织药品集中带量采购正式中选结果及中选品种供应清单公布。本轮结果将在2026年内实施，具体执行时间由各地另行通知，关注点由竞价和拟中选转向地方执行、医疗机构切量、供应履约及未中选品牌的渠道承接。'},
+            ['各省具体执行时间及落地通知','医疗机构切量和中选品种实际使用','中选企业供应清单与履约稳定性','中选价是否成为院内外价格锚点','Viatris及主要竞品的分子、剂型、规格级mapping'],
+            {date:'2026-08-06',title:'第12批国家药品集采正式中选：地方执行、医院切量与供应履约成为下一阶段重点',summary:'第12批国家药品集采65种药品正式完成采购并公布中选结果及供应清单，结果将在2026年内实施，具体时间由各地另行通知。后续商业影响将从竞价转向地方执行、医院切量、供应履约和未中选品牌渠道承接。',viatrisImpact:'高',detail:'一句话结论：第12批集采已从拟中选进入正式中选和地方执行阶段。发生了什么：国家医保局8月6日公布第12批国家组织药品集中带量采购中选结果及中选品种供应清单，65种药品正式完成采购，结果将在2026年内实施，具体执行日期由各地另行通知。必要背景：上一阶段的重点是报价、拟中选和规则设计，现在重点转向各省执行时间、医疗机构切量和供应履约。为什么重要：对成熟品牌不能只看是否中选，还要看中选价是否成为院内外价格锚点，以及未中选品牌如何承接院外和零售需求。对Viatris高相关，但必须完成分子、剂型、规格和主要竞品级mapping后，才能判断具体产品影响。'}
+          );
+          const vbp = newsData.find(x => x.id === 'nr-vbp-round12');
+          if (vbp && !vbp.sources.some(s => s.url.includes('/2026/8/6/'))) vbp.sources.push({label:'国家医保局：第12批国家组织药品集中带量采购正式中选结果',url:'https://www.nhsa.gov.cn/art/2026/8/6/art_187_21682.html'});
+
+          appendUpdate('essential-medicines-list-2026-official-release-analysis-202607',
+            {date:'2026-08-17',text:'国家医保局、国家卫健委进一步明确新版基药的基层落地路径：随着基层病种和诊疗能力扩大，按照“药随病走”“同病同药同治”原则扩大基层用药，基层优先配备国家基本药物，同时配备集采中选和医保目录药品。基药开始从“目录准入”进一步进入“患者流+医保支付+实际用药”联动阶段。'},
+            ['9月1日新版基药正式实施后的各省配备要求','阿托伐他汀、氨氯地平等相关分子和规格变化','高血压、冠心病等慢病患者是否进一步向基层迁移','基层新增药量流向原研成熟品牌还是集采仿制药','基药、集采、医保、门诊统筹之间的联动','基层医疗机构与零售药店在慢病续方中的分工']
+          );
+          appendUpdate('essential-medicines-list-2026-official-release-analysis-202607',
+            {date:'2026-08-20',text:'湖南新晃等地继续推动集采药品进基层，137家村卫生室、7家药店和1家民营机构参与，超过50个集采品种直达基层，覆盖高血压、糖尿病等常见病和慢病，说明低价药向基层和零售终端扩围已经出现实际执行案例。'}
+          );
+          const essential = newsData.find(x => x.id === 'essential-medicines-list-2026-official-release-analysis-202607');
+          if (essential) {
+            if (!essential.sources.some(s => s.url.includes('21867'))) essential.sources.push({label:'国家医保局：基层病种与用药下沉政策解读',url:'https://www.nhsa.gov.cn/art/2026/8/21/art_14_21867.html'});
+            if (!essential.sources.some(s => s.url.includes('21837'))) essential.sources.push({label:'国家医保局：湖南新晃推动集采药品进基层',url:'https://www.nhsa.gov.cn/art/2026/8/20/art_14_21837.html'});
+          }
+
+          appendUpdate('glp1-china-2026',
+            {date:'2026-08-24',text:'Reuters报道，Novo Nordisk、Eli Lilly、Pfizer、信达等正在中国加大肥胖疾病教育和消费者触达。由于处方药广告受到严格限制，企业更多通过地铁、健身房、运动场景以及睡眠呼吸暂停、脂肪肝等疾病教育连接潜在患者。GLP-1竞争开始进一步从疗效和剂型延伸到C端获客、院外渠道和处方药营销合规。'},
+            ['疾病教育与处方药广告监管边界','C端消费者触达和患者转化','零售、线上和私立医疗渠道','GLP-1医保、自费和商业保险支付','Novo、Lilly和本土企业中国渠道策略']
+          );
+
+          weeklyTakeaways.splice(0, weeklyTakeaways.length, ...payload.takeaways);
+          discussionPoints.splice(0, discussionPoints.length, ...payload.discussions);
+          followUpFocus.splice(0, followUpFocus.length, ...payload.followups);
+
+          const originalRenderStats = renderStats;
+          renderStats = function(filtered) {
+            originalRenderStats(filtered);
+            if (els.statPageUpdated) els.statPageUpdated.textContent = '2026.08.25';
+          };
+
+          renderMonths();
+          render();
+          if (els.updated) els.updated.textContent = '本页更新：2026.08.25 · ' + newsData.length + '个事件';
+          if (els.statPageUpdated) els.statPageUpdated.textContent = '2026.08.25';
+        })();
+      `;
+      doc.body.appendChild(patchScript);
+      setTimeout(() => { frame.style.visibility = 'visible'; }, 80);
+    }
+
+    frame.addEventListener('load', () => {
+      try { injectUpdates(); }
+      catch (e) { console.error(e); frame.style.visibility = 'visible'; }
+    });
+  </script>
+</body>
+</html>
