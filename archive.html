@@ -1,0 +1,2152 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pharma News Dashboard</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --line: #d8e0ea;
+      --primary: #1f4e79;
+      --primary-soft: #e7f0f8;
+      --accent: #2f6f73;
+      --accent-soft: #e8f3f2;
+      --warning: #8a5a12;
+      --warning-soft: #fff3d8;
+      --shadow: 0 10px 24px rgba(23, 32, 51, 0.08);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 44px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      color: var(--primary);
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .updated {
+      padding: 10px 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 170px 170px 190px;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    input, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--panel);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 6px 0 16px;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+
+    .stat.action {
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
+    }
+
+    .stat.action.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .stat .value {
+      font-size: 24px;
+      line-height: 1.1;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .stat .label {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 290px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .news-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-main {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .date {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .summary {
+      margin: 0;
+      color: #344054;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .badge.secondary {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .badge.warning {
+      background: var(--warning-soft);
+      color: var(--warning);
+    }
+
+    details {
+      border-top: 1px solid var(--line);
+      padding: 0 16px 14px;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 12px 0;
+      color: var(--primary);
+      font-size: 14px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .detail-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px;
+      background: #fbfcfe;
+    }
+
+    .detail-box h3 {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: var(--primary);
+    }
+
+    .detail-box p {
+      margin: 0;
+      color: #344054;
+      line-height: 1.55;
+      font-size: 13px;
+    }
+
+    .detail-content {
+      display: grid;
+      gap: 10px;
+      color: #344054;
+      line-height: 1.65;
+      font-size: 13px;
+    }
+
+    .detail-content p {
+      margin: 0;
+    }
+
+    .detail-content .section-title {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 8px;
+      margin: 4px 0 12px;
+    }
+
+    .event {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .event-date {
+      font-size: 12px;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .event-body {
+      border-left: 3px solid var(--primary-soft);
+      padding-left: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #344054;
+    }
+
+    .sources {
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .side {
+      display: grid;
+      gap: 12px;
+      position: sticky;
+      top: 16px;
+    }
+
+    .side-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+
+    .side-card h3 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: var(--primary);
+    }
+
+    .side-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: #344054;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .switch-box {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 0 12px;
+      gap: 8px;
+    }
+
+    .switch-box input {
+      width: auto;
+      margin: 0;
+    }
+
+    .switch-box span {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .empty {
+      display: none;
+      background: var(--panel);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty.show { display: block; }
+
+    @media (max-width: 880px) {
+      header,
+      .toolbar,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .updated { white-space: normal; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .side { position: static; }
+    }
+
+    @media (max-width: 560px) {
+      .page { padding: 20px 12px 34px; }
+      .stats { grid-template-columns: 1fr; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .card-top { display: grid; }
+      .event { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>中国医药健康市场雷达</h1>
+        <p class="subtitle">按类型、时间和事件进展归档新闻。用于行业跟进、回溯检索、面试观点沉淀和管理层讨论准备。</p>
+      </div>
+      <div class="updated" id="updated"></div>
+    </header>
+
+    <section class="toolbar" aria-label="筛选新闻">
+      <div>
+        <label for="search">搜索</label>
+        <input id="search" type="search" placeholder="搜公司、产品、政策、关键词，例如 GLP-1 / 医保 / AstraZeneca">
+      </div>
+      <div>
+        <label for="month">月份</label>
+        <select id="month"></select>
+      </div>
+      <div>
+        <label for="sort">排序</label>
+        <select id="sort">
+          <option value="desc">时间倒序</option>
+          <option value="asc">时间正序</option>
+        </select>
+      </div>
+      <div>
+        <label for="highOnly">Viatris</label>
+        <label class="switch-box" for="highOnly">
+          <input id="highOnly" type="checkbox">
+          <span>只看高相关</span>
+        </label>
+      </div>
+    </section>
+
+    <nav class="tabs" id="tabs" aria-label="新闻类型"></nav>
+
+    <section class="stats" aria-label="概览">
+      <div class="stat"><div class="value" id="stat-count">0</div><div class="label">当前显示事件</div></div>
+      <div class="stat"><div class="value" id="stat-updates">0</div><div class="label">进展记录</div></div>
+      <button class="stat action" id="stat-high-card" type="button"><div class="value" id="stat-high">0</div><div class="label">Viatris高相关</div></button>
+      <div class="stat"><div class="value" id="stat-latest">-</div><div class="label">最新新闻日期</div></div>
+      <div class="stat"><div class="value" id="stat-page-updated">2026.07.07</div><div class="label">本页更新</div></div>
+    </section>
+
+    <main class="layout">
+      <section>
+        <div class="news-list" id="newsList"></div>
+        <div class="empty" id="empty">没有匹配的新闻。换个关键词或切换tab试试。</div>
+      </section>
+
+      <aside class="side">
+        <div class="side-card">
+          <h3>今年值得记住</h3>
+          <ul class="side-list" id="weeklyTakeaways"></ul>
+        </div>
+        <div class="side-card">
+          <h3>可复用观点</h3>
+          <ul class="side-list" id="discussionPoints"></ul>
+        </div>
+        <div class="side-card">
+          <h3>后续重点追踪</h3>
+          <ul class="side-list" id="watchList"></ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const newsData = [
+      {
+            "id": "global-pharma-us-manufacturing-tariff-supply-chain-202608",
+            "category": "大公司/战略",
+            "date": "2026-08-11",
+            "title": "全球药企加码美国制造：约5000亿美元投资背后的供应链与关税防御",
+            "tags": [
+                  "美国制造",
+                  "供应链",
+                  "关税",
+                  "MNC",
+                  "Pfizer",
+                  "Lilly",
+                  "AstraZeneca",
+                  "Roche",
+                  "Novartis",
+                  "BMS"
+            ],
+            "viatrisImpact": "",
+            "summary": "Reuters报道，Pfizer、Lilly、J&J、Roche、AstraZeneca、Novartis、Merck、BMS等全球药企正在扩大美国制造、研发和供应链投资，合计承诺约5000亿美元。",
+            "why": "这不是单纯建厂新闻，而是MNC应对美国药价、关税和供应链安全压力的战略动作。",
+            "role": "分析MNC全球战略时，要同时看产品管线、制造供应链和关键市场政策，而不把供应链视为后台运营问题。",
+            "watch": [
+                  "美国药品关税政策是否落地",
+                  "MNC是否调整中国与美国制造分工",
+                  "本土化制造是否影响全球供应和价格",
+                  "Viatris等成熟药企的供应链应对"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-08-11",
+                        "text": "Reuters梳理全球药企约5000亿美元美国制造与研发投资，供应链本土化成为MNC战略防御重点。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters：Global drugmakers invest billions to boost US presence",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/global-drugmakers-rush-boost-us-presence-tariff-threat-looms-2026-08-10/"
+                  },
+                  {
+                        "label": "Reuters：Bristol Myers to build $2.3B manufacturing site in Houston",
+                        "url": "https://www.reuters.com/legal/litigation/bristol-myers-build-23-billion-manufacturing-site-houston-2026-08-10/"
+                  }
+            ]
+      },
+      {
+            "id": "china-biotech-lab-monkey-shortage-preclinical-bottleneck-202608",
+            "category": "创新药/CRO",
+            "date": "2026-08-07",
+            "title": "中国创新药研发遇“实验猴短缺”：创新热背后的临床前资源瓶颈",
+            "tags": [
+                  "中国创新药",
+                  "实验猴",
+                  "临床前CRO",
+                  "药物研发",
+                  "供应瓶颈"
+            ],
+            "viatrisImpact": "",
+            "summary": "中国创新药研发和BD热潮推动临床前动物实验需求上升，多家媒体报道实验猴价格和排期显著紧张。",
+            "why": "创新药速度不只取决于资本和临床效率，也受临床前资源、CRO产能和伦理合规约束。",
+            "role": "创新药出海不能只看BD金额，临床前资源、全球开发人才、注册能力和监管接受度都会成为瓶颈。",
+            "watch": [
+                  "实验猴价格和排期变化",
+                  "临床前CRO产能和订单周期",
+                  "替代动物模型和体外模型发展",
+                  "创新药IND节奏是否受到影响"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-08-07",
+                        "text": "多家媒体关注中国实验猴短缺问题，临床前资源成为创新药研发加速背后的瓶颈之一。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "SCMP：China lab monkey prices hit Covid-era highs",
+                        "url": "https://www.scmp.com/news/china/science/article/3360770/chinas-lab-monkey-prices-hit-covid-era-highs-new-drug-rd-demand"
+                  },
+                  {
+                        "label": "中新网：创新药研发加速遇“猴荒”",
+                        "url": "https://www.chinanews.com/cj/2026/07-22/10664288.shtml"
+                  }
+            ]
+      },
+      {
+            "id": "astrazeneca-bms-megamerger-rumor-investor-pushback-202608",
+            "category": "大公司/投融资",
+            "date": "2026-08-05",
+            "title": "AZ-BMS近4000亿美元合并传闻降温：大药企专利悬崖压力与mega-merger逻辑再被审视",
+            "tags": [
+                  "AstraZeneca",
+                  "Bristol Myers Squibb",
+                  "MNC",
+                  "并购传闻",
+                  "专利悬崖",
+                  "投资者反应"
+            ],
+            "viatrisImpact": "",
+            "summary": "FT报道称AstraZeneca与Bristol Myers Squibb曾出现近4000亿美元级别合并讨论；Reuters随后援引知情人士称目前没有正在进行的讨论，也没有可做的交易。",
+            "why": "市场反应说明投资者对Big Pharma超大型并购仍高度谨慎。",
+            "role": "判断大药企并购，不能只看交易规模，要拆战略互补、专利悬崖、管线重叠、整合风险和投资者接受度。",
+            "watch": [
+                  "AZ和BMS是否有后续正式声明",
+                  "是否出现小规模资产交易或管线合作替代mega-merger",
+                  "BMS专利悬崖和增长组合表现",
+                  "AZ是否继续坚持小型BD和自研驱动"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-08-05",
+                        "text": "Reuters援引知情人士称AZ与BMS目前没有正在进行的交易讨论，市场对早前近4000亿美元合并传闻反应谨慎。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters：No discussions over AstraZeneca-BMS deal",
+                        "url": "https://www.reuters.com/world/no-discussions-over-astrazeneca-bristol-myers-deal-senior-source-says-2026-08-05/"
+                  },
+                  {
+                        "label": "Financial Times：How investors killed AstraZeneca’s $400bn megadeal",
+                        "url": "https://www.ft.com/content/2eb0a79c-f5cd-415c-9f72-3c8d576329c1"
+                  }
+            ]
+      },
+      {
+            "id": "eli-lilly-glp1-q2-2026-widens-gap-with-novo-202608",
+            "category": "大公司/财报",
+            "date": "2026-08-05",
+            "title": "Lilly GLP-1销售继续强势：Mounjaro与Zepbound拉开与Novo差距",
+            "tags": [
+                  "Eli Lilly",
+                  "Novo Nordisk",
+                  "GLP-1",
+                  "Mounjaro",
+                  "Zepbound",
+                  "肥胖",
+                  "糖尿病",
+                  "财报"
+            ],
+            "viatrisImpact": "",
+            "summary": "Lilly Q2 2026业绩大超预期，Mounjaro销售同比增长91%至99.4亿美元，Zepbound销售49.3亿美元，两款GLP-1产品占公司季度收入约64.7%。",
+            "why": "GLP-1赛道已经从单一产品竞争升级为制造产能、价格、医保覆盖、DTC渠道、口服剂型和全球支付能力的综合竞争。",
+            "role": "分析GLP-1竞争时，除了疗效，还要看产能、价格、支付覆盖、渠道与全球商业化执行。",
+            "watch": [
+                  "Lilly与Novo在口服GLP-1上的竞争",
+                  "中国GLP-1审批和商业化进展",
+                  "产能扩张是否缓解供应瓶颈",
+                  "医保和商保是否扩大肥胖药支付"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-08-05",
+                        "text": "Lilly Q2 GLP-1销售大超预期，上调全年收入指引，进一步扩大与Novo的竞争差距。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters：Lilly beats estimates on GLP-1 demand",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/eli-lilly-raises-annual-revenue-forecast-obesity-diabetes-drug-demand-stay-2026-08-05/"
+                  }
+            ]
+      },
+      {
+            "id": "nr-vbp-round12",
+            "category": "政策/支付",
+            "date": "2026-07-31",
+            "title": "第12批国家药品集采产生拟中选结果：反内卷、稳临床与参比制剂留院成为规则亮点",
+            "tags": [
+                  "第12批国采",
+                  "集采",
+                  "成熟药",
+                  "参比制剂",
+                  "知识产权",
+                  "产能"
+            ],
+            "viatrisImpact": "高",
+            "summary": "第12批国家药品集采65种药品全部采购成功，全国4.5万家医疗机构报量，327家企业的521个产品获得拟中选资格。本批通过异常低价限制、参比制剂不带量复活、厂牌报量及基层供应优化，进一步平衡降价、临床选择和供应稳定。",
+            "why": "国采从一次性降价工具，变成常态化的价格治理机制。原研、参比、过评仿制药之间的边界会继续影响医院选择和产品生命周期管理。",
+            "role": "这条新闻的启发是，集采不能只看降价幅度，还要拆价格影响、销量承诺、渠道切换、库存风险、供应保障和替代格局。成熟药竞争会越来越依赖综合运营能力。",
+            "watch": [
+                  "正式中选名单及价格",
+                  "是否涉及Viatris产品或主要竞品分子",
+                  "参比制剂不带量复活后的医院使用情况",
+                  "拟中选价格对院外零售和未中选品牌的影响",
+                  "基层和医联体供应执行情况"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-06-23",
+                        "text": "第12批国家组织药品集中带量采购公告发布，药品信息填报和投标报名启动。"
+                  },
+                  {
+                        "date": "2026-07-31",
+                        "text": "第12批国家药品集采开标，65种药品全部采购成功，327家企业的521个产品获得拟中选资格；参比制剂不带量复活和异常低价限制成为规则亮点。"
+                  },
+                  {
+                        "date": "2026-07-28",
+                        "text": "第12批国家药品集采进入企业信息确认和联合申报承诺阶段，供应清单等材料提交进入关键节点。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "国家医保局: 第12批国采公告",
+                        "url": "https://www.nhsa.gov.cn/art/2026/6/23/art_187_21078.html"
+                  },
+                  {
+                        "label": "国家医保局：第12批国家药品集采开标中选产品丰富多元",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/31/art_14_21646.html"
+                  },
+                  {
+                        "label": "中国食品药品网：第12批国家药品集采开标",
+                        "url": "https://cs.cnpharm.com/c/2026-08-01/1103784.shtml"
+                  },
+                  {
+                        "label": "国家医保局：第12批集采企业相关信息通知",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/28/art_187_21596.html"
+                  },
+                  {
+                        "label": "国家医保局：第12批集采企业关联关系公示",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/21/art_187_21507.html"
+                  },
+                  {
+                        "label": "第12批国家组织药品集中带量采购公告第2号",
+                        "url": "https://npo00373q.npoall.com/news/itemid-287263.html"
+                  }
+            ]
+      },
+      {
+            "id": "beijing-shanghai-commercial-health-insurance-innovation-drug-202607",
+            "category": "政策/支付",
+            "date": "2026-07-27",
+            "title": "北京、上海完善商保创新药支付基础设施：从目录准入走向进院、供应和直接结算",
+            "tags": [
+                  "商业健康保险",
+                  "商保创新药",
+                  "北京",
+                  "上海",
+                  "创新药支付",
+                  "双通道",
+                  "DRG",
+                  "一站式结算"
+            ],
+            "viatrisImpact": "",
+            "summary": "北京、上海进一步完善商业健康保险与创新药械的协同政策，覆盖药企协商定价、按疗效付费、快速挂网、双通道、DRG支持、医保商保同步结算及数据共享。",
+            "why": "商保创新药正在从政策名单转向完整支付和服务链条，真实可及性取决于进院、供应和结算能力。",
+            "role": "企业评估商保机会时，需要同时看参保规模、理赔率、药企折扣、医院处方量和直接结算覆盖，而不只看目录入选。",
+            "watch": [
+                  "商保创新药快速挂网和进院情况",
+                  "按疗效付费及分期支付案例",
+                  "医保商保一站式结算覆盖范围",
+                  "双通道及协议药店实际供应",
+                  "真实患者使用和赔付数据"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-27",
+                        "text": "北京、上海商保支持政策集中进入行业视野，创新药支付支持延伸至协商定价、快速挂网、双通道、DRG和一站式结算。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "北京市支持商业健康保险高质量发展的若干措施",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/17/art_14_21468.html"
+                  },
+                  {
+                        "label": "上海促进商业健康保险及生物医药创新若干措施",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/15/art_14_21434.html"
+                  }
+            ]
+      },
+      {
+            "id": "local-medical-insurance-supports-innovative-drugs-devices-zhejiang-fujian-202607",
+            "category": "政策/支付",
+            "date": "2026-07-21",
+            "title": "地方医保支持创新药械加速：浙江、福建探索挂网、支付、商保和真实世界评价联动",
+            "tags": [
+                  "地方医保",
+                  "创新药械",
+                  "商保创新药",
+                  "双通道",
+                  "DRG",
+                  "浙江",
+                  "福建"
+            ],
+            "viatrisImpact": "",
+            "summary": "浙江、福建近期出台支持创新医药产业政策，重点从挂网准入、DRG激励、商保创新药落地、双通道和真实世界评价等环节打通创新药械商业化路径。",
+            "why": "创新药械支付支持正在从国家目录层面，下沉到地方支付和医院落地层面。",
+            "role": "判断创新药政策时，不能只看国家医保谈判，还要看地方是否解决进院、挂网、DRG和药店承接问题。",
+            "watch": [
+                  "浙江商保创新药三除外是否实际落地",
+                  "福建双通道和零售配备执行情况",
+                  "地方创新药械应用清单",
+                  "AI和脑机接口医疗服务项目立项进展"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-21",
+                        "text": "浙江医保发布支持创新医药高质量发展的措施，福建此前也发布支持生物医药产业创新发展的措施。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "浙江省医保局：支持创新医药高质量发展的若干措施",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/21/art_14_21508.html"
+                  },
+                  {
+                        "label": "福建省医保局：支持生物医药产业创新发展十条措施",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/20/art_14_21495.html"
+                  }
+            ]
+      },
+      {
+            "id": "bms-nvidia-ai-factory-life-sciences-20260720",
+            "category": "数字医疗/AI医疗",
+            "date": "2026-07-20",
+            "title": "BMS与NVIDIA建设生命科学AI Factory：Big Pharma把AI从工具升级为基础设施",
+            "tags": [
+                  "BMS",
+                  "NVIDIA",
+                  "AI制药",
+                  "AI Factory",
+                  "药物发现",
+                  "算力"
+            ],
+            "viatrisImpact": "",
+            "summary": "BMS宣布部署NVIDIA最新DGX SuperPOD/Vera Rubin系统，建设生命科学领域领先的企业AI基础设施，用于支持药物发现和开发。",
+            "why": "大药企AI竞争正在从使用工具升级为自建算力、数据、模型和科学流程。",
+            "role": "AI制药的关键不只是模型能力，而是算力、数据、科学流程和组织决策是否真正闭环。",
+            "watch": [
+                  "BMS是否披露AI对研发周期或候选物质量的实际影响",
+                  "更多MNC是否跟进建设AI算力平台",
+                  "AI投入是否带来临床成功率改善",
+                  "AI治理和数据安全规则"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-20",
+                        "text": "BMS宣布与NVIDIA扩展合作，部署最新AI计算系统支持药物发现和开发。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "BMS：Build the Most Powerful AI Factory in Life Sciences with NVIDIA",
+                        "url": "https://news.bms.com/news/corporate-financial/2026/Bristol-Myers-Squibb-to-Build-the-Most-Powerful-AI-Factory-in-Life-Sciences-with-NVIDIA/default.aspx"
+                  },
+                  {
+                        "label": "Reuters：BMS buys Nvidia system for drug research",
+                        "url": "https://www.reuters.com/legal/litigation/bristol-myers-buys-nvidias-latest-ai-computing-system-drug-research-2026-07-20/"
+                  }
+            ]
+      },
+      {
+            "id": "china-pharma-globalization-talent-bottleneck-20260715",
+            "category": "组织/合规",
+            "date": "2026-07-15",
+            "title": "中国药企全球化遇到人才瓶颈：从好资产走向全球开发还缺组织能力",
+            "tags": [
+                  "中国药企全球化",
+                  "临床试验",
+                  "海外注册",
+                  "国际化人才",
+                  "恒瑞",
+                  "康希诺"
+            ],
+            "viatrisImpact": "",
+            "summary": "Reuters报道，恒瑞、康希诺等中国药企在全球化过程中面临国际化人才短缺，尤其是全球临床、海外注册、国际商业化和跨文化管理能力。",
+            "why": "创新药出海下一阶段的瓶颈，可能从有没有好资产转向有没有全球开发组织。",
+            "role": "评估创新药出海不能只看交易额，还要看全球医学、注册、临床运营、联盟管理和海外商业化团队。",
+            "watch": [
+                  "中国药企是否建立海外临床和注册团队",
+                  "美国、日本、欧洲对中国临床数据的接受度",
+                  "是否更多采用MNC共同开发模式",
+                  "海外商业化人才招聘"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-15",
+                        "text": "Reuters报道中国药企全球化面临国际化人才短缺，全球临床、注册和商业化能力成为下一阶段瓶颈。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters：中国药企全球化人才瓶颈",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/chinese-drugmakers-with-big-ambitions-struggle-recruit-staff-global-expansion-2026-07-15/"
+                  }
+            ]
+      },
+      {
+            "id": "nhsa-2026-nrdl-commercial-insurance-initial-review-20260629",
+            "category": "政策/支付",
+            "date": "2026-07-14",
+            "title": "2026医保/商保目录形式审查正式名单公布：支付准入进入专家评审和谈判阶段",
+            "tags": [
+                  "医保目录",
+                  "商保创新药目录",
+                  "支付",
+                  "准入"
+            ],
+            "viatrisImpact": "",
+            "summary": "国家医保局公布2026年基本医保目录及商保创新药目录形式审查正式名单。基本医保目录601个通用名、商保创新药目录58个通用名通过形式审查，但这仍不代表已经纳入目录。",
+            "why": "支付体系正在给高价值创新药预留更多分层支付空间，但最终落地仍取决于谈判、保险产品采用和患者可及性。",
+            "role": "创新药商业化不能只问“能不能进医保”，还要设计医保、商保、惠民保、自费和院外渠道的组合路径。",
+            "watch": [
+                  "专家评审结果",
+                  "谈判竞价节奏",
+                  "商保创新药目录能否形成真实支付能力",
+                  "基本医保与商保目录的分工"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-06-29",
+                        "text": "国家医保局公示2026年基本医保目录及商保创新药目录初步形式审查结果。"
+                  },
+                  {
+                        "date": "2026-07-05",
+                        "text": "2026年基本医保目录及商保创新药目录初步形式审查公示期结束。后续将根据反馈意见和部门核实结果，确定最终通过形式审查名单，并推进专家评审、基本医保目录谈判竞价和商保创新药目录价格协商。"
+                  },
+                  {
+                        "date": "2026-07-14",
+                        "text": "国家医保局公布2026医保目录及商保创新药目录形式审查正式名单。"
+                  },
+                  {
+                        "date": "2026-07-31",
+                        "text": "2026年基本医保目录及商保创新药目录专家评审结束，通过评审的相关药品进入谈判、竞价或价格协商准备阶段；取得资格不代表已纳入目录。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "国家医保局",
+                        "url": "https://www.nhsa.gov.cn/art/2026/6/29/art_109_21131.html"
+                  },
+                  {
+                        "label": "国家医保局政策解读",
+                        "url": "https://www.nhsa.gov.cn/art/2026/6/29/art_105_21130.html"
+                  },
+                  {
+                        "label": "国家医保局：形式审查正式名单公告",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/14/art_109_21421.html"
+                  },
+                  {
+                        "label": "国家医保局：2026医保及商保创新药目录专家评审阶段性结果公告",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/31/art_109_21622.html"
+                  }
+            ]
+      },
+      {
+            "id": "china-innovative-drug-outlicensing-scale-up-202607",
+            "category": "BD/投融资",
+            "date": "2026-07-14",
+            "title": "中国创新药出海进入规模化阶段：上半年授权约1100亿美元，三笔BD集中落地",
+            "tags": [
+                  "创新药出海",
+                  "License-out",
+                  "迪哲医药",
+                  "阿斯利康",
+                  "信达生物",
+                  "Spero",
+                  "翰森制药",
+                  "Avere"
+            ],
+            "viatrisImpact": "",
+            "summary": "上半年我国创新药对外授权约1100亿美元、共81笔，7月14日前后又出现迪哲/AZ、信达/Spero、翰森/Avere三笔交易集中落地。",
+            "why": "中国创新药出海已从偶发大单进入连续、多疾病领域、多交易结构的规模化阶段。",
+            "role": "看BD新闻要拆首付款、权益范围、产品阶段、保留区域、销售分成和后续开发责任。",
+            "watch": [
+                  "下半年是否继续出现高首付款交易",
+                  "出海领域是否从肿瘤扩展到自免、代谢、呼吸、神经",
+                  "中国企业是否从单资产授权升级为平台型合作",
+                  "交易后全球开发执行能力"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-14",
+                        "text": "中国创新药BD密集落地，迪哲/AZ、信达/Spero、翰森/Avere三笔交易集中出现。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "国家医保局/国家药监局：上半年创新药对外授权约1100亿美元",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/14/art_14_21423.html"
+                  },
+                  {
+                        "label": "第一财经：迪哲医药与阿斯利康签署授权许可协议",
+                        "url": "https://www.yicai.com/news/103273826.html"
+                  },
+                  {
+                        "label": "Spero SEC 8-K：Innovent license agreement",
+                        "url": "https://www.sec.gov/Archives/edgar/data/1701108/000119312526302473/d320658d8k.htm"
+                  },
+                  {
+                        "label": "翰森制药：与Avere就HS-20118达成许可合作及战略投资",
+                        "url": "https://cn.hspharm.com/news/news-detail-513486.htm"
+                  }
+            ]
+      },
+      {
+            "id": "china-innovative-drugs-devices-approval-2026h1",
+            "category": "医疗器械/诊断",
+            "date": "2026-07-13",
+            "title": "上半年38个1类创新药、42个创新器械获批：中国医药创新从药品延伸到高端器械",
+            "tags": [
+                  "创新药",
+                  "创新医疗器械",
+                  "NMPA",
+                  "脑机接口",
+                  "全球首款",
+                  "高端器械"
+            ],
+            "viatrisImpact": "",
+            "summary": "国家药监局披露，上半年我国批准38个1类创新药上市，其中11个新靶点、新机制药均为国产；同期批准创新医疗器械42个，包括多个全球首款产品。",
+            "why": "中国医疗创新正在从创新药扩展到高端器械、AI医疗和脑机接口，商业化评价需要加入医院交付和支付路径。",
+            "role": "看高端器械不能套药品逻辑，还要看医院流程、医生培训、设备部署、真实世界数据和支付路径。",
+            "watch": [
+                  "38个1类创新药后续医保/商保准入",
+                  "42个创新器械临床落地情况",
+                  "脑机接口是否进入更多医院和康复中心",
+                  "高端器械支付路径"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-13",
+                        "text": "国家药监局披露上半年38个1类创新药、42个创新医疗器械获批。"
+                  },
+                  {
+                        "date": "2026-07-13",
+                        "text": "国家药监局披露上半年38个1类创新药、42个创新医疗器械获批。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "国家药监局相关数据",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/14/art_14_21423.html"
+                  },
+                  {
+                        "label": "央视新闻：上半年我国批准上市创新医疗器械42个",
+                        "url": "https://big5.cctv.com/gate/big5/news.cctv.com/2026/07/13/ARTISytYvlEBhKtRCOCiTDlr260713.shtml"
+                  }
+            ]
+      },
+      {
+            "id": "china-biotech-global-vc-strategy-shift-20260710",
+            "category": "BD/投融资",
+            "date": "2026-07-10",
+            "title": "中国创新药继续吸引全球资本：美国VC和Biopharma开始调整策略",
+            "tags": [
+                  "中国创新药",
+                  "VC",
+                  "License-out",
+                  "全球资本",
+                  "MNC外部创新",
+                  "地缘竞争",
+                  "并购"
+            ],
+            "viatrisImpact": "",
+            "summary": "中国创新药已经不是偶发的“便宜资产池”，而是正在改变全球药企、美国VC和Biopharma的管线获取与竞争策略。海外资本既想利用中国研发效率，也担心被快速跟随和地缘政策限制。",
+            "why": "中国创新药出海正在从中国企业融资故事，升级为全球医药创新分工重构。MNC需要中国资产补强管线，美国VC和biotech也要调整投资、保密和竞争策略。",
+            "role": "讨论中国创新药出海时，可以拆成资产层、交易层和产业层：靶点机制和临床数据、首付款和权益范围、全球药企管线缺口与地缘审查。",
+            "watch": [
+                  "首付款比例是否继续提升",
+                  "交易疾病领域是否继续从肿瘤外溢到呼吸、肾病、代谢、自免等领域",
+                  "美国政策是否限制接受中国临床数据或中国资产交易",
+                  "中国biotech是否从单资产license-out升级为平台型合作和全球共同开发"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-10",
+                        "text": "WSJ报道中国生物科技崛起正在促使美国VC和全球药企调整策略。"
+                  },
+                  {
+                        "date": "2026-07-11",
+                        "text": "美国biotech对中国快速跟随和临床效率优势的防御策略开始成为行业讨论焦点。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "WSJ：China's Ascent in Biotech Rousts U.S. Venture Capitalists to Adapt",
+                        "url": "https://www.wsj.com/pro/venture-capital/chinas-ascent-in-biotech-rousts-u-s-venture-capitalists-to-adapt-95eea361"
+                  },
+                  {
+                        "label": "WSJ：U.S. Biotechs Are Keeping More Secrets to Beat Copycats in China",
+                        "url": "https://www.wsj.com/tech/biotech/u-s-biotechs-are-keeping-more-secrets-to-beat-copycats-in-china-e2d62868"
+                  },
+                  {
+                        "label": "Axios：Biopharma divides over China response",
+                        "url": "https://www.axios.com/2026/07/10/biopharma-splits-china-response"
+                  }
+            ]
+      },
+      {
+            "id": "essential-medicines-list-2026-official-release-analysis-202607",
+            "category": "政策/支付",
+            "date": "2026-07-09",
+            "title": "2026版国家基本药物目录正式发布：创新药下沉与基层用药结构重塑",
+            "tags": [
+                  "国家基本药物目录",
+                  "基药目录",
+                  "基层用药",
+                  "创新药下沉",
+                  "成熟品牌",
+                  "慢病",
+                  "县域市场"
+            ],
+            "viatrisImpact": "",
+            "summary": "2026版国家基本药物目录正式发布，时隔多年迎来更新。新版目录不仅扩容基础用药，还把创新药、儿童用药、慢病和重大疾病治疗需求纳入更广泛的基层配备和合理用药框架，意味着基药目录从“基础用药清单”进一步升级为影响县域市场、成熟品牌竞争和创新药下沉的重要政策工具。",
+            "why": "基药目录影响各级医疗卫生机构配备和优先使用。新版目录把创新药、慢病和重大疾病治疗放进基药框架，可能改变基层用药结构、处方习惯、院内外渠道和成熟品牌生命周期管理。",
+            "role": "这条新闻的启发是，政策分析要先分清基药、医保、集采和商保目录的功能，再拆配备、使用、支付、价格、供货和渠道。对成熟品牌而言，目录机会和价格/替代压力往往同时出现。",
+            "watch": [
+                  "各地9月1日前的实施和配备要求",
+                  "基层、二级、三级医疗机构用药目录调整",
+                  "阿托伐他汀、氨氯地平等相关分子及规格变化",
+                  "基药、医保、集采和门诊统筹的联动",
+                  "基层用药变化对医院、零售和成熟品牌的影响"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-09",
+                        "text": "国家卫健委发布2026版国家基本药物目录。官方附件显示，目录包括化学药品和生物制品、中成药、中药饮片三部分。"
+                  },
+                  {
+                        "date": "2026-07-13",
+                        "text": "本周更新重点从“基药目录是否发布”转为“新版目录如何影响基层配备、创新药下沉、成熟品牌和县域用药结构”。"
+                  },
+                  {
+                        "date": "2026-08-03",
+                        "text": "2026版国家基本药物目录将于9月1日起实施，政策关注点转入医疗机构配备、上下级用药衔接、基层供应保障和地方执行准备。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "国家卫健委官方通知",
+                        "url": "https://www.nhc.gov.cn/yaozs/c100098/202607/0f4f2bdcfead449f8412453373522470.shtml"
+                  },
+                  {
+                        "label": "国家基本药物目录（2026年版）PDF",
+                        "url": "https://www.nhc.gov.cn/yaozs/c100098/202607/0f4f2bdcfead449f8412453373522470/files/%E5%9B%BD%E5%AE%B6%E5%9F%BA%E6%9C%AC%E8%8D%AF%E7%89%A9%E7%9B%AE%E5%BD%95%EF%BC%882026%E5%B9%B4%E7%89%88%EF%BC%89.pdf"
+                  },
+                  {
+                        "label": "腾讯新闻/健识局解读",
+                        "url": "https://news.qq.com/rain/a/20260709A0A9VR00?adChannelId=finance"
+                  },
+                  {
+                        "label": "搜狐健康解读",
+                        "url": "https://www.sohu.com/a/1048036164_359980"
+                  }
+            ]
+      },
+      {
+            "id": "china-bci-clinical-translation-ecosystem-20260708",
+            "category": "医疗器械/诊断",
+            "date": "2026-07-08",
+            "title": "脑机接口在中国进入临床转化生态观察阶段：从产品获批到规模化交付仍有长路",
+            "tags": [
+                  "脑机接口",
+                  "AI医疗",
+                  "医疗器械",
+                  "NMPA",
+                  "康复",
+                  "高端器械"
+            ],
+            "viatrisImpact": "",
+            "summary": "一项新研究系统梳理中国脑机接口临床转化生态，显示中国BCI已经形成从研究者发起研究、注册临床试验到NMPA批准产品的转化链条。但长期稳定性、临床流程标准化、算法泛化和支付路径仍是商业化关键挑战。",
+            "why": "脑机接口是中国高端医疗器械和AI医疗从概念走向监管批准、临床交付和产业政策支持的代表赛道，提醒我们医药健康雷达不能只看药品。",
+            "role": "看AI医疗和高端器械，不能套用药品逻辑。要看产品能否标准化交付、医院是否具备操作和随访能力、临床终点是否清晰、支付路径是否存在、算法和设备能否持续迭代。",
+            "watch": [
+                  "BCI产品是否进入更多康复中心和三甲医院",
+                  "是否形成收费和医保/商保支付路径",
+                  "长期植入安全性和真实世界数据",
+                  "NMPA是否进一步明确脑机接口分类、临床评价和上市后监管要求",
+                  "国产BCI企业是否获得更多资本和医院合作"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-08",
+                        "text": "中国脑机接口临床转化生态研究发布，系统梳理IIT、注册临床试验和NMPA批准产品。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "arXiv：Clinical Translation of Brain-Computer Interface in China",
+                        "url": "https://arxiv.org/abs/2607.07185"
+                  },
+                  {
+                        "label": "Reuters：中国批准脑机接口医疗器械上市",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/china-approves-market-launch-brain-computer-interface-medical-device-world-first-2026-03-13/"
+                  }
+            ]
+      },
+      {
+            "id": "sino-biopharm-az-gsk-respiratory-commercial-bd-20260708",
+            "category": "BD/投融资",
+            "date": "2026-07-08",
+            "title": "中国生物制药同周推进AZ/GSK呼吸合作：本土平台同时输出创新资产、承接MNC中国商业化",
+            "tags": [
+                  "中国生物制药",
+                  "正大天晴",
+                  "阿斯利康",
+                  "GSK",
+                  "呼吸",
+                  "商业化合作",
+                  "MNC中国",
+                  "渠道",
+                  "License-out"
+            ],
+            "viatrisImpact": "",
+            "summary": "中国生物制药一边将正大天晴COPD实验药TQC3721的中国以外权益授权给阿斯利康，一边获得GSK两款呼吸药在中国大陆的商业化权利，体现本土药企同时成为创新资产输出方和MNC中国商业化承接方。",
+            "why": "这不是单纯license-out新闻，而是MNC中国价值链分工新闻。本土平台既能输出研发资产，也可能承接MNC成熟或专科产品的准入、分销、医院覆盖和区域推广。",
+            "role": "看MNC中国业务，不要只看产品归属，而要拆研发权益、生产供应、进口分销、医院准入、销售推广和患者管理分别由谁承担。未来很多合作会是BD、商业化权利和渠道能力的组合。",
+            "watch": [
+                  "TQC3721是否启动全球III期",
+                  "阿斯利康是否继续从中国引进呼吸、肾病、代谢等非肿瘤资产",
+                  "GSK两款呼吸产品交给中生后在中国的放量、准入和渠道表现",
+                  "更多MNC是否把成熟或专科产品交给中国本土商业平台"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-07",
+                        "text": "中国生物制药旗下正大天晴将TQC3721中国以外权益授权给阿斯利康，公开报道显示交易包含2亿美元首付款，最高可达19亿美元里程碑。"
+                  },
+                  {
+                        "date": "2026-07-08",
+                        "text": "中国生物制药获得GSK两款呼吸药Trelegy Ellipta和Anoro Ellipta在中国大陆商业化权利。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters：Sino Biopharm-GSK China rights",
+                        "url": "https://www.reuters.com/legal/litigation/sino-biopharmaceutical-gsk-expand-alliance-with-china-rights-respiratory-drugs-2026-07-08/"
+                  },
+                  {
+                        "label": "WSJ：Sino Biopharm, AZ and GSK respiratory partnerships",
+                        "url": "https://www.wsj.com/health/pharma/astrazeneca-sino-biopharm-sign-up-to-1-9-billion-respiratory-drug-licensing-deal-1c7d7a08"
+                  }
+            ]
+      },
+      {
+            "id": "glp1-china-2026",
+            "category": "药品/创新药",
+            "date": "2026-07-05",
+            "title": "GLP-1进入“支付+剂型+仿制化”三线竞争",
+            "tags": [
+                  "GLP-1",
+                  "ecnoglutide",
+                  "mazdutide",
+                  "orforglipron",
+                  "tirzepatide",
+                  "慢病"
+            ],
+            "viatrisImpact": "",
+            "summary": "Pfizer/信达GLP-1通过中国医保目录初审，礼来口服GLP-1中国上市节奏逐步清晰，同时中国企业的tirzepatide仿制版本进入FDA审评。GLP-1已从单个产品竞争，升级为医保、自费、线上渠道、供应和仿制化的系统竞争。",
+            "why": "GLP-1是观察中国慢病市场变化的最佳样本：它把患者长期管理、线上问诊、电商购药、DTP、自费支付和医保谈判放在同一张图上。",
+            "role": "这条新闻的启发是，慢病产品竞争不只是疗效竞争，也是一条患者旅程的竞争：认知、问诊、处方、支付、购药、复购、依从性和安全监测都会影响长期价值。",
+            "watch": [
+                  "最终医保谈判价格和适应症范围",
+                  "口服GLP-1在中国获批时间",
+                  "线上渠道监管和处方合规",
+                  "中国多肽制造/仿制药出海进展"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-03-06",
+                        "text": "中国批准Pfizer/Sciwind的ecnoglutide用于长期体重管理，Pfizer通过授权方式进入中国GLP-1减重市场。"
+                  },
+                  {
+                        "date": "2026-06-16",
+                        "text": "Novo Nordisk表示将很快在中国提交口服Wegovy监管申请，口服GLP-1竞争升温。"
+                  },
+                  {
+                        "date": "2026-06-24",
+                        "text": "礼来称orforglipron在中国可能最早于2026年底至2027年初上市，并计划结合本地线上健康平台。"
+                  },
+                  {
+                        "date": "2026-06-29",
+                        "text": "Reuters报道Pfizer ecno­glutide、信达mazdutide通过中国医保目录初步审查。"
+                  },
+                  {
+                        "date": "2026-06-30",
+                        "text": "中国翰宇药业tirzepatide仿制版本进入美国FDA审评，提示GLP-1仿制化竞争前移。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters: GLP-1医保初审",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/pfizer-innovent-glp-1-drugs-pass-china-insurance-preliminary-review-2026-06-29/"
+                  },
+                  {
+                        "label": "Reuters: 礼来口服GLP-1",
+                        "url": "https://www.reuters.com/legal/litigation/china-approval-eli-lilly-glp-1-pill-come-soon-2026-executive-says-2026-06-24/"
+                  },
+                  {
+                        "label": "Reuters: Hybio仿制tirzepatide",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/us-food-drug-administration-review-hybios-generic-glp-1s-2026-06-30/"
+                  },
+                  {
+                        "label": "Reuters: Pfizer GLP-1获批",
+                        "url": "https://www.investing.com/news/economy-news/china-approves-pfizer-glp1-drug-for-weight-management-4546014"
+                  },
+                  {
+                        "label": "Reuters: Novo口服Wegovy",
+                        "url": "https://www.investing.com/news/stock-market-news/novo-nordisk-to-seek-regulatory-approval-for-wegovy-pill-in-china-soon-says-ceo-4743926"
+                  }
+            ]
+      },
+      {
+            "id": "nhsa-drug-finder",
+            "category": "渠道/患者",
+            "date": "2026-07-03",
+            "title": "国家医保局上线“医保找药”：患者购药路径和院外渠道透明度提高",
+            "tags": [
+                  "医保找药",
+                  "定点药店",
+                  "院外零售",
+                  "商保创新药",
+                  "患者行为"
+            ],
+            "viatrisImpact": "",
+            "summary": "国家医保局上线“医保找药”功能，患者可查询医保药品和商保创新药在一个月内在哪家定点医疗机构或定点药店有过结算记录。功能覆盖全国所有定点医疗机构和定点零售药店，并每日更新。",
+            "why": "这把“药品进目录后是否真的买得到”变得更透明。未来院外渠道、定点药店、DTP承接和处方流转的重要性会继续上升。",
+            "role": "这条新闻的启发是，判断政策影响要看落地：患者能不能买到、在哪买、能不能报销、是否需要处方流转。真实可及性往往比文件发布本身更能说明商业价值。",
+            "watch": [
+                  "是否纳入库存/价格/报销比例",
+                  "定点药店是否获得更多处方外流",
+                  "商保创新药目录品种可及性是否改善"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-03",
+                        "text": "医保找药功能上线，入口包括国家医保局微信公众号、国家医保服务平台APP、支付宝和微信小程序。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "国家医保局: 医保找药",
+                        "url": "https://www.nhsa.gov.cn/art/2026/7/3/art_14_21281.html"
+                  }
+            ]
+      },
+      {
+            "id": "orpathys-gastric-cancer",
+            "category": "药品/创新药",
+            "date": "2026-07-02",
+            "title": "ORPATHYS胃癌适应症获批：肿瘤治疗继续向生物标志物驱动演进",
+            "tags": [
+                  "ORPATHYS",
+                  "savolitinib",
+                  "MET扩增",
+                  "胃癌",
+                  "精准医学",
+                  "AstraZeneca",
+                  "HUTCHMED"
+            ],
+            "viatrisImpact": "",
+            "summary": "HUTCHMED宣布ORPATHYS获NMPA附条件批准，用于MET扩增的局部晚期或转移性胃癌/胃食管结合部腺癌患者。这是药物+检测的典型精准治疗案例。",
+            "why": "精准治疗越发展，伴随诊断、病理检测、NGS、医院检测流程和医保支付越重要。药企商业化不只是推广药，还要推动检测率和患者筛选。",
+            "role": "这条新闻提供了一个精准治疗观察框架：目标患者有多少、检测率是多少、医生是否按标志物筛选、支付是否支持检测和用药。药物价值需要和诊断能力一起评估。",
+            "watch": [
+                  "胃癌适应症是否进入医保或商保目录",
+                  "MET检测率和院内检测流程",
+                  "阿斯利康如何利用肿瘤商业化网络放量"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-02",
+                        "text": "ORPATHYS获批用于MET扩增胃癌/胃食管结合部腺癌，注册研究ORR为32.3%。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "HUTCHMED公告",
+                        "url": "https://www.globenewswire.com/news-release/2026/07/02/3321131/0/en/HUTCHMED-Announces-NMPA-Approval-for-ORPATHYS-for-the-treatment-of-Gastric-Cancer-Patients-with-MET-Amplification.html"
+                  }
+            ]
+      },
+      {
+            "id": "astrazeneca-cspc-kidney-disease-bd-20260702",
+            "category": "BD/投融资",
+            "date": "2026-07-02",
+            "title": "阿斯利康与石药达成最高17.7亿美元肾病药物研发合作",
+            "tags": [
+                  "License-out",
+                  "MNC BD",
+                  "石药",
+                  "肾病"
+            ],
+            "viatrisImpact": "",
+            "summary": "阿斯利康与石药达成最高17.7亿美元合作，用于发现和开发治疗肾脏疾病的实验性药物。该交易说明 MNC 对中国外部创新的兴趣正在从肿瘤扩展到肾病等慢病专科领域。",
+            "why": "中国创新药资产继续成为 MNC 全球外部创新来源，且疾病领域正在外溢。",
+            "role": "看 BD 新闻不要只看总金额，要拆首付款、临床阶段、权益范围、开发责任、里程碑触发条件。",
+            "watch": [
+                  "是否披露具体靶点",
+                  "首付款比例和近期付款规模",
+                  "合作是否为单资产还是平台型合作",
+                  "AZ 是否继续加码中国外部创新"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-02",
+                        "text": "Reuters 报道阿斯利康与石药达成最高17.7亿美元肾病药物研发合作。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters",
+                        "url": "https://www.reuters.com/legal/litigation/astrazeneca-signs-cspc-china-deal-experimental-kidney-disease-drugs-2026-07-02/"
+                  }
+            ]
+      },
+      {
+            "id": "nmpa-device-classification-change-management-20260701",
+            "category": "医疗器械/诊断",
+            "date": "2026-07-01",
+            "title": "医疗器械分类变更管理规则进入执行观察期",
+            "tags": [
+                  "医疗器械",
+                  "NMPA",
+                  "分类管理",
+                  "注册合规"
+            ],
+            "viatrisImpact": "",
+            "summary": "行业合规报道显示，NMPA关于医疗器械分类变更管理的措施自2026年6月1日起生效，重点是为分类变更提供统一程序框架。",
+            "why": "器械企业的监管路径和生命周期管理正在更加精细化。",
+            "role": "分析器械/IVD企业时，要同时看产品创新、分类路径、临床评价、标准体系、采购价格和院内准入。",
+            "watch": [
+                  "是否有企业因分类调整改变注册路径",
+                  "IVD和AI医疗器械是否受到影响",
+                  "地方执行和审评口径是否出现差异"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-07-01",
+                        "text": "行业合规报道提示NMPA医疗器械分类变更管理措施进入执行观察期。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Complife Group",
+                        "url": "https://www.complifegroup.com/2026/07/01/medical-devices-in-china-nmpa-regulates-the-management-of-classification-changes/"
+                  }
+            ]
+      },
+      {
+            "id": "lilly-innovent-verzenio-china-commercialization-20260630",
+            "category": "渠道/患者",
+            "date": "2026-06-30",
+            "title": "礼来将 Verzenio 中国大陆商业化权益转给信达生物：MNC成熟产品价值链重分工",
+            "tags": [
+                  "MNC中国",
+                  "成熟产品",
+                  "本土商业化",
+                  "肿瘤"
+            ],
+            "viatrisImpact": "",
+            "summary": "礼来将乳腺癌药 Verzenio 在中国大陆的商业化权利转给信达生物，礼来仍保留生产、供应和开发责任。该事件体现 MNC 在中国面对后生命周期产品和本土竞争时，可能通过本土商业平台提升覆盖效率。",
+            "why": "MNC 中国成熟/后生命周期产品可能进入价值链重分工阶段。",
+            "role": "判断 MNC 中国业务时，要拆产品生命周期、专利/仿制压力、渠道覆盖效率、本土 partner 能力，以及 MNC 保留哪部分价值链。",
+            "watch": [
+                  "信达承接后的销售组织和准入维护方式",
+                  "其他 MNC 是否复制类似成熟产品本土商业化合作",
+                  "Verzenio 后续价格、医保和院内外渠道变化"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-06-30",
+                        "text": "Reuters 报道礼来将 Verzenio 中国大陆商业化权利转给信达生物，礼来保留生产、供应和开发责任。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters",
+                        "url": "https://www.reuters.com/legal/litigation/chinas-innovent-biologics-gains-commercialization-rights-eli-lilly-breast-cancer-2026-06-30/"
+                  }
+            ]
+      },
+      {
+            "id": "us-house-china-clinical-trials-probe-20260630",
+            "category": "组织/合规",
+            "date": "2026-06-30",
+            "title": "美国国会委员会调查多家药企在华临床试验",
+            "tags": [
+                  "临床试验",
+                  "地缘合规",
+                  "MNC",
+                  "数据与伦理"
+            ],
+            "viatrisImpact": "",
+            "summary": "美国众议院美中战略竞争特别委员会调查 Merck、AbbVie、礼来、辉瑞、BMS 等公司在中国开展的临床试验，关注伦理、知情同意、军队医院、新疆和知识产权等问题。",
+            "why": "在华临床研发从效率议题上升为地缘合规和声誉风险议题。",
+            "role": "MNC 中国研发价值不能只看临床速度和成本，还要看伦理证据链、机构选择、第三方管理、数据治理和总部风险承受能力。",
+            "watch": [
+                  "被点名企业正式回应",
+                  "调查是否扩大到更多企业和更多临床机构",
+                  "是否影响全球多中心临床在中国布局",
+                  "是否带来新的数据和伦理审查要求"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-06-30",
+                        "text": "Reuters 报道美国国会委员会调查 Merck、AbbVie、礼来、辉瑞、BMS 等在华临床试验。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters",
+                        "url": "https://www.reuters.com/world/us-house-committee-opens-investigation-into-merck-abbvie-china-drug-trials-2026-06-30/"
+                  }
+            ]
+      },
+      {
+            "id": "solid-tumor-cart",
+            "category": "药品/创新药",
+            "date": "2026-06-29",
+            "title": "科济CAR-T实体瘤适应症获批：细胞治疗从血液瘤迈向实体瘤",
+            "tags": [
+                  "CAR-T",
+                  "实体瘤",
+                  "胃癌",
+                  "科济药业",
+                  "satri-cel",
+                  "CLDN18.2"
+            ],
+            "viatrisImpact": "",
+            "summary": "中国批准科济CAR-T用于胃癌相关治疗场景，被Reuters称为CAR-T疗法在实体瘤领域的重要里程碑。它的战略意义大于短期销售。",
+            "why": "实体瘤CAR-T长期受肿瘤微环境、靶点异质性和安全性挑战限制。获批后真正考验会转向定价、支付、治疗中心和真实世界疗效。",
+            "role": "这条新闻的观点是，创新药评价要区分科学突破、注册成功、支付可及和商业放量四个阶段。获批是重要节点，但不是商业成功的终点。",
+            "watch": [
+                  "定价和患者援助",
+                  "首批治疗中心布局",
+                  "真实世界疗效与安全性",
+                  "是否进入医保或商保创新药目录"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-06-22",
+                        "text": "科济CAR-T在中国获批用于胃癌治疗场景，实体瘤细胞治疗进入商业化验证阶段。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters: CARsgen CAR-T approval",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/china-approves-carsgens-car-t-treatment-treat-stomach-cancer-2026-06-22/"
+                  }
+            ]
+      },
+      {
+            "id": "merck-biotechne",
+            "category": "医疗器械/诊断",
+            "date": "2026-06-29",
+            "title": "Merck KGaA收购Bio-Techne：生命科学工具和精准诊断上游价值被重估",
+            "tags": [
+                  "Merck KGaA",
+                  "Bio-Techne",
+                  "生命科学工具",
+                  "精准诊断",
+                  "M&A"
+            ],
+            "viatrisImpact": "",
+            "summary": "Merck KGaA以约113亿美元现金收购Bio-Techne，补强生命科学工具、细胞基因治疗和精准诊断相关能力。医药健康产业链价值不只在药品终端，也在研发、质控和诊断上游。",
+            "why": "工具、试剂、抗体、分析技术和诊断平台决定创新速度和质量控制能力。对行业地图来说，药品、器械、诊断、CXO、工具和支付渠道要连起来看。",
+            "role": "这条新闻的启发是，医药产业价值不只在终端药品商业化，也在生命科学工具、诊断上游和平台能力。上游工具公司的并购，往往反映创新基础设施的长期价值。",
+            "watch": [
+                  "交易完成和反垄断审查",
+                  "Merck生命科学业务后续并购",
+                  "中国生命科学工具国产替代"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-06-25",
+                        "text": "Merck KGaA宣布以约113亿美元收购Bio-Techne，预计2026年底或2027年初完成。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters: Merck Bio-Techne",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/germanys-merck-buy-bio-techne-73-per-share-2026-06-25/"
+                  }
+            ]
+      },
+      {
+            "id": "device-udi-standards",
+            "category": "医疗器械/诊断",
+            "date": "2026-06-29",
+            "title": "器械/IVD观察：UDI扩展和创新器械审批活跃，监管数字化持续推进",
+            "tags": [
+                  "医疗器械",
+                  "IVD",
+                  "UDI",
+                  "创新器械",
+                  "监管数字化"
+            ],
+            "viatrisImpact": "",
+            "summary": "本期没有单一重磅器械新闻，但UDI扩展、器械标准化、创新器械审批活跃等信号说明，器械/诊断赛道正在向全生命周期管理和监管数字化推进。",
+            "why": "器械和IVD受到采购控费、国产替代、唯一标识、标准化和质量体系升级影响。它们会和药品支付、精准诊断、医院运营效率相互影响。",
+            "role": "这条新闻的观点是，医药健康观察需要同时纳入药、械、诊断和工具赛道。监管数字化、国产替代和采购控费会在多个赛道之间相互传导。",
+            "watch": [
+                  "UDI扩展落地进度",
+                  "第二类器械和IVD标识实施",
+                  "创新器械审批和集采政策"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-03-01",
+                        "text": "NMPA等部门发布后续品种实施医疗器械唯一标识相关公告。"
+                  },
+                  {
+                        "date": "2026-06-29",
+                        "text": "行业报告显示中国创新医疗器械累计审批继续增加，需持续用NMPA公告交叉验证。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "NMPA UDI公告",
+                        "url": "https://udi.nmpa.gov.cn/toDetail.html?CatalogId=2&infoId=80"
+                  },
+                  {
+                        "label": "行业观察: 创新医疗器械审批",
+                        "url": "https://www.hlongmed.com/en/article-59662-62591.html"
+                  }
+            ]
+      },
+      {
+            "id": "gcp-revision-2026",
+            "category": "组织/合规",
+            "date": "2026-06-12",
+            "title": "新版药物临床试验质量管理规范发布：临床研发提速后补齐数据治理和伦理要求",
+            "tags": [
+                  "GCP",
+                  "临床试验",
+                  "数据治理",
+                  "伦理审查",
+                  "NMPA",
+                  "创新药"
+            ],
+            "viatrisImpact": "",
+            "summary": "NMPA等部门发布新版药物临床试验质量管理规范，更新2020年版本，新增数据治理要求，强调伦理原则、科学规则、研究者责任、受试者保护和全过程质量管理。新版GCP将于2026年9月1日施行。",
+            "why": "中国创新药临床试验数量快速增加，全球也越来越关注中国临床数据质量。新版GCP是在研发效率提升后，对数据可信度、伦理和质量管理的制度补强。",
+            "role": "这条新闻的启发是，中国创新药不能只看临床速度，还要看数据质量、伦理治理和国际可接受性。研发效率提升之后，数据可信度会成为全球合作和出海注册的关键基础。",
+            "watch": [
+                  "9月1日实施后的机构执行情况",
+                  "数据治理对临床成本和周期的影响",
+                  "中国临床数据在海外注册中的接受度"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-06-12",
+                        "text": "新版GCP发布，新增数据治理章节并明确主要研究者责任。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "NMPA English: China updates GCP",
+                        "url": "https://english.nmpa.gov.cn/2026-06/12/c_1190202.htm"
+                  }
+            ]
+      },
+      {
+            "id": "siemens-diagnostics-china-2026",
+            "category": "医疗器械/诊断",
+            "date": "2026-05-07",
+            "title": "Siemens Healthineers因中国诊断业务承压下调展望：控费压力外溢到IVD",
+            "tags": [
+                  "Siemens Healthineers",
+                  "IVD",
+                  "诊断",
+                  "带量采购",
+                  "报销",
+                  "中国市场"
+            ],
+            "viatrisImpact": "",
+            "summary": "Reuters报道，Siemens Healthineers因诊断业务尤其是中国市场压力下调2026年展望。中国市场受到较低报销水平和带量采购实践影响，诊断收入同比下降，管理层形容诊断业务面临“perfect storm”。",
+            "why": "这说明中国控费逻辑不只影响药品，也在向IVD、诊断和大型设备商业模式传导。器械/诊断公司同样需要面对价格重置、采购规则和国产替代。",
+            "role": "这条新闻的观点是，药、械、诊断需要放在同一个支付和采购体系里观察。IVD并不是与医保控费无关的独立赛道，价格规则和采购机制会共同重塑商业模式。",
+            "watch": [
+                  "中国IVD集采和报销政策后续变化",
+                  "Siemens是否调整诊断业务组合",
+                  "MNC诊断业务在中国的本土化和价格策略"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-02-05",
+                        "text": "Siemens Healthineers一季报已提示中国诊断市场需求和价格压力。"
+                  },
+                  {
+                        "date": "2026-05-07",
+                        "text": "公司因中国诊断业务压力下调2026年展望。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters: Siemens Healthineers outlook cut",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/siemens-healthineers-cuts-2026-outlook-2026-05-07/"
+                  },
+                  {
+                        "label": "Reuters: Q1 China diagnostics pressure",
+                        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/siemens-healthineers-beats-q1-profit-estimates-strong-imaging-unit-margins-2026-02-05/"
+                  }
+            ]
+      },
+      {
+            "id": "ai-drug-regulation-2026",
+            "category": "数字医疗/AI",
+            "date": "2026-04-02",
+            "title": "国家药监局发布“人工智能+药品监管”实施意见：AI进入监管基础设施",
+            "tags": [
+                  "AI监管",
+                  "NMPA",
+                  "审评审批",
+                  "智慧监管",
+                  "数据治理",
+                  "数字化"
+            ],
+            "viatrisImpact": "",
+            "summary": "国家药监局发布《关于“人工智能+药品监管”的实施意见》，提出到2030年初步构建药品监管与人工智能融合创新体系，推动AI在审评审批、监督检查、检验监测、政务服务等场景应用。",
+            "why": "AI对医药行业的影响不只在研发和医生端，也会进入监管流程、质量体系和合规留痕。未来药企面对监管的资料准备、审评沟通、质量检查和风险监测都可能被数字化重塑。",
+            "role": "启发在于，AI监管会倒逼企业提升数据治理和流程留痕能力。未来值得提前思考：哪些数据需要结构化，哪些流程需要可追溯，哪些审批节点可能被自动化或半自动化审查。",
+            "watch": [
+                  "AI辅助审评审批试点场景",
+                  "监管数据标准和垂直模型建设",
+                  "企业质量、注册、PV和合规流程是否同步数字化"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-04-02",
+                        "text": "国家药监局发布“人工智能+药品监管”实施意见，提出2030和2035阶段目标。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "国家药监局: AI+药品监管实施意见",
+                        "url": "https://www.nmpaic.org.cn/yjzxyw/202604/t20260402_429648.html"
+                  },
+                  {
+                        "label": "国家药监局发布消息",
+                        "url": "https://www.nmpaic.org.cn/yjzxyw/202604/t20260402_429649.html"
+                  }
+            ]
+      },
+      {
+            "id": "china-biotech-license-boom-2026",
+            "category": "BD/投融资",
+            "date": "2026-02-13",
+            "title": "中国Biotech授权交易热度升温：全球药企继续外部采购中国管线",
+            "tags": [
+                  "License-out",
+                  "中国创新药",
+                  "MNC",
+                  "BD",
+                  "专利悬崖",
+                  "管线补强"
+            ],
+            "viatrisImpact": "",
+            "summary": "Reuters报道，全球药企正在加速寻找中国研发的实验性药物，行业分析师预计中国Biotech授权交易在2026年可能继续创纪录。大中华区授权交易总价值从2021年到2025年大幅增长，核心驱动包括MNC专利悬崖、研发成本压力和中国管线数量增加。",
+            "why": "这条主线解释了为什么2026年不断出现AZ-石药、礼来-海思科等交易。中国创新药的国际角色正在变化：既是本土市场机会，也是全球管线补强来源。",
+            "role": "这条主线适合形成一个交易质量框架：首付款、near-term payment、临床阶段、区域权益、里程碑触发条件、royalty和中国权益保留。真正值得关注的是交易能否兑现为临床推进和全球商业化价值。",
+            "watch": [
+                  "2026年全年交易总额和首付款水平",
+                  "哪些治疗领域最受MNC关注",
+                  "交易后资产临床兑现率"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-02-13",
+                        "text": "Reuters报道中国Biotech授权交易可能在2026年继续创纪录。"
+                  },
+                  {
+                        "date": "2026-06-01",
+                        "text": "礼来与海思科子公司达成最高约30亿美元合作，进一步验证中国管线吸引力。"
+                  },
+                  {
+                        "date": "2026-07-02",
+                        "text": "阿斯利康与石药达成17.7亿美元肾病siRNA合作，交易主题从代谢扩展到小核酸和肾病。"
+                  },
+                  {
+                        "date": "2026-07-02",
+                        "text": "阿斯利康与石药达成最高17.7亿美元肾病药物研发合作，显示中国外部创新交易从肿瘤、代谢继续外溢到肾病等专科慢病。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters: China biotech licensing boom",
+                        "url": "https://www.marketscreener.com/news/china-biotech-licensing-boom-to-hit-record-in-2026-as-pipeline-swells-ce7e5ddadb8bf224"
+                  },
+                  {
+                        "label": "Reuters: Lilly-Haisco deal",
+                        "url": "https://kelo.com/2026/06/01/unit-of-chinas-haisco-eli-lilly-sign-collaboration-licensing-deals/"
+                  }
+            ]
+      },
+      {
+            "id": "az-china-compliance-2026",
+            "category": "组织/合规",
+            "date": "2026-02-13",
+            "title": "阿斯利康前中国负责人被起诉：MNC中国增长与合规风险同步上升",
+            "tags": [
+                  "AstraZeneca",
+                  "Leon Wang",
+                  "合规",
+                  "医保欺诈",
+                  "个人信息",
+                  "MNC中国"
+            ],
+            "viatrisImpact": "",
+            "summary": "阿斯利康前中国负责人Leon Wang被正式起诉，相关指控涉及医保欺诈、非法交易及 unlawful collection of personal information 等。事件发生在阿斯利康继续加码中国投资和BD合作的背景下，凸显MNC中国业务的增长机会与合规风险并存。",
+            "why": "中国仍是全球药企重要市场和创新来源地，但医保基金监管、数据合规、反腐和商业推广边界都在收紧。MNC不能只强调增长和创新合作，必须把合规前置到业务设计。",
+            "role": "这条新闻提醒我们，合规不是末端审批，而是业务模式设计的一部分。涉及患者数据、医保支付、第三方服务商和医生互动的项目，价值判断必须同时纳入增长机会和风险边界。",
+            "watch": [
+                  "案件后续进展",
+                  "阿斯利康中国组织和管控机制调整",
+                  "其他MNC是否强化医保、数据和第三方合规审查"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-02-13",
+                        "text": "媒体报道阿斯利康前中国负责人被正式起诉，事件引发对跨国药企中国合规风险的讨论。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "SCMP: AstraZeneca former China head charged",
+                        "url": "https://www.scmp.com/economy/china-economy/article/3343522/china-charges-former-astrazeneca-executive-what-it-means-global-pharmaceutical-firms"
+                  }
+            ]
+      },
+      {
+            "id": "az-cspc-obesity-2026",
+            "category": "BD/投融资",
+            "date": "2026-01-30",
+            "title": "阿斯利康与石药达成185亿美元肥胖/代谢合作：中国创新资产进入MNC核心赛道",
+            "tags": [
+                  "AstraZeneca",
+                  "石药集团",
+                  "GLP-1",
+                  "肥胖",
+                  "T2D",
+                  "License-out",
+                  "AI制药"
+            ],
+            "viatrisImpact": "",
+            "summary": "阿斯利康与石药集团围绕肥胖和2型糖尿病候选药物达成最高185亿美元合作，包含12亿美元首付款和最高173亿美元里程碑。交易覆盖8个项目，包括SYH2082等长效体重管理资产，并涉及AI驱动多肽发现和月制剂技术。",
+            "why": "这是2026年中国创新药出海的早期标志性交易之一。它说明MNC已经把中国Biotech从“低成本资产来源”升级为核心治疗领域的外部创新来源，尤其是GLP-1/代谢这种全球战略赛道。",
+            "role": "这条新闻的启发是：BD交易价值不能只看总金额，还要拆首付款、权益范围、是否保留中国权益、平台技术和临床阶段。它也说明MNC正在把中国创新生态纳入全球核心管线布局。",
+            "watch": [
+                  "SYH2082等资产是否顺利进入临床",
+                  "阿斯利康是否继续围绕石药平台追加合作",
+                  "GLP-1/代谢赛道中国资产估值是否继续升温"
+            ],
+            "updates": [
+                  {
+                        "date": "2026-01-30",
+                        "text": "阿斯利康与石药达成肥胖和2型糖尿病合作，潜在总金额最高185亿美元。"
+                  }
+            ],
+            "sources": [
+                  {
+                        "label": "Reuters: AZ-CSPC obesity/T2D deal",
+                        "url": "https://www.investing.com/news/stock-market-news/astrazeneca-strikes-deal-for-up-to-185-billion-to-license-weightloss-drugs-from-chinas-cspc-4476023"
+                  },
+                  {
+                        "label": "AstraZeneca公告转载",
+                        "url": "https://www.tradingview.com/news/reuters.com%2C2026-01-30%3Anewsml_RSd0023Ra%3A0-reg-astrazeneca-plc-astrazeneca-agrees-obesity-and-t2d-deal-with-cspc/"
+                  }
+            ]
+      }
+];
+
+    const eventDetails = {
+      "az-cspc-obesity-2026": "2026年1月，阿斯利康与石药集团达成肥胖和2型糖尿病方向的大额合作，是今年中国创新药出海的重要开场。交易覆盖8个项目，其中包括临床准备阶段资产SYH2082，以及多个利用石药AI驱动多肽发现平台和月制剂技术的候选项目。阿斯利康获得中国以外的全球权益，石药获得12亿美元首付款和最高173亿美元里程碑付款。这类交易的重点不是“金额很大”本身，而是MNC在全球GLP-1和代谢竞争中，愿意把中国公司的平台能力纳入核心组合。它也说明中国Biotech的价值正在从单个fast follow资产，延伸到递送技术、长效制剂、AI筛选和连续管线生产能力。",
+      "china-biotech-license-boom-2026": "2026年初，Reuters对中国Biotech授权交易做了系统性报道：全球药企因专利悬崖、研发成本上升和管线压力，继续向中国寻找实验性药物资产。中国过去几年积累了大量ADC、双抗、GLP-1、细胞治疗、小核酸和肿瘤靶向资产，临床推进速度和成本效率也有优势。因此，license-out不再只是个别公司融资手段，而是中国创新药参与全球产业链的核心路径。看这类新闻时要警惕一个误区：总金额通常包含多年开发和商业里程碑，不等于公司马上拿到的钱。真正要看首付款、近期付款、权益区域、资产阶段和MNC是否愿意投入后续开发资源。",
+      "az-china-compliance-2026": "阿斯利康前中国负责人被起诉，是2026年MNC中国合规主线中最有代表性的事件之一。报道提到相关指控涉及医保欺诈、非法交易和个人信息收集等问题。它发生在阿斯利康持续加码中国投资、BD和研发合作的大背景下，所以不是简单的个案新闻，而是提醒MNC：中国市场一方面仍然重要，另一方面医保基金、数据合规、反腐、患者项目和第三方服务商管理都在进入更高压监管状态。真正值得提炼的观点是，合规要前置到业务设计阶段；涉及医保支付、患者数据、医生互动、第三方执行和互联网平台的项目，都需要先明确增长逻辑和风险边界。",
+      "ai-drug-regulation-2026": "国家药监局发布“人工智能+药品监管”实施意见，说明AI正在从企业内部效率工具，进入监管体系本身。文件提出到2030年形成药品监管与AI融合创新体系，并在审评审批、监督检查、检验监测、政务服务等场景中应用。对企业的启发是：未来监管沟通会越来越依赖结构化数据、全流程留痕和可追溯证据。注册、质量、药物警戒、合规和医学事务团队，可能都需要适应更数字化的监管环境。它对业务短期销量影响不大，但会改变企业长期运营能力，尤其是跨部门流程和数据治理。",
+      "siemens-diagnostics-china-2026": "Siemens Healthineers下调2026年展望，核心压力来自诊断业务和中国市场，是“控费外溢到器械/诊断”的重要样本。中国曾是跨国诊断企业的重要增长市场，但报销水平下降、带量采购、国产替代和医院成本控制正在改变IVD商业模式。诊断不像药品那样直接面向患者品牌，但它深度嵌入医院检验、病理、影像和治疗决策流程。该事件说明广义医药健康分析不能只盯药品，IVD、设备、耗材和诊断上游同样会被医保支付和医院控费影响。更可复用的观点是，药、械、诊断要放在同一个支付治理框架里看。",
+      "gcp-revision-2026": "新版药物临床试验质量管理规范将在2026年9月1日施行，背景是中国创新药临床试验数量快速上升，同时全球市场也越来越关注中国临床数据的质量和国际可接受性。新版GCP强调数据治理、伦理审查、主要研究者责任、受试者保护和全过程质量管理。它与6月底美国对MNC中国临床试验的审查形成呼应：一边是中国提升临床研发效率和质量标准，另一边是海外监管和政治环境对中国数据提出更多问题。后续观察重点不是单个条款，而是它会不会提高临床成本、延长周期、改善数据可信度，并帮助中国创新药更顺利走向海外注册。",
+      "glp1-china-2026": "GLP-1是2026年最值得持续跟踪的慢病赛道。3月，Pfizer/Sciwind的ecnoglutide在中国获批长期体重管理，说明中国本土创新资产和MNC商业化合作正在结合。6月，Novo表示将推进口服Wegovy中国申请，礼来也释放orforglipron中国上市节奏，口服剂型可能降低患者对注射的心理门槛。6月底，Pfizer/信达GLP-1通过医保初审，同时中国翰宇的tirzepatide仿制版本进入FDA审评。把这些串起来看，GLP-1竞争已经包括疗效、剂型、医保、自费、线上渠道、供应能力、专利和仿制化。它是观察慢病商业模式变化的最好案例。",
+      "nhsa-drug-finder": "国家医保局上线“医保找药”功能，看起来是便民服务，但对药品可及性和院外渠道有更深影响。它允许患者查询某种医保药或商保创新药在过去一个月内，哪些定点医疗机构或定点零售药店有过结算记录，并且每日更新。过去很多创新药即使进入医保，患者仍可能遇到医院不进药、药房不知道哪里有、处方流转不顺的问题。这个功能把“能不能买到”变得更透明。对药企来说，未来准入后管理不只是看目录和价格，还要看真实可及网点、定点药店承接和患者找药路径。",
+      "orpathys-gastric-cancer": "ORPATHYS胃癌适应症获批，是精准肿瘤治疗继续按生物标志物细分的案例。该药用于MET扩增的局部晚期或转移性胃癌/胃食管结合部腺癌患者，适用人群为至少二线系统治疗失败者。HUTCHMED披露关键II期研究中独立评审ORR为32.3%、DCR为63.1%、中位DoR为9.7个月。对行业的重点不是单个适应症，而是“药物+检测”的商业化逻辑：如果MET检测率不足，符合条件患者找不到，药物就很难放量。未来肿瘤创新药商业化越来越依赖伴随诊断、病理流程、NGS可及性和医生对标志物的认知。",
+      "nr-vbp-round12": "一句话结论：第12批集采从单纯压价进一步转向价格、质量、临床选择和供应能力的综合平衡。发生了什么：7月31日开标，65种药品全部采购成功，4.5万家医疗机构报量，327家企业的521个产品获得拟中选资格。规则变化：继续按厂牌报量，并允许参比制剂以适宜价格不带量复活，诺华沙库巴曲缬沙坦、拜耳碘普罗胺、卫材倍他司汀、雅培地屈孕酮等10个参比制剂拟中选。价格治理：明显低于平均报价的产品不再作为控制价差锚点，极端低价产品即使中选也可能不带量、不占入围名额。供应要求：规则同时强化包装稳定、境外仿制药资质、医联体统一报量和基层供应保障。为什么重要：集采正在兼顾临床选择与供应稳定，而不是只以最低价决定结果。对Viatris高相关，但仍需逐项核对65个品种、剂型和规格与Viatris产品或主要竞品的重合，不能直接推断财务影响。",
+      "solid-tumor-cart": "科济CAR-T实体瘤适应症获批，被Reuters称为全球首个获批用于实体瘤的CAR-T疗法，是中国创新疗法的重要里程碑。CAR-T此前主要用于血液肿瘤，实体瘤面临肿瘤微环境、靶点异质性、T细胞浸润和安全性等挑战。获批说明科学和注册层面迈出关键一步，但商业化仍需要回答定价、治疗中心、制备周期、支付可及、真实世界疗效等问题。它很适合用来训练创新药判断：获批不等于商业成功，要区分科学突破、注册成功、支付可及和商业放量四个阶段。",
+      "merck-biotechne": "Merck KGaA收购Bio-Techne，是生命科学工具和精准诊断上游价值被重估的代表。Bio-Techne提供蛋白、抗体、分析技术等工具，服务生物研究、细胞基因治疗和精准诊断。它不是终端药品公司，但嵌入了药物研发、生产质控和诊断流程。疫情后生命科学工具行业估值回落，但长期来看，创新药研发、细胞基因治疗、伴随诊断和科研服务仍需要高质量工具平台。这条新闻提醒我们不要只看药企商业化，生命科学工具、诊断上游和平台型公司也是医药健康产业的重要部分。",
+      "device-udi-standards": "器械/IVD的2026主线不是某一个爆炸性单品，而是监管数字化、标准化和采购控费持续推进。UDI扩展意味着更多第二类器械、体外诊断试剂和第一类器械会进入唯一标识管理，产品追溯、供应链管理和监管数据会更结构化。与此同时，创新器械审批保持活跃，但诊断业务又面临报销和采购压力。把这些放在一起看，器械/诊断企业需要同时应对创新审批、质量体系、采购价格和院内运营效率。它与药品精准治疗也有关，因为肿瘤靶向药放量越来越依赖检测能力。",
+      "lilly-innovent-verzenio-china-commercialization-20260630": "Reuters 6月30日报道，礼来将 Verzenio 在中国大陆的商业化权利转给信达生物，礼来仍保留生产、供应和开发责任。报道指出，该产品在中国面临本土仿制竞争压力。这条新闻的意义不只是肿瘤药商业化变化，而是 MNC 中国业务模式的一个典型样本：当产品进入更激烈的后生命周期阶段，继续全链条自营未必是最优选择。MNC 可能保留生产、供应、医学和开发责任，同时把地面商业化、渠道覆盖、院内准入维护交给本土平台。对 Viatris 高相关，因为 Viatris 中国业务与成熟品牌、仿制药竞争、渠道效率、生命周期管理高度相关。",
+      "astrazeneca-cspc-kidney-disease-bd-20260702": "Reuters 7月2日报道，阿斯利康与石药集团达成最高17.7亿美元合作，用于发现和开发治疗肾脏疾病的实验性药物。公开报道未披露具体靶点和疾病亚型。这条新闻应放在中国创新药出海和 MNC 外部创新的大背景下理解：过去中国 license-out 高度集中在肿瘤、ADC、免疫等领域，而肾病这类慢病专科领域也开始进入 MNC 的全球管线补强视野。对行业而言，这说明中国资产价值不只来自 fast follow，也可能来自早研效率、疾病机制探索和临床开发速度。",
+      "us-house-china-clinical-trials-probe-20260630": "Reuters 6月30日报道，美国众议院美中战略竞争特别委员会对 Merck、AbbVie、Eli Lilly、Pfizer、BMS 等药企在中国开展临床试验发起调查，关注点包括新疆、军队医院、知情同意、伦理标准、知识产权和国家安全风险。Merck 和 AbbVie 被要求在7月17日前提供详细信息。这条新闻说明，MNC 在中国做研发和临床试验的价值叙事正在被重新审视。过去中国临床试验常被视为速度快、患者资源丰富、成本效率高；现在还必须同时回答伦理合规、机构选择、数据可信度、跨境信息和地缘政治风险问题。",
+      "nhsa-2026-nrdl-commercial-insurance-initial-review-20260629": "一句话结论：专家评审通过意味着取得谈判、竞价或价格协商准备资格，不代表已经纳入目录。发生了什么：2026年基本医保目录及商保创新药目录专家评审已经结束，结果包括拟简易续约、拟重新谈判续约、拟谈判新增、拟竞价新增和拟价格协商。必要背景：此前形式审查只确认申报资格，专家评审进一步决定哪些药品进入后续支付准入程序。下一步：企业需按要求提交确认函及谈判、竞价或价格协商材料，后续将进入现场沟通和正式谈判阶段。为什么重要：目录外药品获得拟谈判、拟竞价或拟价格协商资格，并不等于已经纳入目录。行业启发：关注点应从是否通过形式审查，转向支付范围、参照药选择和最终价格。",
+      "nmpa-device-classification-change-management-20260701": "行业合规报道显示，NMPA 52/2026 关于医疗器械分类变更管理的措施自2026年6月1日起生效，主要为医疗器械分类变更提供统一程序框架。该事件不是单一产品获批新闻，但对器械和IVD企业具有长期意义：分类变化会影响注册路径、临床评价要求、上市节奏和合规成本。它也提醒我们，医药健康市场雷达不能只看药品，器械/诊断的监管、分类、临床评价和采购支付同样会影响行业格局。",
+      "essential-medicines-list-2026-official-release-analysis-202607": "一句话结论：2026版国家基本药物目录正式发布，核心意义不只是药品数量扩容，而是把创新药、儿童用药、慢病和重大疾病用药纳入更广泛的医疗机构配备使用体系，可能重塑基层和县域用药结构。发生了什么：国家卫健委官方通知页面链接指向《国家基本药物目录（2026年版）》附件，官方PDF首页显示文件名称和目录版本均为《国家基本药物目录（2026年版）》，发布机构为中华人民共和国国家卫生健康委员会；目录由化学药品和生物制品、中成药、中药饮片三部分构成，其中化学药品和生物制品共476个品种，中成药共318个品种，中药饮片不列具体品种、用文字表述。官方PDF说明中未披露新增/调出药品数量；网页标题、网页发布时间、执行时间和后续工作要求因官方页面访问受限，本文按官方附件可核验信息呈现，未能核验项不作编造。必要背景：基药目录影响医疗机构配备、优先使用、基层可及和合理用药；医保目录影响医保基金支付资格、谈判准入和患者报销；集采影响价格、采购量和市场份额重分配；商保创新药目录影响高价值创新药的分层支付探索。本次目录的关键变化是，基药不再应被简单理解为“老药/低价药”，而是更强调临床价值、可及性、供应保障和适合各级医疗机构使用。媒体解读提到司美格鲁肽、奥希替尼、泰它西普、司普奇拜单抗、依达拉奉右莰醇等进入目录；这类具体品种仍需以后续官方附件逐项核对为准。为什么重要：对基层医疗机构，基药目录会影响用药目录调整、配备比例、处方习惯和绩效考核；对创新药，进入基药可能缩短从上市到广泛临床使用的路径，但也提高安全性、适宜性、供应能力和价格可承受性的要求；对成熟品牌/仿制药，基药目录会强化基础用药覆盖，也可能加剧低价仿制药、集采中选品种和成熟品牌之间的竞争；对县域和院外渠道，基层配备增加可能改变处方流向，并带动零售/院外承接慢病续方和患者管理。对Viatris高相关，但不等于已经确认重大财务影响。高相关来自政策类型与业务模式匹配：Viatris中国业务以成熟品牌、慢病用药、心血管等基础治疗领域、渠道效率和生命周期管理为核心。后续需要分子级核对新版目录中心血管、降压、降脂、糖尿病、抗感染、神经系统等类别是否涉及Viatris相关分子、竞品分子或替代治疗方案，特别是阿托伐他汀、氨氯地平及主要竞品分子是否在目录中、剂型规格是否变化、基层配备是否可能影响院内外渠道。岗位启发：先校验政策口径，再拆目录影响路径；不要只问是否进目录，要看配备、使用、支付、价格、供货和渠道；成熟品牌可能获得覆盖机会，也可能面临品牌溢价压缩；政策变化需要准入、市场、医学、供应、销售和财务共同评估。",
+      "sino-biopharm-az-gsk-respiratory-commercial-bd-20260708": "发生了什么：阿斯利康与中国生物制药旗下正大天晴达成协议，获得慢性呼吸疾病实验药TQC3721在中国以外的开发、生产和商业化权利。公开报道显示，该交易包含2亿美元首付款，总里程碑最高可达19亿美元。与此同时，中国生物制药获得GSK两款呼吸药Trelegy Ellipta和Anoro Ellipta在中国大陆的商业化权利，负责进口、分销、医院准入和推广。必要背景：呼吸领域是AZ、GSK等MNC长期强势赛道。中国生物制药这组合作很有代表性：对外，它向全球MNC输出中国创新资产；对内，它承接MNC已上市或成熟产品在中国市场的商业化和渠道覆盖。为什么重要：这不是单纯license-out新闻，而是“MNC中国价值链分工”新闻。MNC不一定每个产品都适合在中国全链条自营，本土平台可能在准入、医院覆盖、区域销售、成本效率、县域下沉方面更有优势。中国本土药企也不再只是研发资产供应方，而是逐渐成为MNC中国商业化partner。对Viatris高相关的原因不是呼吸治疗领域本身，而是模式相关。Viatris中国业务核心涉及成熟品牌、慢病用药、渠道效率和生命周期管理。MNC将中国商业化权利交给本土平台，或与本土平台合作提升准入和渠道覆盖，这与Viatris未来如何管理成熟产品、如何平衡自营与合作、如何提升县域和院外覆盖高度相关。行业/岗位启发：看MNC中国业务，不要只看产品归属，而要拆价值链，判断研发权益、生产供应、进口分销、医院准入、销售推广、患者管理分别由谁承担。未来很多合作不是纯BD，而是“BD + 商业化权利 + 渠道能力”的组合。",
+      "china-biotech-global-vc-strategy-shift-20260710": "发生了什么：WSJ报道，中国生物科技快速崛起正在迫使美国VC和全球药企调整策略。报道提到，2025年大型药企与中国公司的交易额达到687亿美元，约为上一年的三倍；中国在全球生物科技VC融资中的份额从2025年的9%升至2026年上半年的15%，美国份额降至58%。另有报道指出，美国biotech正在变得更保密，以应对中国快速跟随和临床效率优势。Axios也报道美国biopharma内部对如何回应中国创新药崛起存在分歧。必要背景：过去中国创新药出海主要被理解为低成本、fast follow和交易金额变大；现在它进一步上升为全球外部创新体系和地缘产业竞争的一部分。MNC既希望通过中国资产补强管线，又要面对临床数据、知识产权、地缘审查和供应链安全问题。为什么重要：这意味着中国创新药出海不再只是中国企业的融资故事，而是全球医药创新分工重构。MNC需要从中国获取资产，美国VC需要调整投资和保密策略，中国biotech则需要从交易能力升级为全球开发、注册、医学和商业化能力。行业/岗位启发：面试或管理层讨论中，可以把中国创新药出海拆成三层：资产层看靶点、机制、临床数据和差异化；交易层看首付款、里程碑、权益范围和开发责任；产业层看全球药企管线缺口、地缘审查、临床数据可信度和跨境合作结构。",
+      "china-bci-clinical-translation-ecosystem-20260708": "发生了什么：本周一篇关于中国脑机接口临床转化生态的研究纳入134项中国临床试验注册中心登记的临床试验、26项研究者发起研究，并统计截至2026年6月已有5个脑机接口相关产品获得NMPA批准。研究显示，非侵入式系统占注册研究的79.1%，卒中康复是主要适应方向，占65.0%。此前Reuters也报道，中国已经批准脑机接口医疗器械商业化上市，用于帮助颈髓损伤导致四肢瘫痪的患者恢复抓握功能。必要背景：脑机接口横跨医疗器械、神经科学、AI算法、康复医学和长期随访。它和药品商业化逻辑完全不同，注册获批只是第一步，后续还需要医院流程、手术/康复能力、真实世界证据、算法迭代和支付路径。为什么重要：这是中国高端医疗器械和AI医疗从概念走向监管批准、临床交付和产业政策支持的代表赛道。它提醒我们，医药健康市场不只是药品，器械、诊断和AI医疗也会形成新的产业机会和监管挑战。行业/岗位启发：看AI医疗和高端器械，不能套用药品逻辑。要看产品是否能标准化交付，医院是否具备操作和随访能力，临床终点是否清晰，支付路径是否存在，算法和设备是否能持续迭代，真实世界数据能否支撑长期使用。",
+      "china-innovative-drugs-devices-approval-2026h1": "一句话结论：中国医疗创新正在从创新药扩展到高端器械、AI医疗和脑机接口。发生了什么：国家药监局披露上半年批准38个1类创新药上市，包括20个化学药、17个生物制品和1个中药，其中11个新靶点、新机制药均为国产。必要背景：同期批准上市第三类医疗器械1595个，其中创新医疗器械42个。为什么重要：创新评价的边界正在从药品研发延伸到器械注册、医院交付和复杂临床流程。岗位启发：看高端器械不能套药品逻辑，还要看医院流程、医生培训、设备部署、真实世界数据和支付路径。后续观察点：关注42个创新器械的临床落地、脑机接口进入医院和康复中心的进展。",
+      "beijing-shanghai-commercial-health-insurance-innovation-drug-202607": "一句话结论：北京、上海正在把商保创新药支持从目录准入延伸到进院、供应和直接结算。北京措施：推动商保公司与药企协商定价，探索按疗效付费和分期支付，并支持商保创新药快速挂网、不计入基本医保自费率和集采可替代品种监测。供应保障：商保创新药可不受一品两规限制，并可通过双通道在医疗机构或协议药店保障供应；符合条件的新药新技术费用可不计入DRG病组支付标准。上海措施：支持保险机构与药企开展集体采购药价谈判、新药上市沟通、按疗效付费和分期支付，并通过上海保险码推动医保商保同步结算和直赔。为什么重要：两地共同解决挂网、进院、考核、供应和患者垫资等障碍，使商保成为支付基础设施的一部分。后续观察点：企业仍需关注真实参保人数、理赔率、药企折扣、医院处方量和直接赔付数据。",
+      "global-pharma-us-manufacturing-tariff-supply-chain-202608": "一句话结论：约5000亿美元美国投资反映全球药企正把制造、研发与供应链本土化纳入战略防御。发生了什么：Reuters 8月11日报道，Pfizer、Lilly、J&J、Roche、AstraZeneca、Novartis、Merck、BMS等药企扩大美国制造、研发和供应链投入；Pfizer计划投入700亿美元，AZ承诺到2030年投资500亿美元。补充进展：BMS于8月10日宣布将在Houston建设约23亿美元制造基地，属于其400亿美元美国投资承诺的一部分。为什么重要：美国关税、药价政策、供应安全和本土就业政治正在影响MNC全球产能布局。对中国市场的启发：未来MNC会更加平衡中国增长机会与美国政策防御，供应链会成为商业战略的一部分。后续观察点：关注关税政策是否落地、制造分工如何调整，以及本土化是否改变全球供应和价格。",
+      "china-biotech-lab-monkey-shortage-preclinical-bottleneck-202608": "一句话结论：实验猴短缺显示中国创新药的瓶颈已从资本和临床效率延伸至临床前资源。发生了什么：多家媒体报道研发加速推高实验猴需求，部分研究者因短缺暂停动物实验；SCMP称价格达到疫情时期高位。必要背景：研报预计2026至2028年中国实验猴供需缺口至少1.5万至2万只。为什么重要：毒理、安全性和部分疾病模型研究的排期会影响IND节奏与CRO服务能力。行业启发：创新药不只面临全球人才、国际注册和商业化能力瓶颈，也开始受到资源与伦理合规约束。后续观察点：关注价格、排期、替代模型、进口渠道及CRO产能是否影响开发节奏。",
+      "astrazeneca-bms-megamerger-rumor-investor-pushback-202608": "一句话结论：AZ-BMS近4000亿美元合并传闻已降温，反映市场对缺乏清晰战略互补的mega-merger保持谨慎。发生了什么：FT报道称AstraZeneca曾推进与Bristol Myers Squibb的近4000亿美元级合并设想；Reuters随后称知情人士表示双方目前没有正在进行的讨论，也没有可做的交易。市场担忧：BMS面临Eliquis等核心产品专利悬崖、两家公司肿瘤管线存在重叠，超大型整合还可能损害研发效率。为什么重要：Big Pharma在专利悬崖、增长压力和美国市场重心下，仍可能重新考虑mega-merger。管理启发：并购必须回答战略互补是否足够强、是否买到未来增长、整合成本会否损害创新。后续观察点：关注正式声明及是否以小规模资产交易或管线合作替代。",
+      "eli-lilly-glp1-q2-2026-widens-gap-with-novo-202608": "一句话结论：Lilly的GLP-1销售强势增长，进一步巩固其在肥胖和糖尿病赛道的领先位置。发生了什么：Mounjaro销售同比增长91%至99.4亿美元，Zepbound销售49.3亿美元，两款产品占公司季度收入约64.7%；公司上调2026年收入指引至850亿至870亿美元。竞争格局：Novo的口服Wegovy虽增长但略低于预期，市场仍认为tirzepatide在疗效和商业化上更占优势。为什么重要：GLP-1竞争已从单一产品延伸至产能、价格、医保覆盖、DTC渠道、口服剂型和全球支付能力。对中国市场的启发：需关注审批、供应、本土竞品与医保商保支付。后续观察点：关注Lilly与Novo的口服竞争和供应瓶颈是否缓解。",
+      "bms-nvidia-ai-factory-life-sciences-20260720": "一句话结论：BMS正在将AI投入从单个工具升级为企业级研发基础设施。发生了什么：BMS 7月20日宣布部署NVIDIA DGX SuperPOD with Vera Rubin系统，建设生命科学领域领先的企业AI基础设施，支持药物发现和开发。必要背景：Reuters也报道BMS购买NVIDIA最新一代计算系统，用于研发中的AI应用。为什么重要：Big Pharma的AI竞争取决于专有数据、科学模型、算力、研发流程和组织决策能否闭环。风险提示：AI基础设施不等于临床成功率提升，仍需以候选物质量、研发周期、失败率和投入产出验证。后续观察点：关注BMS是否披露实际研发效率，以及更多MNC是否跟进建设算力平台。"
+};
+
+    newsData.forEach(item => {
+      item.detail = eventDetails[item.id] || item.summary;
+    });
+
+    const weeklyTakeaways = [
+      "Big Pharma面对专利悬崖和增长压力，仍会反复出现超大型并购传闻，但投资者对缺乏清晰战略互补的mega-merger高度谨慎。",
+      "全球药企正在把美国制造和供应链本土化作为战略防御动作，而不仅是普通产能投资。",
+      "GLP-1赛道正在重塑Big Pharma市值、制造、支付和渠道格局。",
+      "中国创新药高速发展后，瓶颈开始从有没有资产延伸到临床前资源、全球人才和组织能力。"
+];
+
+    const discussionPoints = [
+      "判断大药企并购，不能只看交易规模，要拆战略互补、专利悬崖、管线重叠、整合风险和投资者接受度。",
+      "MNC全球战略要同时看三条线：产品管线、制造供应链、关键市场政策。",
+      "创新药出海不能只看BD金额，临床前资源、全球开发人才、注册能力和监管接受度都会成为瓶颈。",
+      "AI制药的关键不只是模型能力，而是算力、数据、科学流程和组织决策是否真正闭环。"
+];
+
+
+
+    const followUpFocus = [
+      "AZ-BMS传闻是否彻底终止，还是后续以小规模资产交易或合作替代。",
+      "美国药品关税和本土制造政策是否进一步影响MNC中国投资和全球供应链。",
+      "Lilly/Novo GLP-1竞争是否从疗效转向价格、产能和支付覆盖。",
+      "第12批集采最终中选结果，以及是否涉及Viatris相关分子或主要竞品。",
+      "中国实验猴短缺是否影响临床前CRO排期和创新药开发节奏。"
+];
+    const dashboardUpdated = "2026-08-12";
+
+    const tabs = ["全部", "政策/支付", "药品/创新药", "医疗器械/诊断", "BD/投融资", "组织/合规", "渠道/患者", "数字医疗/AI"];
+    let activeTab = "全部";
+
+    const els = {
+      updated: document.getElementById("updated"),
+      search: document.getElementById("search"),
+      month: document.getElementById("month"),
+      sort: document.getElementById("sort"),
+      highOnly: document.getElementById("highOnly"),
+      tabs: document.getElementById("tabs"),
+      list: document.getElementById("newsList"),
+      empty: document.getElementById("empty"),
+      statCount: document.getElementById("stat-count"),
+      statUpdates: document.getElementById("stat-updates"),
+      statHigh: document.getElementById("stat-high"),
+      statHighCard: document.getElementById("stat-high-card"),
+      statLatest: document.getElementById("stat-latest"),
+      statPageUpdated: document.getElementById("stat-page-updated"),
+      takeaways: document.getElementById("weeklyTakeaways"),
+      watchList: document.getElementById("watchList"),
+      discussionPoints: document.getElementById("discussionPoints")
+    };
+
+    function formatDate(dateText) {
+      return dateText.replaceAll("-", ".");
+    }
+
+    function monthKey(dateText) {
+      return dateText.slice(0, 7);
+    }
+
+    function normalize(text) {
+      return String(text || "").toLowerCase();
+    }
+
+    function matchesSearchMonthHigh(item) {
+      const q = normalize(els.search.value.trim());
+      const selectedMonth = els.month.value;
+      const monthMatch = selectedMonth === "all" || monthKey(item.date) === selectedMonth;
+      const highMatch = !els.highOnly.checked || isHighImpact(item.viatrisImpact);
+      const haystack = normalize([
+        item.title, item.category, item.summary, item.detail, item.why, item.role, item.viatrisImpact,
+        item.tags.join(" "), item.watch.join(" "),
+        item.updates.map(u => `${u.date} ${u.text}`).join(" ")
+      ].join(" "));
+      const searchMatch = !q || haystack.includes(q);
+      return monthMatch && highMatch && searchMatch;
+    }
+
+    function tabCounts() {
+      const base = newsData.filter(matchesSearchMonthHigh);
+      return Object.fromEntries(tabs.map(tab => [
+        tab,
+        tab === "全部" ? base.length : base.filter(item => item.category === tab).length
+      ]));
+    }
+
+    function renderTabs() {
+      const counts = tabCounts();
+      els.tabs.innerHTML = tabs.map(tab => (
+        `<button class="tab ${tab === activeTab ? "active" : ""}" data-tab="${tab}" type="button">${tab}（${counts[tab] || 0}）</button>`
+      )).join("");
+      els.tabs.querySelectorAll(".tab").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeTab = btn.dataset.tab;
+          render();
+        });
+      });
+    }
+
+    function renderMonths() {
+      const months = Array.from(new Set(newsData.map(item => monthKey(item.date)))).sort().reverse();
+      els.month.innerHTML = `<option value="all">全部月份</option>` + months.map(m => `<option value="${m}">${m}</option>`).join("");
+    }
+
+    function getFiltered() {
+      const filtered = newsData.filter(item => {
+        const tabMatch = activeTab === "全部" || item.category === activeTab;
+        return tabMatch && matchesSearchMonthHigh(item);
+      });
+
+      return filtered.sort((a, b) => {
+        const direction = els.sort.value === "asc" ? 1 : -1;
+        return a.date.localeCompare(b.date) * direction;
+      });
+    }
+
+    function isHighImpact(impact) {
+      return String(impact || "").includes("高");
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function formatDetailText(text) {
+      const sectionLabels = [
+        "一句话结论",
+        "发生了什么",
+        "必要背景",
+        "本次目录的关键变化 / Highlight",
+        "本次目录的关键变化",
+        "为什么重要",
+        "对Viatris为什么高相关",
+        "对Viatris高相关",
+        "行业/岗位能力启发",
+        "行业/岗位启发",
+        "岗位启发",
+        "后续观察点"
+      ];
+      const pattern = new RegExp(`(${sectionLabels.map(label => label.replaceAll("/", "\\/")).join("|")})：`, "g");
+      const normalized = String(text || "").trim().replace(pattern, "\n$1：");
+      const sections = normalized.split(/\n+/).map(x => x.trim()).filter(Boolean);
+      const labelSet = new Set(sectionLabels);
+
+      if (sections.length > 1) {
+        return sections.map(section => {
+          const match = section.match(/^(.+?)：(.*)$/);
+          if (match && labelSet.has(match[1])) {
+            return `<p><span class="section-title">${escapeHtml(match[1])}</span>${escapeHtml(match[2].trim())}</p>`;
+          }
+          return `<p>${escapeHtml(section)}</p>`;
+        }).join("");
+      }
+
+      const sentences = normalized.match(/[^。！？]+[。！？]?/g) || [normalized];
+      const paragraphs = [];
+      for (let i = 0; i < sentences.length; i += 2) {
+        paragraphs.push(sentences.slice(i, i + 2).join(""));
+      }
+      return paragraphs.map(paragraph => `<p>${escapeHtml(paragraph.trim())}</p>`).join("");
+    }
+
+    function renderCard(item) {
+      const tagHtml = item.tags.map(tag => `<span class="badge">${tag}</span>`).join("");
+      const timelineHtml = item.updates
+        .slice()
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .map(u => `
+          <div class="event">
+            <div class="event-date">${formatDate(u.date)}</div>
+            <div class="event-body">${u.text}</div>
+          </div>
+        `).join("");
+      const sourceHtml = item.sources.map(src => `<a href="${src.url}" target="_blank" rel="noopener">${src.label}</a>`).join(" · ");
+
+      return `
+        <article class="card">
+          <div class="card-main">
+            <div class="card-top">
+              <div>
+                <h2>${item.title}</h2>
+              </div>
+              <div class="date">${formatDate(item.date)}</div>
+            </div>
+            <p class="summary">${item.summary}</p>
+            <div class="badges">
+              <span class="badge secondary">${item.category}</span>
+              ${isHighImpact(item.viatrisImpact) ? `<span class="badge warning">Viatris高相关</span>` : ""}
+              ${tagHtml}
+            </div>
+          </div>
+          <details>
+            <summary>展开新闻详解、新闻价值、启发观点和后续进展</summary>
+            <div class="detail-box" style="margin-bottom:12px;">
+              <h3>新闻详解</h3>
+              <div class="detail-content">${formatDetailText(item.detail)}</div>
+            </div>
+            <div class="detail-grid">
+              <div class="detail-box">
+                <h3>新闻价值</h3>
+                <p>${item.why}</p>
+              </div>
+              <div class="detail-box">
+                <h3>启发与观点</h3>
+                <p>${item.role}</p>
+              </div>
+            </div>
+            <div class="detail-box">
+              <h3>后续观察点</h3>
+              <p>${item.watch.join("；")}。</p>
+            </div>
+            <h3 style="margin:12px 0 8px;color:var(--primary);font-size:13px;">事件进展</h3>
+            <div class="timeline">${timelineHtml}</div>
+            <div class="sources">${sourceHtml}</div>
+          </details>
+        </article>
+      `;
+    }
+
+    function renderSide(filtered) {
+      els.takeaways.innerHTML = weeklyTakeaways.map(x => `<li>${x}</li>`).join("");
+      els.discussionPoints.innerHTML = discussionPoints.map(x => `<li>${x}</li>`).join("");
+      els.watchList.innerHTML = followUpFocus.map(item => `<li>${item}</li>`).join("");
+    }
+
+    function renderStats(filtered) {
+      const updates = filtered.reduce((sum, item) => sum + item.updates.length, 0);
+      const high = filtered.filter(item => isHighImpact(item.viatrisImpact)).length;
+      const latest = filtered.length ? filtered.map(i => i.date).sort().at(-1) : "-";
+      els.statCount.textContent = filtered.length;
+      els.statUpdates.textContent = updates;
+      els.statHigh.textContent = high;
+      els.statHighCard.classList.toggle("active", els.highOnly.checked);
+      els.statLatest.textContent = latest === "-" ? "-" : formatDate(latest);
+      els.statPageUpdated.textContent = formatDate(dashboardUpdated);
+    }
+
+    function render() {
+      renderTabs();
+      const filtered = getFiltered();
+      els.list.innerHTML = filtered.map(renderCard).join("");
+      els.empty.classList.toggle("show", filtered.length === 0);
+      renderStats(filtered);
+      renderSide(filtered);
+    }
+
+    function init() {
+      const latestDate = newsData.map(item => item.date).sort().at(-1);
+      els.updated.textContent = `本页更新：${formatDate(dashboardUpdated)} · ${newsData.length}个事件`;
+      renderMonths();
+      render();
+      els.search.addEventListener("input", render);
+      els.month.addEventListener("change", render);
+      els.sort.addEventListener("change", render);
+      els.highOnly.addEventListener("change", render);
+      els.statHighCard.addEventListener("click", () => {
+        els.highOnly.checked = !els.highOnly.checked;
+        render();
+      });
+    }
+
+    init();
+  </script>
+</body>
+</html>
