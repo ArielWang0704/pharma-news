@@ -1,0 +1,23 @@
+/* V2.8: let Themes and Archive use the full content width; keep Weekly reader width unchanged. */
+@media (min-width:1001px){
+  #sheet-themes .section-head,
+  #sheet-themes .theme-grid,
+  #sheet-events .section-head,
+  #sheet-events .filters,
+  #sheet-events .event-list,
+  #sheet-events .empty{
+    width:100%;
+    max-width:none;
+  }
+
+  /* The archive is a retrieval surface: use the wider canvas for two balanced columns. */
+  #eventList{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+  }
+
+  /* Themes also benefit from the wider canvas without stretching article copy. */
+  #themeGrid{
+    width:100%;
+  }
+}
