@@ -29,7 +29,7 @@
       if (!card.dataset.rawCategory && chip) card.dataset.rawCategory = chip.textContent.trim();
       const broad = broadCategory(card.dataset.rawCategory || '');
       card.dataset.broadCategory = broad;
-      if (chip) chip.textContent = broad;
+      if (chip && chip.textContent !== broad) chip.textContent = broad;
       const hide = Boolean(wanted && broad !== wanted);
       card.dataset.broadHidden = hide ? '1' : '0';
       if (!hide) visible++;
@@ -37,12 +37,20 @@
     if (emptyState && cards.length) emptyState.classList.toggle('show', visible === 0);
   }
 
-  broadSelect.addEventListener('change', apply);
-  const observer = new MutationObserver(apply);
-  observer.observe(eventList, {childList:true, subtree:true});
+  // Broad category is a reader-side filter; apply only after actual user/filter events.
+  broadSelect.addEventListener('change', () => setTimeout(apply, 0));
+  document.addEventListener('input', e => {
+    if (e.target && e.target.closest && e.target.closest('.filters')) setTimeout(apply, 0);
+  });
+  document.addEventListener('change', e => {
+    if (e.target && e.target.closest && e.target.closest('.filters')) setTimeout(apply, 0);
+  });
+
+  // Initial data is loaded asynchronously by v21-app.js. Poll only until cards appear, then stop.
   let tries = 0;
   const timer = setInterval(() => {
     apply();
-    if (eventList.querySelector('.event-card') || ++tries > 60) clearInterval(timer);
+    tries++;
+    if (eventList.querySelector('.event-card') || tries > 80) clearInterval(timer);
   }, 100);
 })();
