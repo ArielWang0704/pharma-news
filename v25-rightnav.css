@@ -1,0 +1,28 @@
+/* V2.5: narrow right-side primary navigation */
+@media (min-width:1001px){
+  .shell{
+    max-width:1260px;
+    grid-template-columns:minmax(0,1fr) 116px;
+    column-gap:18px;
+  }
+  main{grid-column:1;grid-row:2;min-width:0;}
+  .sheet-tabs{
+    grid-column:2;
+    grid-row:2;
+    width:116px;
+    padding:6px;
+    gap:4px;
+    background:rgba(255,255,255,.9);
+  }
+  .sheet-tab{
+    padding:10px 8px;
+    text-align:center;
+    font-size:13px;
+    white-space:nowrap;
+  }
+  .sheet-tab.active{
+    box-shadow:inset 0 0 0 1px rgba(31,78,121,.08);
+    border-left:3px solid var(--blue);
+  }
+  .weekly-layout{grid-template-columns:minmax(0,1fr) 270px;gap:15px;}
+}
