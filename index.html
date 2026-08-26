@@ -38,41 +38,26 @@
           <div class="metric-strip" id="weeklyMetrics"></div>
         </div>
         <div class="weekly-layout">
-          <div class="focus-list" id="weeklyFocus"></div>
+          <div class="focus-list" id="weeklyFocus"><div class="load-error">正在加载新闻数据…</div></div>
           <aside class="insight-panel">
-            <div class="insight-block">
-              <h3>本周形成的判断</h3>
-              <div id="weeklyJudgements"></div>
-            </div>
-            <div class="insight-block">
-              <h3>下一步最值得验证</h3>
-              <div id="weeklyValidation"></div>
-            </div>
+            <div class="insight-block"><h3>本周形成的判断</h3><div id="weeklyJudgements"></div></div>
+            <div class="insight-block"><h3>下一步最值得验证</h3><div id="weeklyValidation"></div></div>
           </aside>
         </div>
       </section>
 
       <section class="sheet" id="sheet-themes">
         <div class="section-head compact">
-          <div>
-            <span class="eyebrow">LONG-TERM THEMES</span>
-            <h2>长期主题</h2>
-            <p>把零散新闻沉淀成可持续维护的行业命题；新新闻优先成为主题证据，而不是无限新增卡片。</p>
-          </div>
+          <div><span class="eyebrow">LONG-TERM THEMES</span><h2>长期主题</h2><p>把零散新闻沉淀成可持续维护的行业命题；新新闻优先成为主题证据，而不是无限新增卡片。</p></div>
         </div>
-        <div class="theme-grid" id="themeGrid"></div>
+        <div class="theme-grid" id="themeGrid"><div class="load-error">正在加载长期主题…</div></div>
       </section>
 
       <section class="sheet" id="sheet-events">
         <div class="section-head compact">
-          <div>
-            <span class="eyebrow">EVENT ARCHIVE</span>
-            <h2>全部事件</h2>
-            <p>完整事件档案。默认两列快速浏览，需要时再展开深度解读。</p>
-          </div>
+          <div><span class="eyebrow">EVENT ARCHIVE</span><h2>全部事件</h2><p>完整事件档案。默认两列快速浏览，需要时再展开深度解读。</p></div>
           <div class="archive-stats" id="archiveStats"></div>
         </div>
-
         <div class="filters">
           <input id="search" type="search" placeholder="搜索公司、产品、政策、主题……">
           <select id="broadCategoryFilter">
@@ -85,18 +70,17 @@
             <option value="渠道/患者">渠道/患者</option>
             <option value="数字医疗/AI">数字医疗/AI</option>
           </select>
-          <select id="categoryFilter" aria-hidden="true" tabindex="-1"><option value="">全部类型</option></select>
           <select id="themeFilter"><option value="">全部主题</option></select>
           <select id="monthFilter"><option value="">全部月份</option></select>
           <label class="check"><input id="viatrisOnly" type="checkbox"> 只看Viatris高相关</label>
         </div>
-        <div class="event-list" id="eventList"></div>
+        <div class="event-list" id="eventList"><div class="load-error">正在加载事件档案…</div></div>
         <div class="empty" id="emptyState">没有匹配的事件。</div>
       </section>
     </main>
   </div>
-  <script src="v21-app.js?v=20260826-1"></script>
-  <script src="v22-archive.js?v=20260826-1"></script>
+
+  <script src="v26-app.js?v=20260826-1"></script>
   <script>
     window.__RadarNativeMutationObserver = window.MutationObserver;
     window.MutationObserver = class RadarNoopObserver {
@@ -106,7 +90,7 @@
       takeRecords(){ return []; }
     };
   </script>
-  <script src="v24-research-batch.js?v=20260826-2"></script>
+  <script src="v24-research-batch.js?v=20260826-3"></script>
   <script>
     window.MutationObserver = window.__RadarNativeMutationObserver;
     delete window.__RadarNativeMutationObserver;
