@@ -1,0 +1,99 @@
+/* V2.1 reading-layout refinements */
+.shell{
+  max-width:1240px;
+  display:grid;
+  grid-template-columns:168px minmax(0,1fr);
+  column-gap:24px;
+  align-items:start;
+}
+.topbar{grid-column:1/-1;}
+.sheet-tabs{
+  grid-column:1;
+  grid-row:2;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  border-bottom:0;
+  margin:0;
+  position:sticky;
+  top:18px;
+  align-self:start;
+  padding:8px;
+  background:rgba(255,255,255,.76);
+  border:1px solid var(--line);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+}
+.sheet-tab{
+  width:100%;
+  text-align:left;
+  border:0;
+  border-radius:8px;
+  padding:11px 12px;
+  color:#475467;
+  border-bottom:0;
+  line-height:1.3;
+}
+.sheet-tab:hover{background:#f3f6fa;}
+.sheet-tab.active{
+  color:var(--blue);
+  background:var(--blue2);
+  border-bottom:0;
+  box-shadow:inset 3px 0 0 var(--blue);
+}
+main{grid-column:2;grid-row:2;min-width:0;}
+.section-head p{max-width:680px;}
+.weekly-layout{grid-template-columns:minmax(0,1fr) 286px;gap:16px;}
+.focus-card,.event-main,.theme-card{padding-left:18px;padding-right:18px;}
+.focus-card h3,.event-card h3{max-width:760px;}
+.focus-summary,.event-summary,.theme-judgement{max-width:800px;}
+.focus-detail{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+}
+.focus-detail .event-detail{
+  display:block;
+  border-top:0;
+  padding:0;
+  background:transparent;
+}
+.focus-detail .detail-grid{grid-template-columns:1fr;}
+.focus-detail .detail-section.wide{grid-column:auto;}
+.evidence-row.linked{
+  padding:0;
+  border-top:0;
+}
+.evidence-row.linked + .evidence-row.linked{border-top:1px dashed #edf0f4;}
+.evidence-link{
+  display:grid;
+  grid-template-columns:76px minmax(0,1fr) 18px;
+  gap:6px;
+  align-items:start;
+  padding:7px 2px;
+  color:#475467;
+  text-decoration:none;
+  border-radius:6px;
+}
+.evidence-link:hover{
+  background:#f7f9fc;
+  color:var(--blue);
+  text-decoration:none;
+}
+.evidence-link .date{padding-top:1px;}
+.evidence-link .arrow{color:#98a2b3;text-align:right;}
+
+@media(max-width:1000px){
+  .shell{display:block;max-width:100%;}
+  .sheet-tabs{
+    position:static;
+    display:flex;
+    flex-direction:row;
+    overflow-x:auto;
+    margin-bottom:18px;
+    padding:6px;
+  }
+  .sheet-tab{width:auto;white-space:nowrap;text-align:center;}
+  .sheet-tab.active{box-shadow:inset 0 -3px 0 var(--blue);}
+  .weekly-layout{grid-template-columns:1fr;}
+}
