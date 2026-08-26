@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="v2.css?v=20260826-1">
   <link rel="stylesheet" href="v2-layout-fixes.css?v=20260826-1">
   <link rel="stylesheet" href="v21-reading.css?v=20260826-1">
+  <link rel="stylesheet" href="v22-archive.css?v=20260826-1">
 </head>
 <body>
   <div class="shell">
@@ -65,14 +66,24 @@
           <div>
             <span class="eyebrow">EVENT ARCHIVE</span>
             <h2>全部事件</h2>
-            <p>完整事件档案。默认轻量浏览，需要时再展开深度解读。</p>
+            <p>完整事件档案。默认两列快速浏览，需要时再展开深度解读。</p>
           </div>
           <div class="archive-stats" id="archiveStats"></div>
         </div>
 
         <div class="filters">
           <input id="search" type="search" placeholder="搜索公司、产品、政策、主题……">
-          <select id="categoryFilter"><option value="">全部类型</option></select>
+          <select id="broadCategoryFilter">
+            <option value="">全部类型</option>
+            <option value="政策/支付">政策/支付</option>
+            <option value="药品/创新药">药品/创新药</option>
+            <option value="医疗器械/诊断">医疗器械/诊断</option>
+            <option value="BD/投融资">BD/投融资</option>
+            <option value="组织/公司">组织/公司</option>
+            <option value="渠道/患者">渠道/患者</option>
+            <option value="数字医疗/AI">数字医疗/AI</option>
+          </select>
+          <select id="categoryFilter" aria-hidden="true" tabindex="-1"><option value="">全部类型</option></select>
           <select id="themeFilter"><option value="">全部主题</option></select>
           <select id="monthFilter"><option value="">全部月份</option></select>
           <label class="check"><input id="viatrisOnly" type="checkbox"> 只看Viatris高相关</label>
@@ -83,5 +94,6 @@
     </main>
   </div>
   <script src="v21-app.js?v=20260826-1"></script>
+  <script src="v22-archive.js?v=20260826-1"></script>
 </body>
 </html>
