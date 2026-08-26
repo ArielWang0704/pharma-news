@@ -1,0 +1,28 @@
+/* V2.2: archive = scan-first retrieval view */
+#sheet-events .filters{
+  grid-template-columns:minmax(260px,1.35fr) 150px 180px 132px auto;
+}
+#sheet-events #categoryFilter{display:none!important;}
+#eventList{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  align-items:start;
+  grid-auto-flow:row dense;
+}
+#eventList .event-card.open{
+  grid-column:1/-1;
+}
+#eventList .event-card[data-broad-hidden="1"]{display:none;}
+#eventList .compact-event .event-main{min-height:172px;}
+#eventList .compact-event.open .event-main{min-height:auto;}
+#eventList .compact-event .event-summary{
+  min-height:3.3em;
+}
+@media(max-width:1050px){
+  #sheet-events .filters{grid-template-columns:1fr 1fr;}
+  #eventList{grid-template-columns:1fr;}
+  #eventList .event-card.open{grid-column:auto;}
+}
+@media(max-width:640px){
+  #sheet-events .filters{grid-template-columns:1fr;}
+}
