@@ -6,6 +6,7 @@
   <title>中国医药健康市场雷达</title>
   <link rel="stylesheet" href="v2.css?v=20260826-1">
   <link rel="stylesheet" href="v2-layout-fixes.css?v=20260826-1">
+  <link rel="stylesheet" href="v21-reading.css?v=20260826-1">
 </head>
 <body>
   <div class="shell">
@@ -64,7 +65,7 @@
           <div>
             <span class="eyebrow">EVENT ARCHIVE</span>
             <h2>全部事件</h2>
-            <p>这里保留完整档案；“重大事件 / 主题节点 / Evidence”分级管理。</p>
+            <p>完整事件档案。默认轻量浏览，需要时再展开深度解读。</p>
           </div>
           <div class="archive-stats" id="archiveStats"></div>
         </div>
@@ -74,12 +75,6 @@
           <select id="categoryFilter"><option value="">全部类型</option></select>
           <select id="themeFilter"><option value="">全部主题</option></select>
           <select id="monthFilter"><option value="">全部月份</option></select>
-          <select id="levelFilter">
-            <option value="">全部层级</option>
-            <option value="major">重大事件</option>
-            <option value="theme-node">主题节点</option>
-            <option value="evidence">Evidence</option>
-          </select>
           <label class="check"><input id="viatrisOnly" type="checkbox"> 只看Viatris高相关</label>
         </div>
         <div class="event-list" id="eventList"></div>
@@ -87,7 +82,6 @@
       </section>
     </main>
   </div>
-  <script src="v2-app.js?v=20260826-1"></script>
-  <script src="v2-interactions.js?v=20260826-1"></script>
+  <script src="v21-app.js?v=20260826-1"></script>
 </body>
 </html>
