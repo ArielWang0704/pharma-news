@@ -1,7 +1,7 @@
 (() => {
   'use strict';
-  const UPDATE_DATE = '2026-08-25';
-  const WEEK_START = '2026-08-17';
+  const UPDATE_DATE = '2026-08-31';
+  const WEEK_START = '2026-08-24';
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
   const arr = v => Array.isArray(v) ? v : [];
@@ -32,7 +32,13 @@
     'essential-medicines-list-2026-official-release-analysis-202607':'major',
     'beijing-shanghai-commercial-health-insurance-innovation-drug-202607':'major',
     'sandoz-henlius-biosimilar-global-license-20260817':'major',
-    'viatris-q2-2026-greater-china-growth':'major'
+    'viatris-q2-2026-greater-china-growth':'major',
+    'nhsa-pharma-industry-high-quality-development-forum-20260827':'major',
+    'high-value-consumables-vbp-7-digestive-intervention-20260826':'major',
+    'dualitybio-genentech-dupac-global-adc-collaboration-20260827':'major',
+    'hesco-sentivera-preclinical-autoimmune-license-20260825':'major',
+    'novo-oral-semaglutide-china-weight-management-20260827':'major',
+    'mnc-china-operating-model-reorganization-202608':'evidence'
   };
 
   const EVIDENCE_NOTES = {
@@ -171,14 +177,14 @@
     const weekly=EVENTS.filter(withinWeekly).filter(e=>levelOf(e)!=='evidence').sort((a,b)=>priority(b)-priority(a)||String(b.date||'').localeCompare(String(a.date||''))).slice(0,5);
     box.innerHTML=weekly.map(e=>`<article class="focus-card" data-id="${esc(e.id)}"><div class="focus-top"><h3>${esc(e.title)}</h3><span class="date">${fmt(e.date)}</span></div><p class="focus-summary">${esc(e.summary||'')}</p>${chips(e)}${e.why?`<div class="why-now"><b>为什么值得看：</b>${esc(e.why)}</div>`:''}<button class="open-link" data-weekly-toggle aria-expanded="false">展开解读 ↓</button><div class="weekly-detail" hidden>${baseDetail(e)}</div></article>`).join('') || '<div class="empty show">本周没有足够重要的新增事件。</div>';
     const judgements=[
-      '基层支付、基药和集采开始从三条独立政策线变成一条“患者流—医保支付—药品配备”的联动链。',
-      'MNC中国运营模式越来越按医院、院外和广阔市场拆分能力，同时中国研发和商业洞察更直接进入全球决策。',
-      '中国医药出海的能力边界继续扩展：不仅是创新资产，也包括生物类似药、制造与全球商业化分工。'
+      '医保正在从单一控费方走向战略购买方，价格、采购、支付、数据与结算逐渐形成一套体系。',
+      '中国医药出海进入交易结构分化阶段，headline金额越来越不能代表交易质量，保留权益和价值链位置更重要。',
+      '集采正从单纯最低价竞争转向控制异常低价、兼顾供应和临床选择，并开始从药品延伸到耗材。'
     ];
     const validations=[
-      '9月1日新版基药实施后，各地基层究竟新增哪些分子、规格和品牌。',
-      '基层新增慢病患者量最终流向原研成熟品牌还是集采仿制药。',
-      'MNC渠道重构后，预算、P&L、KPI和客户归属是否真的发生迁移，而不只是组织图变化。'
+      '第12批集采执行后，参比制剂/原研按厂牌报量最终转化为多少真实采购。',
+      '9月10日第7批耗材国采开标后，三类高需求量耗材的降价幅度及外资/国产中选结构。',
+      '映恩和海思科两类BD结构未来一年的实际现金兑现、临床推进和再许可进展。'
     ];
     if($('#weeklyJudgements')) $('#weeklyJudgements').innerHTML=judgements.map(x=>`<div class="insight-item">${esc(x)}</div>`).join('');
     if($('#weeklyValidation')) $('#weeklyValidation').innerHTML=validations.map(x=>`<div class="insight-item">${esc(x)}</div>`).join('');
@@ -251,3 +257,5 @@
 
   init();
 })();
+
+
