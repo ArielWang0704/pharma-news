@@ -1,0 +1,144 @@
+name: Publish September radar catch-up
+
+on:
+  push:
+    paths:
+      - '.github/workflows/catchup-202609.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch radar app and page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          app_path = Path('v26-app.js')
+          app = app_path.read_text(encoding='utf-8')
+
+          def replace_once(text, old, new, label):
+              if old not in text:
+                  raise SystemExit(f'missing patch target: {label}')
+              return text.replace(old, new, 1)
+
+          app = replace_once(app, "const UPDATE_DATE = '2026-08-31';", "const UPDATE_DATE = '2026-09-16';", 'update date')
+          app = replace_once(app, "const WEEK_START = '2026-08-24';", "const WEEK_START = '2026-09-01';", 'week start')
+
+          theme_replacements = {
+              '基药的商业价值正在从“进入目录”转向“患者是否下沉、医保是否跟随、基层是否真正配药”。真正影响成熟品牌的，是患者流、支付和终端配备能否同时改变。': 'DRG/DIP 3.0把基层“同病同付”从方向变成国家分组要求，基药与集采“三进”则补上药品供应。成熟品牌要看患者流、支付标准、基层/零售配备是否同步变化。',
+              '集采已经从一次性降价工具变成长期价格治理机制，影响不仅是价格，还会传导到医院切量、院外承接、供应履约和企业资源配置。': '第12批药品与第7批耗材共同确认：集采仍然控价，但“畸低价不带量”、按厂牌报量、复活机制和临床功能折算，正在把竞争从最低价推向合理价格、真实需求与供应履约。',
+              'MNC中国组织正在从单一产品线管理向不同客户场景分层；同时，中国研发、市场洞察和商业判断更直接进入全球资源配置。': 'MNC的运营分工正在同时按客户场景和资产生命周期重构：医院/零售/广阔市场需要不同能力，创新药与成熟品牌也越来越采用不同的制造、监管和商业运营模式。',
+              'GLP-1已经从单品疗效竞争进入portfolio、产能、支付、院外获客和患者分层的综合竞争。': 'GLP-1正从减重单品走向代谢疾病平台：口服剂型降低给药摩擦，MASH扩展科室与筛查入口；商业化越来越取决于诊断漏斗、支付、渠道和患者长期留存。',
+              '中国医药出海不再只有创新药资产授权，生物类似药、制造和全球商业化分工也在进入跨国药企的全球管线与LOE战略。': '中国医药出海已从单资产license-out进入modality/platform交易与MNC复购阶段。评价交易要看upfront、人体数据成熟度、保留权益、开发责任和买方是否持续向同一平台下注，而不是只看headline。',
+              '创新药支付正在从“是否进医保”扩展到商保、挂网、进院、双通道和直接结算的完整链条。': '创新药支付正从年度国谈走向“上市前参照药预沟通—基本医保/商保分层—进院/双通道—上市后续约与价值再评价”的连续机制；商保目录价值仍需用真实保险覆盖与结算证明。'
+          }
+          for old, new in theme_replacements.items():
+              app = replace_once(app, old, new, 'theme judgement')
+
+          marker = "    {id:'digital',name:'AI与数字医疗'"
+          if marker not in app:
+              raise SystemExit('missing theme insertion marker')
+          new_themes = """    {id:'retail',name:'院外零售与患者承接',keywords:['零售药店','院外','DTP','电商','医保个人账户','白名单','三进','医保找药'],judgement:'院外零售正在从医院处方的补充渠道，变成医保价格治理、集采延伸和慢病患者承接的重要基础设施。成熟品牌要同时看门店覆盖、价格、自付、处方流和供应履约。',viatris:true},\n    {id:'medtech-payment',name:'器械/IVD与医疗服务支付',keywords:['医疗器械','耗材','IVD','诊断','医疗服务价格','预立项','手术机器人','脑机接口','医保医疗服务项目'],judgement:'器械商业化不再由“获批—进院”单独决定，收费项目、地方定价、医保支付、集采与真实工作流共同决定使用量；价格和health economics正在前移到研发/审评阶段。',viatris:false},\n"""
+          app = app.replace(marker, new_themes + marker, 1)
+
+          level_marker = "    'mnc-china-operating-model-reorganization-202608':'evidence'\n  };"
+          levels = """    'mnc-china-operating-model-reorganization-202608':'evidence',
+    'simcere-roche-sim0660-20260901':'evidence',
+    'drg-dip-3-0-20260902':'evidence',
+    'hutchmed-gsk-hmpl-a830-attc-20260903':'evidence',
+    'nhsa-2026-national-reimbursement-negotiation-20260909':'major',
+    'nhsa-medical-service-price-guides-20260909':'evidence',
+    'vbp-high-value-consumables-round7-results-20260910':'major',
+    'wegovy-mash-china-approval-20260910':'evidence',
+    'retail-pharmacy-personal-account-whitelist-rollout-20260912':'evidence',
+    'medilink-tampeli-sclc-phase3-20260913':'evidence',
+    'hunan-vbp-drugs-three-in-retail-20260914':'evidence',
+    'sanofi-cheplapharm-mature-medicines-20260914':'evidence',
+    'gsk-chimagen-trispecific-tce-20260915':'evidence',
+    'ivonescimab-harmoni2-os-20260915':'major',
+    'nhsa-high-tech-price-prelisting-20260915':'evidence',
+    'legend-biotech-ingrid-zhang-ceo-20260915':'evidence',
+    'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major'
+  };"""
+          app = replace_once(app, level_marker, levels, 'level overrides')
+
+          evidence_marker = "    'global-pharma-us-manufacturing-tariff-supply-chain-202608': {supply:'支持判断：制造与供应链已经成为应对关税和市场政策风险的战略变量。'}\n  };"
+          evidence = """    'global-pharma-us-manufacturing-tariff-supply-chain-202608': {supply:'支持判断：制造与供应链已经成为应对关税和市场政策风险的战略变量。'},
+    'simcere-roche-sim0660-20260901': {bd:'支持判断：中国平台型资产可以在人体数据前获得MNC验证，但交易质量仍应拆分upfront、临床成熟度和后续兑现概率。'},
+    'drg-dip-3-0-20260902': {grassroots:'修正判断：基层市场不只靠基药扩容，医保对医院的“同病同付”正在直接改变患者下沉激励。',payment:'支持判断：支付方式改革正在从控费进一步承担分级诊疗与创新支持功能。'},
+    'hutchmed-gsk-hmpl-a830-attc-20260903': {bd:'支持判断：中国可交易的modality能力正在从抗体/ADC扩展到“自研小分子payload+抗体定向递送”。'},
+    'nhsa-2026-national-reimbursement-negotiation-20260909': {payment:'修正判断：创新药准入正在从年度谈判变成参照药预沟通、基本医保/商保分层和上市后价值评价的连续机制。'},
+    'nhsa-medical-service-price-guides-20260909': {'medtech-payment':'支持判断：全国先统一“收费项目字典”，为创新器械收费与后续医保支付建立共同基础设施。'},
+    'vbp-high-value-consumables-round7-results-20260910': {vbp:'强证据：6个异常低价产品中选但零带量，说明“反极端低价”已经进入真实分量规则。','medtech-payment':'支持判断：器械集采开始显式处理临床功能差异，而非只比较最低价格。'},
+    'wegovy-mash-china-approval-20260910': {glp1:'支持并升级判断：GLP-1正在从减重产品扩展成多器官代谢疾病平台，诊断筛查和科室入口的重要性上升。'},
+    'retail-pharmacy-personal-account-whitelist-rollout-20260912': {retail:'支持判断：医保定点药店正从泛健康消费场景回到更强的医疗属性，经营mix和合规要求都会变化。'},
+    'hunan-vbp-drugs-three-in-retail-20260914': {vbp:'支持判断：集采价格治理正从院内延伸到基层、民营医院和零售药店。',retail:'强证据：零售端开始同时管理覆盖、供货价和药店加成，院外渠道不再与集采价格体系割裂。'},
+    'sanofi-cheplapharm-mature-medicines-20260914': {'mnc-china':'支持判断：创新药和成熟品牌越来越需要不同的制造、监管与商业operating model。',vbp:'支持判断：成熟品牌的长期价值需要专门化生命周期运营，而不是沿用创新药组织成本结构。'},
+    'gsk-chimagen-trispecific-tce-20260915': {bd:'支持判断：同一MNC对同一中国平台复购，比单次headline金额更能验证平台能力。'},
+    'nhsa-high-tech-price-prelisting-20260915': {'medtech-payment':'修正判断：创新器械的收费路径从获批后补手续，前移到临床/创新器械审查阶段并行准备。'},
+    'nhsa-national-medical-service-reimbursement-catalogue-20260916': {'medtech-payment':'强证据：收费项目、价格预立项和全国医保支付范围开始形成三层相互衔接的国家框架。',payment:'支持判断：医保支付标准化正在从药品进一步扩展到医疗服务项目。'}
+  };"""
+          app = replace_once(app, evidence_marker, evidence, 'evidence notes')
+
+          app = replace_once(
+              app,
+              "const urls = [`archive.html?v=${Date.now()}`, `radar-base-20260825.html?v=${Date.now()}`];",
+              "const urls = [`archive.html?v=${Date.now()}`, `radar-base-20260825.html?v=${Date.now()}`, `radar-catchup-202609.js?v=${Date.now()}`];",
+              'event urls'
+          )
+          app = replace_once(app, "const [archive,base] = await Promise.all(responses.map(r=>r.text()));", "const [archive,base,catchup] = await Promise.all(responses.map(r=>r.text()));", 'event destructuring')
+          app = replace_once(app, "const newEvents = extractArray(base,'newEvents');", "const newEvents = extractArray(base,'newEvents');\n    const catchupEvents = extractArray(catchup,'newEvents');", 'catchup parse')
+          app = replace_once(app, "[...oldEvents,...newEvents].forEach(e=>{ if(e && e.id) map.set(e.id,e); });", "[...oldEvents,...newEvents,...catchupEvents].forEach(e=>{ if(e && e.id) map.set(e.id,e); });", 'event merge')
+
+          pattern = re.compile(r"    const judgements=\[.*?    \];\n    const validations=\[.*?    \];", re.S)
+          replacement = """    const judgements=[
+      '医保药品准入正在从年度谈判，走向“提前定锚 + 基本医保/商保分层 + 上市后价值再评价”的生命周期管理。',
+      '集采的反极端低价已进入可验证执行：合理价格、临床需求和供应履约开始共同决定谁真正获得采购量。',
+      '中国创新药全球竞争进入下一阶段：在中国做出领先数据只是第一步，能否在全球患者中复现正在成为更关键的价值变量。',
+      '医疗新技术支付正在前移：收费项目、地方价格与医保支付从获批后的串行手续，逐渐变成研发/注册阶段就要同步设计的商业基础设施。'
+    ];
+    const validations=[
+      '正式医保/商保目录公布后，高值创新药最终落在哪一层支付，以及商保目录能否形成真实结算量。',
+      '第7批耗材2027年执行后，国产扩量与外资保价两类策略最终如何影响真实份额和收入。',
+      'HARMONi-7等全球研究能否在非中国人群中复制依沃西相对标准治疗的优势。',
+      '价格预立项首批地方案例能把“产品获批—形成收费项目—进入医保支付”周期缩短多少。'
+    ];"""
+          app2, n = pattern.subn(replacement, app, count=1)
+          if n != 1:
+              raise SystemExit('failed to replace weekly judgement block')
+          app = app2
+          app_path.write_text(app, encoding='utf-8')
+
+          index_path = Path('index.html')
+          index = index_path.read_text(encoding='utf-8')
+          index = replace_once(index, '更新至 <strong>2026.08.31</strong>', '更新至 <strong>2026.09.16</strong>', 'index date')
+          index = replace_once(index, 'v26-app.js?v=20260831-1', 'v26-app.js?v=20260916-1', 'app cache')
+          restore_block = """  <script>
+    window.MutationObserver = window.__RadarNativeMutationObserver;
+    delete window.__RadarNativeMutationObserver;
+  </script>
+"""
+          if restore_block not in index:
+              raise SystemExit('missing index script marker')
+          index = index.replace(restore_block, restore_block + '  <script src="v29-research-202609.js?v=20260916-1"></script>\n', 1)
+          index_path.write_text(index, encoding='utf-8')
+          PY
+      - name: Syntax check
+        run: |
+          node --check v26-app.js
+          node --check radar-catchup-202609.js
+          node --check v29-research-202609.js
+      - name: Commit published update
+        run: |
+          git config user.name "chatgpt-radar-updater"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html v26-app.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Catch up pharma radar through 2026-09-16"
+          git push
