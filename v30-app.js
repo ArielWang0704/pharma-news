@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const UPDATE_DATE = '2026-09-21';
-  const WEEK_START = '2026-09-17';
+  const UPDATE_DATE = '2026-09-16';
+  const WEEK_START = '2026-09-01';
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
   const arr = v => Array.isArray(v) ? v : [];
@@ -11,7 +11,7 @@
   const fmt = d => String(d || '').replaceAll('-','.');
 
   const THEMES = [
-    {id:'grassroots',name:'基药与基层医疗',keywords:['基药','基本药物','基层','DRG','DIP','同病同付','药随病走'],judgement:'DRG/DIP 3.0之后，医保局进一步把高血压等慢病、基层“同病同付”和复杂病例特例单议连起来。成熟品牌的机会不应只看患者下沉，还要验证基层配备、商业覆盖、持续供货与真实临床价值是否同步兑现。',viatris:true},
+    {id:'grassroots',name:'基药与基层医疗',keywords:['基药','基本药物','基层','DRG','DIP','同病同付','药随病走'],judgement:'DRG/DIP 3.0把基层“同病同付”从方向变成国家分组要求，基药与集采“三进”则补上药品供应。成熟品牌要看患者流、支付标准、基层/零售配备是否同步变化。',viatris:true},
     {id:'vbp',name:'集采与成熟品牌',keywords:['集采','带量采购','国采','成熟药','成熟品牌','仿制药','参比制剂'],judgement:'第12批药品与第7批耗材共同确认：集采仍然控价，但“畸低价不带量”、按厂牌报量、复活机制和临床功能折算，正在把竞争从最低价推向合理价格、真实需求与供应履约。',viatris:true},
     {id:'mnc-china',name:'MNC中国运营模式',keywords:['MNC','组织架构','大中华区','Greater China','广阔市场','院外渠道','成熟品牌'],judgement:'MNC的运营分工正在同时按客户场景和资产生命周期重构：医院/零售/广阔市场需要不同能力，创新药与成熟品牌也越来越采用不同的制造、监管和商业运营模式。',viatris:true},
     {id:'glp1',name:'GLP-1与肥胖/代谢市场',keywords:['GLP-1','Mounjaro','Zepbound','Wegovy','肥胖','司美格鲁肽','替尔泊肽','MASH'],judgement:'GLP-1正从减重单品走向代谢疾病平台：口服剂型降低给药摩擦，MASH扩展科室与筛查入口；商业化越来越取决于诊断漏斗、支付、渠道和患者长期留存。',viatris:false},
@@ -57,11 +57,7 @@
     'ivonescimab-harmoni2-os-20260915':'major',
     'nhsa-high-tech-price-prelisting-20260915':'evidence',
     'legend-biotech-ingrid-zhang-ceo-20260915':'evidence',
-    'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major',
-    'miit-pharma-15th-five-year-plan-20260918':'major',
-    'nhsa-drg-dip-value-care-commentary-20260917':'major,
-    'miit-pharma-15th-five-year-plan-20260918': {bd:'升级判断：国家产业KPI已从国内创新数量延伸到FIC全球占比和全球重磅品种，创新药出海将越来越按全球商业化兑现而非license-out headline评价。',supply:'支持判断：规划把重点药品保供、产业链韧性与创新放在同一产业框架，制造供应能力继续战略化。'},
-    'nhsa-drg-dip-value-care-commentary-20260917': {grassroots:'强证据：官方解读已直接把高血压等慢病、基层同病同付和基层药品增量空间连接起来；对成熟慢病品牌应进一步验证终端配备与供应。'}'
+    'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major'
   };
 
   const EVIDENCE_NOTES = {
@@ -127,13 +123,12 @@
     ];
     const responses = await Promise.all(urls.map(u => fetch(u,{cache:'no-store'})));
     for(const r of responses){ if(!r.ok) throw new Error(`数据文件加载失败：${r.status}`); }
-    const [archive,base,catchup,weekly] = await Promise.all(responses.map(r=>r.text()));
+    const [archive,base,catchup] = await Promise.all(responses.map(r=>r.text()));
     const oldEvents = extractArray(archive,'newsData');
     const newEvents = extractArray(base,'newEvents');
     const catchupEvents = extractArray(catchup,'newEvents');
-    const weeklyEvents = extractArray(weekly,'newEvents');
     const map = new Map();
-    [...oldEvents,...newEvents,...catchupEvents,...weeklyEvents].forEach(e=>{ if(e && e.id) map.set(e.id,e); });
+    [...oldEvents,...newEvents,...catchupEvents].forEach(e=>{ if(e && e.id) map.set(e.id,e); });
     const out=[...map.values()].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
     if(!out.length) throw new Error('事件数据为空');
     return out;
