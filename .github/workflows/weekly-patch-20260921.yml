@@ -1,0 +1,44 @@
+name: Publish Sep 21 radar weekly update
+on:
+  push:
+    paths:
+      - '.github/workflows/weekly-patch-20260921.yml'
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch radar app and index
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('v30-app.js')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace("const UPDATE_DATE = '2026-09-16';", "const UPDATE_DATE = '2026-09-21';", 1)
+          s=s.replace("const WEEK_START = '2026-09-01';", "const WEEK_START = '2026-09-17';", 1)
+          s=s.replace("{id:'grassroots',name:'基药与基层医疗',keywords:['基药','基本药物','基层','DRG','DIP','同病同付','药随病走'],judgement:'DRG/DIP 3.0把基层“同病同付”从方向变成国家分组要求，基药与集采“三进”则补上药品供应。成熟品牌要看患者流、支付标准、基层/零售配备是否同步变化。',viatris:true}", "{id:'grassroots',name:'基药与基层医疗',keywords:['基药','基本药物','基层','DRG','DIP','同病同付','药随病走'],judgement:'DRG/DIP 3.0之后，医保局进一步把高血压等慢病、基层“同病同付”和复杂病例特例单议连起来。成熟品牌的机会不应只看患者下沉，还要验证基层配备、商业覆盖、持续供货与真实临床价值是否同步兑现。',viatris:true}", 1)
+          s=s.replace("'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major'", "'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major',\n    'miit-pharma-15th-five-year-plan-20260918':'major',\n    'nhsa-drg-dip-value-care-commentary-20260917':'major'", 1)
+          marker="    'nhsa-national-medical-service-reimbursement-catalogue-20260916':"
+          pos=s.find(marker)
+          end=s.find("\n  };", pos)
+          if pos!=-1 and end!=-1:
+              ins="\n    'miit-pharma-15th-five-year-plan-20260918': {bd:'升级判断：国家产业KPI已从国内创新数量延伸到FIC全球占比和全球重磅品种，创新药出海将越来越按全球商业化兑现而非license-out headline评价。',supply:'支持判断：规划把重点药品保供、产业链韧性与创新放在同一产业框架，制造供应能力继续战略化。'},\n    'nhsa-drg-dip-value-care-commentary-20260917': {grassroots:'强证据：官方解读已直接把高血压等慢病、基层同病同付和基层药品增量空间连接起来；对成熟慢病品牌应进一步验证终端配备与供应。'}"
+              s=s[:end-1]+','+ins+s[end-1:]
+          s=s.replace("const urls = [`archive.html?v=${Date.now()}`, `radar-base-20260825.html?v=${Date.now()}`, `radar-catchup-202609.js?v=${Date.now()}`];", "const urls = [`archive.html?v=${Date.now()}`, `radar-base-20260825.html?v=${Date.now()}`, `radar-catchup-202609.js?v=${Date.now()}`, `radar-weekly-20260921.js?v=${Date.now()}`];", 1)
+          s=s.replace("const [archive,base,catchup] = await Promise.all(responses.map(r=>r.text()));", "const [archive,base,catchup,weekly] = await Promise.all(responses.map(r=>r.text()));", 1)
+          s=s.replace("const catchupEvents = extractArray(catchup,'newEvents');", "const catchupEvents = extractArray(catchup,'newEvents');\n    const weeklyEvents = extractArray(weekly,'newEvents');", 1)
+          s=s.replace("[...oldEvents,...newEvents,...catchupEvents].forEach(e=>{ if(e && e.id) map.set(e.id,e); });", "[...oldEvents,...newEvents,...catchupEvents,...weeklyEvents].forEach(e=>{ if(e && e.id) map.set(e.id,e); });", 1)
+          p.write_text(s,encoding='utf-8')
+          idx=Path('index.html')
+          x=idx.read_text(encoding='utf-8')
+          x=x.replace('更新至 <strong>2026.09.16</strong>','更新至 <strong>2026.09.21</strong>',1)
+          x=x.replace('v30-app.js?v=20260916-1','v30-app.js?v=20260921-1',1)
+          idx.write_text(x,encoding='utf-8')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v30-app.js index.html
+          git commit -m "Update pharma radar through Sep 21"
+          git push
