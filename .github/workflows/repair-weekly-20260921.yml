@@ -1,0 +1,47 @@
+name: Repair Sep 21 radar app
+on:
+  push:
+    paths:
+      - '.github/workflows/repair-weekly-20260921.yml'
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Repair v30 app
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('v30-app.js')
+          s=p.read_text(encoding='utf-8')
+          bad="""    'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major',
+    'miit-pharma-15th-five-year-plan-20260918':'major',
+    'nhsa-drg-dip-value-care-commentary-20260917':'major,
+    'miit-pharma-15th-five-year-plan-20260918': {bd:'升级判断：国家产业KPI已从国内创新数量延伸到FIC全球占比和全球重磅品种，创新药出海将越来越按全球商业化兑现而非license-out headline评价。',supply:'支持判断：规划把重点药品保供、产业链韧性与创新放在同一产业框架，制造供应能力继续战略化。'},
+    'nhsa-drg-dip-value-care-commentary-20260917': {grassroots:'强证据：官方解读已直接把高血压等慢病、基层同病同付和基层药品增量空间连接起来；对成熟慢病品牌应进一步验证终端配备与供应。'}'
+  };"""
+          good="""    'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major',
+    'miit-pharma-15th-five-year-plan-20260918':'major',
+    'nhsa-drg-dip-value-care-commentary-20260917':'major'
+  };"""
+          if bad not in s:
+              raise SystemExit('malformed override block not found')
+          s=s.replace(bad,good,1)
+          evidence_end="""    'nhsa-national-medical-service-reimbursement-catalogue-20260916': {'medtech-payment':'强证据：收费项目、价格预立项和全国医保支付范围开始形成三层相互衔接的国家框架。',payment:'支持判断：医保支付标准化正在从药品进一步扩展到医疗服务项目。'}
+  };"""
+          evidence_new="""    'nhsa-national-medical-service-reimbursement-catalogue-20260916': {'medtech-payment':'强证据：收费项目、价格预立项和全国医保支付范围开始形成三层相互衔接的国家框架。',payment:'支持判断：医保支付标准化正在从药品进一步扩展到医疗服务项目。'},
+    'miit-pharma-15th-five-year-plan-20260918': {bd:'升级判断：国家产业KPI已从国内创新数量延伸到FIC全球占比和全球重磅品种，创新药出海将越来越按全球商业化兑现而非license-out headline评价。',supply:'支持判断：规划把重点药品保供、产业链韧性与创新放在同一产业框架，制造供应能力继续战略化。'},
+    'nhsa-drg-dip-value-care-commentary-20260917': {grassroots:'强证据：官方解读已直接把高血压等慢病、基层同病同付和基层药品增量空间连接起来；对成熟慢病品牌应进一步验证终端配备与供应。'}
+  };"""
+          if evidence_end in s:
+              s=s.replace(evidence_end,evidence_new,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+          node --check v30-app.js
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v30-app.js
+          git commit -m "Fix Sep 21 radar app syntax"
+          git push
