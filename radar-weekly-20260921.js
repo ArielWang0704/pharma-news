@@ -1,30 +1,4 @@
 const newEvents = [
-  {
-    id:'miit-pharma-15th-five-year-plan-20260918', category:'政策/支付', date:'2026-09-18',
-    title:'十部门发布医药工业“十五五”规划：创新药年均增速20%+，政策目标从“鼓励创新”进入可量化产业KPI',
-    tags:['十五五','医药工业','创新药','FIC','医疗器械','国际化','供应链'], viatrisImpact:'中',
-    summary:'工信部、国家发改委、国家医保局、国家药监局等十部门联合发布《医药工业发展“十五五”规划》。到2030年，规模以上医药工业企业营业收入目标超过3.5万亿元，创新药产业规模年均增速20%以上，首创新药（FIC）占全球比例25%以上，全球年销售额超10亿美元品种达到5个以上，创新医疗器械上市数量达到200个以上。',
-    why:'真正值得关注的不是单个20%增速数字，而是创新、支付、监管、制造和国际化第一次被放进同一套跨部门产业目标：未来五年政策评价不只看“批了多少创新药”，还看能否形成全球销售、产业规模和供应链能力。对成熟品牌企业而言，这也意味着资源配置会继续向创新倾斜，但规划同时强调重点药品保供、质量提升和全产业链数智化，成熟产品的竞争逻辑更偏向低成本高质量制造、稳定供应与渠道效率。',
-    updates:[{date:'2026-09-18',text:'十部门正式公布医药工业“十五五”规划及10项2030预期性指标。'}],
-    sources:[
-      {label:'工信部：《医药工业发展“十五五”规划》解读',url:'https://www.miit.gov.cn/zwgk/zcjd/art/2026/art_80c1ef6478184a038c5b80b71bf73ee1.html'},
-      {label:'新华社/人民网：医药工业发展“十五五”规划发布',url:'https://health.people.com.cn/n1/2026/0918/c14739-40801117.html'},
-      {label:'每日经济新闻：十部门规划核心量化指标',url:'https://www.nbd.com.cn/articles/2026-09-18/4584984.html'}
-    ],
-    detail:'“十四五”期间规模以上医药工业增加值年均增长约4.1%；新规划把生物医药明确为新兴支柱产业，并用FIC全球占比、创新药产业规模增速、全球重磅品种数量、研发投入强度等指标衡量质量。其二阶影响是企业战略评价口径会进一步从国内获批/国内收入，转向全球临床、全球商业化与持续研发生产能力。需要注意，这些是2030预期性产业目标，不等于单个企业或单个品种的增长承诺。'
-  },
-  {
-    id:'nhsa-drg-dip-value-care-commentary-20260917', category:'政策/支付', date:'2026-09-17',
-    title:'医保局进一步解释DRG/DIP 3.0：基层“同病同付”明确指向高血压等慢病，成熟慢病药的基层机会更具体了',
-    tags:['DRG','DIP','基层','同病同付','高血压','血脂','慢病','Viatris'], viatrisImpact:'高',
-    summary:'国家医保局9月17日发布医保支付方式改革解读，明确首批DRG基层内科病组共31个，覆盖高血压等基层高频病种；同一统筹区内，基层病种在不同等级医疗机构执行相同支付标准。同时强调特例单议可为难治性高血压、极高危血脂异常、多重合并症老年患者等复杂病例提供支付兜底。',
-    why:'这是对9月2日DRG/DIP 3.0的增量解释，而不是另一条独立政策。此前只能判断“患者可能下沉”，现在政策文本直接把高血压、血脂异常等慢病和基层增量空间连起来。对Viatris更具体的验证对象是络活喜、立普妥等成熟慢病品牌：基层患者流增加是否同步带来基层终端配备、商业覆盖和持续供货，而不是简单推断原研药一定受益。',
-    updates:[{date:'2026-09-17',text:'医保局发布产业视角解读，将基层病种、慢病药物、特例单议和长期临床价值明确连接。'}],
-    sources:[
-      {label:'国家医保局：深化医保支付方式改革，迈向价值医疗新征程',url:'https://www.nhsa.gov.cn/art/2026/9/17/art_14_22171.html'},
-      {label:'国家医保局：支付端改革驱动医药产业结构优化',url:'https://www.nhsa.gov.cn/art/2026/9/19/art_14_22181.html'},
-      {label:'国家医保局：DRG/DIP 3.0发布会实录',url:'https://www.nhsa.gov.cn/art/2026/9/2/art_14_21978.html'}
-    ],
-    detail:'3.0版首次推荐基层病种并推动统筹区“同病同治同付”，本周官方解读进一步指出，高血压等常见慢病企业可能面对基层增量空间；复杂慢病则可通过精准分组和特例单议降低医院因超支而限制治疗选择的顾虑。对成熟品牌的商业含义不是“价格权重新上升”，而是循证价值、终端可及、患者下沉与供应网络需要一起验证。'
-  }
+{title:'2026.09.22 欧洲九家药企公开警告欧洲正在输给美国和中国',summary:'欧洲医药研发份额下降，中国临床试验和投资吸引力上升。',why:'中国已成为全球药企研发、临床和BD资源配置变量。',detail:'<div class="reader-detail research-detail"><section class="reader-section"><h4>事实与背景</h4><p>9月22日九家欧洲药企董事长联名公开信，称欧洲全球医药研发份额从1990年的43%降至31%，商业临床试验份额降至9%，中国临床试验份额接近30%。Reuters、Guardian和BioPharma Dive均指出，欧洲担忧审批慢、支付约束和创新药可及性。</p></section><section class="reader-section"><h4>机制与比较</h4><p>中国不再只是销售市场，而是临床执行、创新资产、生产能力和资本投入的竞争变量。对中国药企，评价标准从国内获批前移到国际多中心证据、海外注册和全球商业化；对MNC，中国团队职责从市场执行扩展到全球临床、BD和产品策略。</p><div class="research-chain"><span>中国临床资源</span><i>→</i><span>研发速度/成本</span><i>→</i><span>资产质量</span><i>→</i><span>总部资源倾斜</span></div></section><section class="reader-section"><h4>行业怎么看/边界</h4><p>支持观点认为临床份额和持续license-out印证中国上升；边界在于公开信本质仍是欧洲药企向政策制定者施压，临床数量不等于全球商业成功。</p></section><section class="reader-section"><h4>对Viatris意味着什么</h4><p>对立普妥、络活喜等成熟品牌，不能直接推导销量上升，但应验证中国的基层、零售/DTP、患者管理和供应能力能否形成可复制的全球成熟品牌运营能力。</p></section><div class="detail-meta"><a class="source-link" href="https://www.astrazeneca.com/media-centre/articles/2026/europe-is-losing-the-pharma-investment-race-but-the-comeback-is-within-reach.html">一手公开信 ↗</a><a class="source-link" href="https://www.reuters.com/legal/litigation/european-drugmakers-call-faster-trials-more-spending-compete-with-us-china-2026-09-22/">Reuters ↗</a><a class="source-link" href="https://www.theguardian.com/business/2026/sep/22/european-drugmakers-losing-ground-us-chinese-rivals">Guardian ↗</a><a class="source-link" href="https://www.biopharmadive.com/news/europe-biotech-investment-decline-letter-pharma-chairs/831112/">BioPharma Dive ↗</a></div></div>'},
+{title:'2026.09.22 中国扩大对美、墨、加药物前体出口管制',summary:'五部门新增2种物质，向美国、墨西哥、加拿大出口18种受控化学品需许可证。',why:'出口许可、最终用途核查和地缘政治风险进入跨国药企供应决策。',detail:'<div class="reader-detail research-detail"><section class="reader-section"><h4>事实层</h4><p>中国五部门联合调整目录，新增2种物质，受控化学品增至18种，对美国、墨西哥、加拿大出口需许可证，9月22日立即生效。Reuters、AP和MLex确认这是连续第三轮扩围。</p></section><section class="reader-section"><h4>机制</h4><p>影响不一定先表现为成品药断供，更可能表现为最终用户核查、许可证审批、交付周期、供应商分散化和安全库存增加。跨境生产链如果经过中国原料、中间体、海外API和北美制剂，许可证延迟可能传导到交付。</p><div class="research-chain"><span>订单</span><i>→</i><span>用途/最终用户</span><i>→</i><span>许可证</span><i>→</i><span>海关审查</span><i>→</i><span>交付</span></div></section><section class="reader-section"><h4>行业怎么看/边界</h4><p>强硬解读认为这是谈判节点前把供应链作为政策工具；更准确的边界是，这不是对所有国家全面禁运，而是对三个国家实施许可管理，短期风险取决于审批效率和企业合规质量。</p></section><section class="reader-section"><h4>对Viatris意味着什么</h4><p>应沿核心SKU做mapping：API/中间体是否依赖中国供应商，是否涉及三国出口，安全库存能否覆盖许可波动，替代供应商和生产地是否完成质量与注册评估。</p></section><div class="detail-meta"><a class="source-link" href="https://la.china-embassy.gov.cn/eng/news/202609/t20260923_12029503.htm">一手/新华社转发 ↗</a><a class="source-link" href="https://www.reuters.com/business/healthcare-pharmaceuticals/china-expands-export-control-list-drug-precursor-chemicals-ahead-trump-xi-summit-2026-09-22/">Reuters ↗</a><a class="source-link" href="https://apnews.com/article/6e3012905f3263b796325c03e94d1e40">AP ↗</a><a class="source-link" href="https://www.mlex.com/mlex/articles/2528225">MLex ↗</a></div></div>'}
 ];
