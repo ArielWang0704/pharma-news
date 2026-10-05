@@ -231,4 +231,37 @@ const newEvents = [
     ],
     detail: '必须区分三件事：全国立项指南统一的是收费项目定义，不等于全国统一价格；预立项只是获批前的价格路径准备，不等于正式收费；医保服务项目目录决定的是基本医保支付范围，也不等于所有省份立即以同一标准报销。真正变化是三个环节开始使用同一套国家框架。'
   }
+,
+  {
+    id:'hengrui-novo-hrs1596-20260929',category:'BD/投融资',date:'2026-09-29',
+    title:'恒瑞×诺和诺德：26亿美元周制口服GLP-1/GIP授权，跨国药企继续从中国寻找下一代代谢资产',
+    tags:['恒瑞医药','Novo Nordisk','HRS-1596','GLP-1','GIP','口服减重药','License-out','代谢'],viatrisImpact:'',
+    summary:'恒瑞医药将HRS-1596在大中华区以外的全球独家开发、生产和商业化权利授权给诺和诺德。交易包括3亿美元首付款、最高23亿美元开发/注册/商业化里程碑，并另有授权区域净销售额提成。HRS-1596已具备开展I期临床试验条件，并获中国批准启动体重管理和2型糖尿病I期试验。',
+    why:'真正值得看的不是26亿美元headline，而是诺和诺德在口服GLP-1竞争中主动购买一个仍处早期、但潜在每周一次给药的中国资产。它把中国创新药出海的判断从临床后期验证进一步推向早期分子也能被全球MNC买单。',
+    updates:[{date:'2026-09-29',text:'恒瑞医药与诺和诺德签署HRS-1596独家许可协议。'}],
+    sources:[
+      {label:'恒瑞医药：HRS-1596授权公告',url:'https://www.hengrui.com/en/media/detail-1042.html'},
+      {label:'Novo Nordisk：HRS-1596许可协议',url:'https://www.novonordisk.com/content/nncorp/global/en/news-and-media/news-and-ir-materials/news-details.html?id=917052'},
+      {label:'Reuters：Novo向恒瑞支付最高26亿美元',url:'https://www.reuters.com/legal/litigation/chinas-hengrui-inks-up-26-billion-deal-with-novo-nordisk-obesity-drug-2026-09-29/'},
+      {label:'每日经济新闻：两大外资药企周制口服布局均靠中国外援',url:'https://www.nbd.com.cn/articles/2026-09-29/4594980.html'},
+      {label:'财联社：恒瑞26亿美元BD交易',url:'https://m.cls.cn/detail/2495626'}
+    ],
+    detail:'HRS-1596是一款GLP-1/GIP双受体激动剂，当前阶段仍是I期前资产。核心卖点不是“又一个GLP-1”，而是潜在每周一次口服：相比每日口服产品，减少给药频率可能降低漏服和长期依从性摩擦。恒瑞保留中国权益，诺和拿到大中华区之外全球开发、生产和商业化权利。\n\n财务结构必须拆开看：3亿美元upfront只占最高26亿美元约11.5%，其余主要绑定开发、注册和商业化里程碑，因此不能把26亿美元视为已经实现的资产价值。真正要验证的是I期安全性、口服暴露、给药频率是否形成临床可感知优势，以及诺和后续全球试验的投入强度。\n\n战略上，这笔交易与2026年3月礼来从英矽智能引入临床前周制口服GLP-1放在一起看更有意义：两个全球减重巨头都在从中国公司寻找下一代口服资产。竞争变量正在从“谁的GLP-1疗效更强”扩展到“谁能把长期治疗做得更容易坚持”。但口服肽类仍受吸收、生物利用度、胃肠道不良反应、剂量和成本约束，不能仅凭给药频率推断商业成功。\n\n行业怎么看/争议在哪里：支持者认为交易证明中国创新药价值已经前移到临床早期；谨慎观点则认为Novo正面临Lilly竞争、核心产品未来专利到期和投资者增长压力，因此交易也可能反映买方补pipeline的需求，而非对HRS-1596成功概率的高置信度判断。两者并不矛盾：交易证明资产值得下注，但不证明资产已经验证。\n\n对Viatris的启示不是追GLP-1，而是观察成熟慢病品牌竞争维度是否继续从“分子有效”向“治疗体验+渠道履约”迁移。对立普妥、络活喜等长期用药品牌，患者持续使用同样受到剂型、给药便利性、处方承接、零售可得性和供应稳定性影响。'
+  },
+  {
+    id:'abogen-novartis-abo2203-20261002',category:'BD/投融资',date:'2026-10-02',
+    title:'艾博×诺华：最高约77.5亿美元RNA授权+平台选择权，中国创新药BD开始从单资产走向“平台+资产包”',
+    tags:['艾博生物','Novartis','ABO2203','mRNA','CD19xCD3','TCE','RNA平台','License-out','自身免疫'],viatrisImpact:'',
+    summary:'艾博生物与诺华达成授权及许可选择权协议：诺华获得ABO2203全球独家许可，并获得基于艾博RNA平台其他潜在项目的独家许可选择权。艾博获得5.75亿美元首付款，若相关选择权全部行使并达成开发、监管及商业化里程碑，潜在里程碑付款最高约72亿美元，另有未来产品销售分成。',
+    why:'真正的增量不只是金额更大，而是交易对象从一个分子扩展到领先资产+RNA平台多个后续选择权，更接近MNC对中国技术平台的外部研发合作，而不是一次性买断单品。',
+    updates:[{date:'2026-10-02',text:'艾博生物与诺华签署ABO2203全球授权及RNA平台后续项目许可选择权协议。'}],
+    sources:[
+      {label:'艾博生物：授权及许可选择权协议',url:'https://www.abogenbio.com/cn/news/company/news2026/276.html'},
+      {label:'Reuters：Novartis与艾博达成最高约77.8亿美元交易',url:'https://www.reuters.com/legal/litigation/novartis-strikes-about-78-billion-mrna-deal-with-chinas-abogen-2026-10-02/'},
+      {label:'BioPharma Dive：Novartis押注中国RNA平台',url:'https://www.biopharmadive.com/news/novartis-abogen-pipeline-collaboration-china/832008/'},
+      {label:'Axios：Novartis与中国生物科技公司达成78亿美元交易',url:'https://www.axios.com/2026/10/02/novartis-china-drug'},
+      {label:'医药魔方Info：艾博与诺华合作条款',url:'https://finance.sina.com.cn/wm/2026-10-02/doc-inituwtr7547364.shtml'}
+    ],
+    detail:'ABO2203是mRNA编码CD19xCD3 T细胞衔接器。艾博此前披露其在复发/难治B细胞非霍奇金淋巴瘤中的首次人体研究；此次诺华交易把资产的潜在应用进一步指向B细胞介导的自身免疫疾病，并同时购买其他RNA项目的独家选择权。诺华购买的不只是候选药，而是进入艾博RNA平台的期权。\n\n财务结构更值得拆开：5.75亿美元upfront是最确定价值；最高约72亿美元后续金额依赖开发、注册、商业化里程碑，还要看诺华是否行使后续项目选择权。upfront只约占headline的7.4%，因此不能理解成诺华已经支付78亿美元购买已验证产品。更合理的解释是，诺华用相对有限的现金入口锁定一个可能产生多个项目的平台，并把风险分阶段承担。\n\n机制上，ABO2203与传统TCE不同：通过LNP递送mRNA，让患者体内短期表达CD19xCD3 TCE，理论上有机会在表达窗口和药效之间建立新的控制方式。公司2026年AACR已披露早期人体数据，但样本量和随访成熟度仍不足以判断长期疗效、安全性和给药频率优势。\n\n行业怎么看/争议在哪里：乐观观点认为这是中国创新药出海从单资产授权走向平台化授权的证据；谨慎观点则认为平台期权容易制造很大的headline数字，最终价值高度依赖后续项目是否被选择、临床是否成功和诺华是否持续投入。因此“潜在金额兑现率”比headline更值得跟踪。\n\n对中国医药产业而言，它与恒瑞-Novo、先声-Roche、和黄-GSK等交易形成连续性：MNC不再只在中国寻找低成本研发，而是在寻找可直接进入全球研发组合的创新资产和平台。对Viatris的间接启示是，创新药资源继续向全球化研发平台集中后，成熟品牌需要用更低成本、更强供应和更精准的渠道运营建立独立竞争力。'
+  }
 ];
