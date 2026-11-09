@@ -264,4 +264,289 @@ const newEvents = [
     ],
     detail:'ABO2203是mRNA编码CD19xCD3 T细胞衔接器。艾博此前披露其在复发/难治B细胞非霍奇金淋巴瘤中的首次人体研究；此次诺华交易把资产的潜在应用进一步指向B细胞介导的自身免疫疾病，并同时购买其他RNA项目的独家选择权。诺华购买的不只是候选药，而是进入艾博RNA平台的期权。\n\n财务结构更值得拆开：5.75亿美元upfront是最确定价值；最高约72亿美元后续金额依赖开发、注册、商业化里程碑，还要看诺华是否行使后续项目选择权。upfront只约占headline的7.4%，因此不能理解成诺华已经支付78亿美元购买已验证产品。更合理的解释是，诺华用相对有限的现金入口锁定一个可能产生多个项目的平台，并把风险分阶段承担。\n\n机制上，ABO2203与传统TCE不同：通过LNP递送mRNA，让患者体内短期表达CD19xCD3 TCE，理论上有机会在表达窗口和药效之间建立新的控制方式。公司2026年AACR已披露早期人体数据，但样本量和随访成熟度仍不足以判断长期疗效、安全性和给药频率优势。\n\n行业怎么看/争议在哪里：乐观观点认为这是中国创新药出海从单资产授权走向平台化授权的证据；谨慎观点则认为平台期权容易制造很大的headline数字，最终价值高度依赖后续项目是否被选择、临床是否成功和诺华是否持续投入。因此“潜在金额兑现率”比headline更值得跟踪。\n\n对中国医药产业而言，它与恒瑞-Novo、先声-Roche、和黄-GSK等交易形成连续性：MNC不再只在中国寻找低成本研发，而是在寻找可直接进入全球研发组合的创新资产和平台。对Viatris的间接启示是，创新药资源继续向全球化研发平台集中后，成熟品牌需要用更低成本、更强供应和更精准的渠道运营建立独立竞争力。'
   }
+,
+[
+  {
+    "id": "fresenius-wuxi-biosimilar-options-20261102",
+    "category": "BD/投融资",
+    "date": "2026-11-02",
+    "title": "Fresenius与药明生物签署最多37个生物类似药候选项目的十年独家开发选择权协议",
+    "tags": [
+      "Fresenius",
+      "WuXi Biologics",
+      "药明生物",
+      "生物类似药",
+      "biosimilar",
+      "CDMO",
+      "制造",
+      "mAbxience",
+      "ADC",
+      "双抗",
+      "全球商业化"
+    ],
+    "viatrisImpact": "",
+    "summary": "Fresenius获得未来十年最多37个已识别生物类似药候选项目的独家选择权，若全部推进，其已上市及在研组合可从29个分子扩至最多66个，覆盖13个治疗领域。参照原研药按目录价计算的合计销售额超过3,700亿欧元，但这不是可实现市场规模或Fresenius收入。Fresenius按每个被选项目向药明生物支付服务费，保留全球商业化权利和全部产品经济收益，并自行决定长期制造路径，部分项目未来可转移至其全资子公司mAbxience。",
+    "why": "这不是传统license-out，而是候选项目池的独家选择权、按项目付费的开发服务，以及买方保留产品经济收益和长期制造选择权的组合模式。",
+    "role": "对中国CDMO而言，价值在复杂生物药开发和全球合规交付能力；但药明生物公开获得的是服务费，并未披露销售分成或产品royalty。对Fresenius而言，外部开发和自有制造可以并存，37个项目并不意味着全部会被选择或上市。",
+    "updates": [
+      {
+        "date": "2026-11-02",
+        "text": "Fresenius宣布与药明生物签署独家开发协议，获得最多37个候选项目的十年选择权。"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Fresenius：独家开发协议及交易条款",
+        "url": "https://www.fresenius.com/Biopharma_Development_Agreement"
+      },
+      {
+        "label": "Reuters：Fresenius与药明生物签署生物类似药开发协议",
+        "url": "https://www.reuters.com/legal/litigation/fresenius-signs-biosimilars-pipeline-agreement-with-wuxi-biologics-2026-11-02/"
+      },
+      {
+        "label": "Fierce Pharma：全球生物类似药竞争与Sandoz、Teva布局",
+        "url": "https://www.fiercepharma.com/pharma/fresenius-expands-biosimilars-pipeline-37-asset-wuxi-deal-targeting-eur370b-market"
+      },
+      {
+        "label": "BioPharm International：37个候选项目和技术范围",
+        "url": "https://www.biopharminternational.com/view/fresenius-and-wuxi-biologics-sign-exclusive-agreement-covering-up-to-37-biosimilar-candidates-1"
+      },
+      {
+        "label": "Drugnews：fee-for-service和制造转移选择权解读",
+        "url": "https://drugnews.com.tw/en/articles/2026-11-02-fresenius-wuxi-biologics-biosimilars-deal.html"
+      }
+    ],
+    "detail": "协议覆盖单抗、双抗、ADC和融合蛋白，首批开发重点为polatuzumab vedotin（Polivy）和teprotumumab（Tepezza）。Fresenius按每个被选择的项目支付服务费，保留全球商业化权利、上市许可和全部产品经济收益；长期制造路线由Fresenius决定，部分项目可逐步转移至mAbxience。公开资料没有披露37个项目的完整名单、总交易金额或项目级时间表。"
+  },
+  {
+    "id": "boehringer-sbp-multiprogram-adc-tce-20261104",
+    "category": "BD/投融资",
+    "date": "2026-11-04",
+    "title": "勃林格殷格翰与中国生物制药签署六个临床前ADC/TCE项目的多项目选择权与许可协议",
+    "tags": [
+      "Boehringer Ingelheim",
+      "勃林格殷格翰",
+      "SBP Group",
+      "中国生物制药",
+      "LaNova",
+      "北京泰德",
+      "MNC",
+      "ADC",
+      "TCE",
+      "License-out",
+      "中国创新药出海",
+      "早期研发"
+    ],
+    "viatrisImpact": "",
+    "summary": "协议覆盖六个临床前肿瘤生物药项目，五个来自中国生物制药旗下LaNova，一个来自北京泰德，技术类型包括ADC与T细胞衔接器。中国生物制药将获得3.58亿美元首付款及近期付款，并有资格获得最高70亿美元选择权行使、开发、注册和商业化里程碑，以及未来销售的最高两位数分级提成。中国生物制药负责早期开发至全球I期；勃林格在约定临床节点后可选择接手后续全球开发、生产和商业化。",
+    "why": "合作方向从2024年勃林格产品进入中国，扩展到2026年中国早期研发资产进入勃林格全球肿瘤管线；交易重点是多项目option和阶段性风险分担，而非单一分子的确定性收购。",
+    "role": "这笔交易支持中国早期研发和平台能力获得MNC全球研发体系验证，但所有项目仍处临床前阶段，且项目级靶点、适应症和付款分配未披露。3.58亿美元为首付款及近期付款合并口径，70亿美元是高度依赖选择权行使和后续开发结果的潜在金额。",
+    "updates": [
+      {
+        "date": "2026-11-04",
+        "text": "勃林格殷格翰与SBP Group宣布六个临床前ADC/TCE项目合作，SBP负责早期开发，勃林格获得阶段性选择权。"
+      }
+    ],
+    "sources": [
+      {
+        "label": "勃林格殷格翰中国：合作公告",
+        "url": "https://www.boehringer-ingelheim.cn/partnering/sbp"
+      },
+      {
+        "label": "SBP Group：六个项目及地域权益公告",
+        "url": "https://www.en.sbpgroup.com/news-center/dynamic/25040.html"
+      },
+      {
+        "label": "Reuters：70亿美元潜在里程碑交易",
+        "url": "https://www.reuters.com/legal/litigation/sino-biopharmaceutical-signs-cancer-deal-worth-about-7-billion-with-germanys-2026-11-04/"
+      },
+      {
+        "label": "Fierce Biotech：ADC/TCE战略背景",
+        "url": "https://www.fiercebiotech.com/biotech/boehringer-returns-sino-biopharma-74b-deal-preclinical-tces-adcs"
+      },
+      {
+        "label": "Jingpost：双方合作方向变化与option结构",
+        "url": "https://jingpost.com/news/sino-biopharma-boehringer-six-program-option-rights-2026"
+      },
+      {
+        "label": "上海市政府：勃林格中国研发中心与早期临床布局",
+        "url": "https://english.shanghai.gov.cn/en-Latest-WhatsNew/20261015/f763213f079843ffa3d2e3c6c390596d.html"
+      }
+    ],
+    "detail": "六个项目中五个来自LaNova，一个来自北京泰德；中国生物制药负责早期开发，达到约定临床节点后，勃林格可选择获得四个项目大中华区以外权益，以及另外两个项目的全球权益。公告未披露项目靶点和适应症。双方2024年已有勃林格肿瘤产品在中国的合作，本次将合作扩展到中国早期资产的全球开发。"
+  },
+  {
+    "id": "evommune-hinova-evo570-vav1-20261104",
+    "category": "BD/投融资",
+    "date": "2026-11-04",
+    "title": "海创药业授权口服VAV1分子胶降解剂EVO570给Evommune，潜在交易约11亿美元",
+    "tags": [
+      "海创药业",
+      "Hinova",
+      "Evommune",
+      "VAV1",
+      "分子胶降解剂",
+      "Molecular Glue Degrader",
+      "自身免疫",
+      "类风湿关节炎",
+      "License-out",
+      "BD"
+    ],
+    "viatrisImpact": "",
+    "summary": "Evommune获得EVO570（原HC118，大中华区代号HP570）在大中华区以外的全球开发、生产和商业化权益。首付款为3,000万美元，其中2,000万美元现金、1,000万美元预付认股权证；另有约11亿美元潜在开发、注册和商业里程碑及分级销售提成。项目尚未进入人体临床，I期预计近期启动，Evommune计划2027年启动类风湿关节炎II期。",
+    "why": "交易把中国来源的早期蛋白降解资产带入海外自身免疫研发组合；VAV1是JAK之外的新机制方向，但Novartis已有同靶点项目进入II期，EVO570必须用人体靶点降解、疗效和安全性证明差异化。",
+    "role": "海创保留大中华区权益，海外开发和商业化由Evommune负责。交易的确定性价值是首付款和区域权益安排，后续里程碑取决于临床、注册和商业进展；不能把公司所称的潜在best-in-class当作临床结论。",
+    "updates": [
+      {
+        "date": "2026-11-04",
+        "text": "Evommune与海创药业签署EVO570大中华区以外独家许可协议。"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Evommune：EVO570授权公告",
+        "url": "https://ir.evommune.com/financial-information/sec-filings/content/0001193125-26-447608/evmn-ex99_1.htm"
+      },
+      {
+        "label": "Evommune：VAV1机制和项目研发状态",
+        "url": "https://www.evommune.com/vav1-molecular-glue-degrader/"
+      },
+      {
+        "label": "Reuters：EVO570许可交易",
+        "url": "https://www.reuters.com/legal/litigation/evommune-licenses-hinova-autoimmune-drug-up-11-billion-deal-2026-11-04/"
+      },
+      {
+        "label": "Fierce Biotech：VAV1竞品及William Blair观点",
+        "url": "https://www.fiercebiotech.com/biotech/evommune-signs-1b-deal-chinas-hinova-enter-same-molecular-glue-space-novartis"
+      },
+      {
+        "label": "BioWeek：VAV1机制、JAK安全性与临床风险",
+        "url": "https://bioweek.com/the-race-to-delete-a-protein-and-treat-rheumatoid-arthritis/"
+      },
+      {
+        "label": "Monte Rosa：MRT-6160项目管线",
+        "url": "https://www.monterosatx.com/pipeline/"
+      },
+      {
+        "label": "Monte Rosa：VAV1项目进入II期及I期数据",
+        "url": "https://www.globenewswire.com/news-release/2026/09/08/3357484/0/en/monte-rosa-therapeutics-announces-milestone-achievement-associated-with-initiation-of-phase-2-clinical-study-for-vav1-directed-molecular-glue-degrader-mrt-6160-ddy391.html"
+      }
+    ],
+    "detail": "EVO570是口服VAV1分子胶降解剂，VAV1位于T/B细胞受体下游信号通路。公司称美国IND已获接受、中国IND已提交，I期预计近期启动，2027年计划开展RA II期。海创保留大中华区权益。Novartis已通过Monte Rosa合作推进同靶点MRT-6160进入干燥综合征和银屑病关节炎II期，因而EVO570尚需以人体数据证明分子差异。"
+  },
+  {
+    "id": "qyuns-caldera-tl1a-il17-20261105",
+    "category": "BD/投融资",
+    "date": "2026-11-05",
+    "title": "荃信生物再次授权Caldera：临床前TL1A/IL-17双抗项目获3,000万美元首付款及最高7.5亿美元里程碑",
+    "tags": [
+      "荃信生物",
+      "Qyuns",
+      "Caldera",
+      "TL1A",
+      "IL-17",
+      "IL-17A",
+      "IL-17A/F",
+      "双抗",
+      "自身免疫",
+      "IBD",
+      "License-out",
+      "BD"
+    ],
+    "viatrisImpact": "",
+    "summary": "荃信生物将一项靶向TL1A及IL-17（具体为IL-17A和IL-17A/F）的临床前双抗项目全球独家授权给Caldera，覆盖研究、开发、注册、生产和商业化。荃信获得3,000万美元一次性、不可退还、不可抵扣首付款，另有最高7.5亿美元临床、注册和商业里程碑及销售提成。这是双方继2025年QX030N（IL-23p19/TL1A）项目之后的第二次合作；新项目与QX030N是不同的双抗项目。",
+    "why": "更值得注意的是同一中国自免双抗平台与同一海外NewCo/合作方再次交易。新项目的TL1A/IL-17组合不同于QX030N的IL-23p19/TL1A组合，但仍处临床前，不能借用QX030N的I期数据来证明新项目有效。",
+    "role": "Caldera获得全球项目权益，荃信获得现金首付款、里程碑和销售提成。对荃信而言，重复合作可能降低双方尽调和协作成本；但新项目的开发责任、临床时间表和里程碑兑现仍取决于Caldera后续融资和临床推进。",
+    "updates": [
+      {
+        "date": "2026-11-05",
+        "text": "荃信生物与Caldera签署TL1A/IL-17临床前双抗项目全球独家许可协议。"
+      }
+    ],
+    "sources": [
+      {
+        "label": "一手｜荃信生物HKEX公告PDF",
+        "url": "https://www.qyuns.net/upload/en/file/2026-11/col274/1793881770523.pdf"
+      },
+      {
+        "label": "Reuters：荃信生物与Caldera最高7.8亿美元交易",
+        "url": "https://www.reuters.com/legal/litigation/chinas-qyuns-therapeutics-licenses-antibody-program-caldera-up-780-million-deal-2026-11-05/"
+      },
+      {
+        "label": "医药魔方：TL1A/IL-17双抗项目与此前合作",
+        "url": "https://bydrug.pharmcube.com/news/detail/094250a4f7092f891e602b76d18239f5"
+      },
+      {
+        "label": "研发客：荃信与Caldera第二次合作",
+        "url": "https://www.pharmadj.com/ssr/article/2118630899391201281"
+      },
+      {
+        "label": "Fangda Partners：协议权益和交易条款",
+        "url": "https://www.fangdalaw.com/en/content/details34_17971.html"
+      },
+      {
+        "label": "BioPharma Dive：Caldera及其首个中国来源项目背景",
+        "url": "https://www.biopharmadive.com/news/caldera-biotech-startup-qyuns-ibd-drug-tl1a-il23/809577/"
+      }
+    ],
+    "detail": "新授权项目处于临床前阶段，靶向TL1A与IL-17A/IL-17A/F；Caldera获得全球独家研究、开发、注册、生产和商业化权益。2025年双方已就另一款IL-23p19/TL1A双抗QX030N/CLD-423合作，后者进入I期并计划推进IBD II期。两项目靶点组合和临床证据不同，不能把QX030N数据外推至新项目。"
+  },
+  {
+    "id": "siemens-olyrian-diagnostics-carveout-20261105",
+    "category": "医疗器械/诊断",
+    "date": "2026-11-05",
+    "title": "西门子医疗启动IVD业务独立化准备，拟以Olyrian Diagnostics品牌于2028年年中前完成carve-out",
+    "tags": [
+      "Siemens Healthineers",
+      "西门子医疗",
+      "Olyrian Diagnostics",
+      "MNC",
+      "IVD",
+      "诊断",
+      "医疗器械",
+      "集采",
+      "中国医疗改革",
+      "检验试剂",
+      "实验室自动化",
+      "Point-of-care"
+    ],
+    "viatrisImpact": "",
+    "summary": "西门子医疗启动体外诊断业务carve-out，拟将其命名为Olyrian Diagnostics，并计划在2028年年中前完成独立组织转型；过渡期内仍属于西门子医疗，现有产品、合同、服务水平和客户联系人暂不变化。该业务每年生产超过160亿次检测，约占集团收入17%、员工20%；中国市场医疗改革和诊断业务转型拖累盈利，FY2026 Q4调整后EBIT利润率为5.4%，公司提出中期恢复至十几个百分点并追加4亿欧元节约目标。",
+    "why": "IVD的仪器装机、试剂耗材复购和服务收入受到中国检验项目价格调整、采购改革和国产竞争影响；本次独立化将诊断业务从集团其他医疗科技板块中拆出，赋予更明确的经营责任，但并不等于已经出售。",
+    "role": "短期医院无需因品牌调整更换设备或重签合同；中期需跟踪中国地区产品注册、试剂供货、售后授权、渠道合同和定价策略是否变化。集团层面的利润压力不能全部归因于中国，公开资料尚未披露中国单独收入和测试量。",
+    "updates": [
+      {
+        "date": "2026-11-05",
+        "text": "西门子医疗宣布启动IVD业务carve-out，拟命名为Olyrian Diagnostics，目标2028年年中前完成独立组织转型。"
+      }
+    ],
+    "sources": [
+      {
+        "label": "一手｜Siemens Healthineers：Olyrian carve-out公告",
+        "url": "https://www.siemens-healthineers.com/press/releases/olyrian-diagnostics"
+      },
+      {
+        "label": "Reuters：中国市场压力、业务规模与利润率目标",
+        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/siemens-healthineers-starts-carve-out-diagnostics-business-2026-11-05/"
+      },
+      {
+        "label": "MedTech Dive：IVD独立化和客户安排",
+        "url": "https://www.medtechdive.com/news/siemens-healthineers-to-rebrand-and-separate-its-ivd-business/873963/"
+      },
+      {
+        "label": "Q4电话会纪要：成本计划和分拆安排",
+        "url": "https://www.marketbeat.com/instant-alerts/transcript-what-siemens-healthineers-shl-said-on-its-q4-earnings-call-2026-11-05/"
+      },
+      {
+        "label": "Reuters：中国医疗改革与诊断业务价格压力背景",
+        "url": "https://www.reuters.com/business/healthcare-pharmaceuticals/siemens-healthineers-cuts-2026-outlook-on-chinese-market-woes-2026-05-07/"
+      },
+      {
+        "label": "Siemens Healthineers投资者公告与财报入口",
+        "url": "https://www.siemens-healthineers.com/investor-relations/news-ad-hoc-announcements"
+      }
+    ],
+    "detail": "Olyrian在过渡期仍属于Siemens Healthineers，官方表示当前产品、服务、合同、服务水平和客户联系人不变。诊断业务每年生产超过160亿次检测，覆盖实验室和床旁检测。Reuters报道中国医疗改革和诊断业务转型影响盈利；但本次公告没有公布出售对象、估值或最终资本安排，carve-out不能写成已经完成的出售。"
+  }
+]
 ];
