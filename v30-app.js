@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const UPDATE_DATE = '2026-09-16';
-  const WEEK_START = '2026-09-01';
+  const UPDATE_DATE = '2026-11-09';
+  const WEEK_START = '2026-11-02';
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
   const arr = v => Array.isArray(v) ? v : [];
@@ -84,6 +84,26 @@
     'gsk-chimagen-trispecific-tce-20260915': {bd:'支持判断：同一MNC对同一中国平台复购，比单次headline金额更能验证平台能力。'},
     'nhsa-high-tech-price-prelisting-20260915': {'medtech-payment':'修正判断：创新器械的收费路径从获批后补手续，前移到临床/创新器械审查阶段并行准备。'},
     'nhsa-national-medical-service-reimbursement-catalogue-20260916': {'medtech-payment':'强证据：收费项目、价格预立项和全国医保支付范围开始形成三层相互衔接的国家框架。',payment:'支持判断：医保支付标准化正在从药品进一步扩展到医疗服务项目。'}
+
+    'fresenius-wuxi-biosimilar-options-20261102': {
+      bd:'支持判断：生物类似药竞争正从单品授权扩展到候选池和外部开发；买方可保留全球商业权益并控制制造路线。',
+      supply:'支持判断：中国CDMO在复杂生物药研发中仍具全球订单吸引力，但开发服务收入与产品长期经济收益可以被合同拆分。'
+    },
+    'boehringer-sbp-multiprogram-adc-tce-20261104': {
+      bd:'支持判断：中国研发平台进入MNC全球肿瘤管线的合作从单资产扩展到多项目option，项目级兑现仍需临床验证。',
+      'mnc-china':'支持判断：MNC中国研发组织与外部创新能力升级，已从参与临床执行延伸至全球早期资产引进和输出。'
+    },
+    'evommune-hinova-evo570-vav1-20261104': {
+      bd:'支持判断：中国出海资产覆盖自身免疫和蛋白降解等新机制，但早期交易的临床数据成熟度和里程碑兑现仍是主要边界。'
+    },
+    'qyuns-caldera-tl1a-il17-20261105': {
+      bd:'支持判断：同一海外合作方重复引进中国自免双抗，说明合作关系可能从单项目走向持续组合建设；但两款资产的临床阶段必须分别评价。'
+    },
+    'siemens-olyrian-diagnostics-carveout-20261105': {
+      'medtech-payment':'支持判断：中国检验价格和采购改革对IVD企业的影响已传导至利润率和全球组织安排；短期合同和服务不变，后续要看产品、试剂和服务组合调整。',
+      'mnc-china':'支持判断：MNC中国业务的变化不仅是商业团队重组，也可能通过全球业务组合和独立化安排反映中国市场盈利压力。',
+      vbp:'支持判断：诊断业务受到中国医疗改革和采购价格压力影响，集采和价格机制可能改变仪器装机后的试剂/耗材利润池。'
+    },
   };
 
   let EVENTS = [];
@@ -200,7 +220,7 @@
     const focus=weekly.filter(e=>levelOf(e)==='major');
     const highs=weekly.filter(isHigh);
     const wm=$('#weeklyMetrics'), as=$('#archiveStats');
-    if(wm) wm.innerHTML=[['本期重点',focus.length],['9月新增事件',weekly.length],['Viatris高相关',highs.length]].map(([l,v])=>`<div class="metric"><b>${v}</b><span>${l}</span></div>`).join('');
+    if(wm) wm.innerHTML=[['本期重点',focus.length],['本周新增事件',weekly.length],['Viatris高相关',highs.length]].map(([l,v])=>`<div class="metric"><b>${v}</b><span>${l}</span></div>`).join('');
     if(as) as.innerHTML=[['全部事件',EVENTS.length],['长期主题',THEMES.length],['高相关',EVENTS.filter(isHigh).length]].map(([l,v])=>`<div class="metric"><b>${v}</b><span>${l}</span></div>`).join('');
   }
 
