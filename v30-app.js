@@ -84,7 +84,6 @@
     'gsk-chimagen-trispecific-tce-20260915': {bd:'支持判断：同一MNC对同一中国平台复购，比单次headline金额更能验证平台能力。'},
     'nhsa-high-tech-price-prelisting-20260915': {'medtech-payment':'修正判断：创新器械的收费路径从获批后补手续，前移到临床/创新器械审查阶段并行准备。'},
     'nhsa-national-medical-service-reimbursement-catalogue-20260916': {'medtech-payment':'强证据：收费项目、价格预立项和全国医保支付范围开始形成三层相互衔接的国家框架。',payment:'支持判断：医保支付标准化正在从药品进一步扩展到医疗服务项目。'}
-
     'fresenius-wuxi-biosimilar-options-20261102': {
       bd:'支持判断：生物类似药竞争正从单品授权扩展到候选池和外部开发；买方可保留全球商业权益并控制制造路线。',
       supply:'支持判断：中国CDMO在复杂生物药研发中仍具全球订单吸引力，但开发服务收入与产品长期经济收益可以被合同拆分。'
