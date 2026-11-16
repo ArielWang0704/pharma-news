@@ -1136,9 +1136,7 @@ const newEvents = [
       }
     ],
     "detail": "本批次对应“诊断与患者性别不符”规则中的泌尿生殖系统疾病章节。国家医保局要求省级医保部门根据最新知识点和代码更新本地智能监管系统；定点医药机构可将“两库”置于院内智能提醒系统，或接入医保部门事前提醒功能，对不合规记录提前提示并自查更正。该机制的重点是医保基金使用和结算数据的合规性，不改变临床指南或药品适应症。"
-  }
-,
-[
+  },
   {
     "id": "nhc-innovation-drug-access-20261110",
     "date": "2026-11-10",
@@ -1203,6 +1201,10 @@ const newEvents = [
       {
         "title": "中国保险行业协会：示范条款和58款商保药品保障推荐清单（第一版）",
         "url": "https://www.iachina.cn/art/2026/11/10/art_22_109383.html"
+      },
+      {
+        "title": "中国保险行业协会：示范条款与58款院外药械清单是否强制、采用模板后的配套规则",
+        "url": "https://www.iachina.cn/art/2026/11/10/art_22_109384.html"
       },
       {
         "title": "财新：中保协推出首版商业保险药品清单",
@@ -1367,7 +1369,7 @@ const newEvents = [
     "title": "依沃西单抗美国BLA收到FDA完整回复函：全球III期OS未达统计学显著，PFS单独不足以支持批准",
     "category": "药品 / 创新药出海",
     "summary": "Summit Therapeutics披露，FDA对依沃西单抗联合含铂化疗治疗既往EGFR-TKI治疗后局部晚期或转移性非鳞状NSCLC的BLA发出Complete Response Letter。FDA认为HARMONi全球III期虽显著改善PFS，但主要OS分析未达到统计学显著，PFS获益单独不足以支持正向获益风险判断。",
-    "detail": "HARMONi主要分析中PFS中位数6.8个月对4.4个月，HR 0.52；OS中位数16.8个月对14.0个月，HR 0.79，p=0.057。2026年6月更新OS HR改善至0.76，名义p=0.0151，但属于后续数据切点；西方亚组HR 0.76、95%CI 0.52–1.10，仍跨越1。该CRL只针对这一BLA适应证，不等于依沃西单抗所有适应证或PD-1/VEGF机制整体失败。",
+    "detail": "HARMONi主要分析中PFS中位数6.8个月对4.4个月，HR 0.52；OS中位数16.8个月对14.0个月，HR 0.79，p=0.057。2026年6月更新OS HR改善至0.76，名义p=0.0151，但属于后续数据切点；西方亚组HR 0.76、95%CI 0.52–1.10，仍跨越1。HARMONi-A与全球HARMONi是不同研究，但部分中国患者被纳入全球分析，不能把两份数据视为完全独立的重复验证。该CRL只针对这一BLA适应证，不等于依沃西单抗所有适应证或PD-1/VEGF机制整体失败。",
     "why": "中国创新资产全球化的检验点正在从“有无全球III期数据”转向预设终点能否按统计方案兑现、OS成熟度、地区人群代表性和全球监管沟通。",
     "role": "FDA完整回复函全文尚未公开；目前可确认的公开理由集中在OS统计学显著性不足。中国已获批的适应证及其他HARMONi研究不因这一封CRL自动失效。",
     "tags": [
@@ -1417,6 +1419,18 @@ const newEvents = [
       {
         "title": "BioMed Nexus：对CRL、预设OS终点和后续路径的独立拆解",
         "url": "https://biomednexus.com/summit-ivonescimab-crl-overall-survival/"
+      },
+      {
+        "title": "JITC：HARMONi-A中国研究最终OS分析",
+        "url": "https://jitc.bmj.com/content/13/Suppl_3/A1592"
+      },
+      {
+        "title": "阿斯利康：2026年10月5日完成对Summit的20亿美元股权投资",
+        "url": "https://www.astrazeneca.com/media-centre/press-releases/2026/astrazeneca-completes-equity-investment-in-summit-therapeutics.html"
+      },
+      {
+        "title": "美国SEC：2024年授权区域扩展修订协议",
+        "url": "https://www.sec.gov/Archives/edgar/data/1599298/000119312524152309/d768276d8k.htm"
       }
     ],
     "updates": [
@@ -1426,5 +1440,4 @@ const newEvents = [
       }
     ]
   }
-]
 ];
