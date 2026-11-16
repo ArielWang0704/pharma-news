@@ -1,8 +1,8 @@
 (() => {
   'use strict';
 
-  const UPDATE_DATE = '2026-11-09';
-  const WEEK_START = '2026-11-02';
+  const UPDATE_DATE = '2026-11-16';
+  const WEEK_START = '2026-11-09';
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
   const arr = v => Array.isArray(v) ? v : [];
@@ -11,15 +11,15 @@
   const fmt = d => String(d || '').replaceAll('-','.');
 
   const THEMES = [
-    {id:'grassroots',name:'基药与基层医疗',keywords:['基药','基本药物','基层','DRG','DIP','同病同付','药随病走'],judgement:'DRG/DIP 3.0把基层“同病同付”从方向变成国家分组要求，基药与集采“三进”则补上药品供应。成熟品牌要看患者流、支付标准、基层/零售配备是否同步变化。',viatris:true},
+    {id:'grassroots',name:'基药与基层医疗',keywords:['基药','基本药物','基层','DRG','DIP','同病同付','药随病走','医联体','创新药进院','特例单议'],judgement:'DRG/DIP 3.0把基层“同病同付”从方向变成国家分组要求；四部门新通知又要求医联体动态调整两目录内1类新药配备。基药与集采“三进”补供应，但真实下沉仍取决于基层诊疗能力、支付和处方流。',viatris:true},
     {id:'vbp',name:'集采与成熟品牌',keywords:['集采','带量采购','国采','成熟药','成熟品牌','仿制药','参比制剂'],judgement:'第12批药品与第7批耗材共同确认：集采仍然控价，但“畸低价不带量”、按厂牌报量、复活机制和临床功能折算，正在把竞争从最低价推向合理价格、真实需求与供应履约。',viatris:true},
     {id:'mnc-china',name:'MNC中国运营模式',keywords:['MNC','组织架构','大中华区','Greater China','广阔市场','院外渠道','成熟品牌'],judgement:'MNC的运营分工正在同时按客户场景和资产生命周期重构：医院/零售/广阔市场需要不同能力，创新药与成熟品牌也越来越采用不同的制造、监管和商业运营模式。',viatris:true},
-    {id:'glp1',name:'GLP-1与肥胖/代谢市场',keywords:['GLP-1','Mounjaro','Zepbound','Wegovy','肥胖','司美格鲁肽','替尔泊肽','MASH'],judgement:'GLP-1正从减重单品走向代谢疾病平台：口服剂型降低给药摩擦，MASH扩展科室与筛查入口；商业化越来越取决于诊断漏斗、支付、渠道和患者长期留存。',viatris:false},
-    {id:'bd',name:'中国创新药出海与BD',keywords:['License-out','license-out','BD','授权','首付款','里程碑','Sandoz','复宏汉霖','Roche','GSK'],judgement:'中国医药出海已从单资产license-out进入modality/platform交易与MNC复购阶段。评价交易要看upfront、人体数据成熟度、保留权益、开发责任和买方是否持续向同一平台下注，而不是只看headline。',viatris:false},
-    {id:'payment',name:'创新药支付与商保',keywords:['商保','商业健康保险','医保目录','国谈','谈判','支付','双通道','参照药'],judgement:'创新药支付正从年度国谈走向“上市前参照药预沟通—基本医保/商保分层—进院/双通道—上市后续约与价值再评价”的连续机制；商保目录价值仍需用真实保险覆盖与结算证明。',viatris:false},
-    {id:'retail',name:'院外零售与患者承接',keywords:['零售药店','院外','DTP','电商','医保个人账户','白名单','三进','医保找药'],judgement:'院外零售正在从医院处方的补充渠道，变成医保价格治理、集采延伸和慢病患者承接的重要基础设施。成熟品牌要同时看门店覆盖、价格、自付、处方流和供应履约。',viatris:true},
+    {id:'glp1',name:'GLP-1与肥胖/代谢市场',keywords:['GLP-1','Mounjaro','Zepbound','Wegovy','肥胖','司美格鲁肽','替尔泊肽','MASH','奥氟格列隆','口服减重','玛仕度肽','埃诺格列肽','BMI'],judgement:'GLP-1正从注射剂疗效竞争走向口服便利性、BMI标签、适应证支付和长期留存的综合竞争；糖尿病适应证纳入医保不能外推到减重用途，商业化仍取决于诊断漏斗、价格、渠道和持续使用。',viatris:false},
+    {id:'bd',name:'中国创新药出海与BD',keywords:['License-out','license-out','BD','授权','首付款','里程碑','Sandoz','复宏汉霖','Roche','GSK','依沃西单抗','ivonescimab','HARMONi','FDA','OS','PFS'],judgement:'中国医药出海已从单资产license-out进入modality/platform交易与全球后期临床兑现阶段。评价交易既要拆upfront、里程碑和权益，也要看预设终点、OS成熟度、地区人群代表性和FDA注册结果，而不是只看headline。',viatris:false},
+    {id:'payment',name:'创新药支付与商保',keywords:['商保','商业健康保险','医保目录','国谈','谈判','支付','双通道','参照药'],judgement:'创新药支付正从年度国谈走向“基本医保/商保分层—医院药事会—DRG/DIP特例单议—双通道/云药房—商保理赔”的执行链；目录资格不等于医院自动配备，商保价值仍需用真实保障责任、赔付和结算证明。',viatris:false},
+    {id:'retail',name:'院外零售与患者承接',keywords:['零售药店','院外','DTP','电商','医保个人账户','白名单','三进','医保找药'],judgement:'院外零售正在从医院处方的补充渠道，变成双通道、云药房、商保院外特药和慢病患者承接的重要基础设施。成熟品牌要同时看门店覆盖、价格、自付、处方流和供应履约。',viatris:true},
     {id:'medtech-payment',name:'器械/IVD与医疗服务支付',keywords:['医疗器械','耗材','IVD','诊断','医疗服务价格','预立项','手术机器人','脑机接口','医保医疗服务项目'],judgement:'器械商业化不再由“获批—进院”单独决定，收费项目、地方定价、医保支付、集采与真实工作流共同决定使用量；价格和health economics正在前移到研发/审评阶段。',viatris:false},
-    {id:'digital',name:'AI与数字医疗',keywords:['AI','数字医疗','人工智能','医疗AI'],judgement:'AI医疗真正的分水岭不是模型能力，而是能否进入真实工作流、完成系统集成、满足合规并证明持续ROI。',viatris:false},
+    {id:'digital',name:'AI与数字医疗',keywords:['AI','数字医疗','人工智能','医疗AI'],judgement:'AI医疗真正的分水岭不是模型能力，而是能否进入医生真实工作流、完成系统集成、满足合规并证明持续ROI；药企赞助内容还必须可识别、可审计，不能混入中立循证答案。',viatris:false},
     {id:'supply',name:'全球供应链与制造',keywords:['供应链','美国制造','关税','制造','API'],judgement:'制造和供应链正在从后台运营问题升级为药企应对关税、政策风险和市场准入的战略变量。',viatris:false}
   ];
 
@@ -57,7 +57,14 @@
     'ivonescimab-harmoni2-os-20260915':'major',
     'nhsa-high-tech-price-prelisting-20260915':'evidence',
     'legend-biotech-ingrid-zhang-ceo-20260915':'evidence',
-    'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major'
+    'nhsa-national-medical-service-reimbursement-catalogue-20260916':'major',
+
+    'nhc-innovation-drug-access-20261110':'evidence',
+    'cia-commercial-health-insurance-drug-list-20261110':'evidence',
+    'china-ai-physician-engagement-20261111':'evidence',
+    'lilly-orforglipron-china-approval-20261112':'major',
+    'nhsa-2026-nrdl-commercial-list-20261114':'major',
+    'akeso-summit-ivonescimab-fda-crl-20261115':'major'
   };
 
   const EVIDENCE_NOTES = {
@@ -110,6 +117,13 @@
       'mnc-china':'支持判断：MNC中国业务的变化不仅是商业团队重组，也可能通过全球业务组合和独立化安排反映中国市场盈利压力。',
       vbp:'支持判断：诊断业务受到中国医疗改革和采购价格压力影响，集采和价格机制可能改变仪器装机后的试剂/耗材利润池。'
     },
+
+    'nhc-innovation-drug-access-20261110': {payment:'支持判断：创新药可及性开始从医保目录延伸到医院药事会、DRG/DIP特例单议和医联体基层配备；实际效果仍待省级细则验证。',grassroots:'支持判断：医联体成员单位按需配备两目录内1类新药，为基层用药上下衔接增加了政策抓手。'},
+    'cia-commercial-health-insurance-drug-list-20261110': {payment:'支持判断：商业保险开始规范院外特药责任，但58款推荐清单不是自动赔付，仍需看保险产品采用和理赔条款。',retail:'支持判断：院外特药保障被纳入标准化医疗险条款讨论，DTP和零售药房的处方、供货与理赔能力更重要。'},
+    'china-ai-physician-engagement-20261111': {digital:'支持判断：医生AI工具开始成为药企数字学术触达的潜在入口，但赞助内容、搜索排序和临床证据隔离必须可审计。','mnc-china':'支持判断：反腐和院内拜访限制正在推动MNC把医学内容、数字平台和合规审查重新纳入中国商业运营模型。'},
+    'lilly-orforglipron-china-approval-20261112': {glp1:'支持判断：口服小分子GLP-1已进入中国减重市场，但BMI标签、价格和长期留存比“首个获批”更决定商业兑现。'},
+    'nhsa-2026-nrdl-commercial-list-20261114': {payment:'支持判断：医保、国家商保创新药目录、医院配备和支付特例机制开始连成执行链；目录准入仍需转化为真实挂网、进院和赔付。',glp1:'修正判断：GLP-1纳入医保按成人2型糖尿病适应证执行，不能将糖尿病支付范围外推到减重用途。',grassroots:'支持判断：目录配备、医联体上下衔接和云药房将成为基层药品可及性的下一组执行指标。',retail:'支持判断：双通道电子处方、云药房和商保院外特药责任使院外药房成为目录落地的重要承接环节。'},
+    'akeso-summit-ivonescimab-fda-crl-20261115': {bd:'修正判断：中国创新资产全球化不能只看license-out headline和PFS强信号，全球预设OS终点、随访成熟度和FDA审评结果会直接决定里程碑兑现。'}
   };
 
   let EVENTS = [];
