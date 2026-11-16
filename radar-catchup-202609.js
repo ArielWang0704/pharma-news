@@ -1137,4 +1137,294 @@ const newEvents = [
     ],
     "detail": "本批次对应“诊断与患者性别不符”规则中的泌尿生殖系统疾病章节。国家医保局要求省级医保部门根据最新知识点和代码更新本地智能监管系统；定点医药机构可将“两库”置于院内智能提醒系统，或接入医保部门事前提醒功能，对不合规记录提前提示并自查更正。该机制的重点是医保基金使用和结算数据的合规性，不改变临床指南或药品适应症。"
   }
+,
+[
+  {
+    "id": "nhc-innovation-drug-access-20261110",
+    "date": "2026-11-10",
+    "title": "四部门发布创新药安全合理配备通知：放宽进院限制，并将医联体基层配备纳入执行链",
+    "category": "政策 / 支付",
+    "summary": "国家卫健委、国家医保局、国家中医药局、国家疾控局联合印发国卫办医政发〔2026〕18号，要求二级以上医院优化药事会流程，具备条件的省市级医院及时配备“两目录”内1类新药；紧密型医联体动态调整目录、成员单位按需配备。两目录内1类新药不计入“一品两规”和多项公立医院绩效监测指标。",
+    "detail": "通知同时提出，对医保目录内创新药病例，若不适合按DRG/DIP病种标准支付，可自主申报特例单议，按月或按季度评议；商保创新药目录药品病例经审核后可不纳入医保按病种支付范围。政策解决的是医院“不能进、进了不敢用”的制度性障碍，但仍要求医院具备使用能力、临床确有需要，并保留处方审核与临床综合评价。",
+    "why": "这不是简单增加药品目录，而是把创新药从目录准入延伸到医院药事会、绩效考核、医保支付和基层医联体配备，试图打通“进医保但进不了院”的最后一公里。",
+    "role": "落地效果仍取决于省级特例单议细则、医院药事会效率、临床使用能力和供应稳定性；文件本身没有取消医院的临床评估与安全管理责任。",
+    "tags": [
+      "创新药进院",
+      "一品两规",
+      "DRG",
+      "DIP",
+      "特例单议",
+      "医联体",
+      "基层用药",
+      "医保目录",
+      "商保创新药目录"
+    ],
+    "sources": [
+      {
+        "title": "通知全文及政策解读（国卫办医政发〔2026〕18号；页面标注来源为国家卫健委网站）",
+        "url": "https://www.cpi.ac.cn/zx/xyzl/202611/t20261111_431391.html"
+      },
+      {
+        "title": "医药魔方：四部门为创新药拆除进院堵点，并提示地方执行仍待明确",
+        "url": "https://bydrug.pharmcube.com/news/detail/c6fe53566dfab3c7b9a88c6b1ade266f"
+      },
+      {
+        "title": "每日经济新闻：医保目录公布前四天，四部门已出台创新药进院政策",
+        "url": "https://www.nbd.com.cn/articles/2026-11-14/4647861.html"
+      }
+    ],
+    "updates": [
+      {
+        "date": "2026-11-16",
+        "text": "已纳入本周医保支付重点卡的执行机制分析；后续跟踪各省特例单议细则和医院药事会落地情况。"
+      }
+    ]
+  },
+  {
+    "id": "cia-commercial-health-insurance-drug-list-20261110",
+    "date": "2026-11-10",
+    "title": "中保协发布首版商保药品保障推荐清单：58款药械聚焦院外特药，配套三类医疗险示范条款",
+    "category": "支付 / 院外渠道",
+    "summary": "中国保险行业协会发布短期、长期一般商业医疗保险和城市定制型医疗险示范条款，并同步推出首版58款《商业健康保险药品保障推荐清单》；其中25款为1类创新药、2款为2类改良型新药，32款为基本医保目录外自费药。",
+    "detail": "该清单主要用于商业医疗险的院外特定药械责任，不等同于国家医保局的28种商保创新药目录，也不意味着58款药械自动获得所有商业保险赔付。示范条款和清单本身为参考文本、不具有强制性；保险公司若采用短期或长期医疗险示范条款，其院外特定药械清单需涵盖这58款，并可结合自身风控和产品设计增加保障品种。",
+    "why": "商业保险开始尝试统一院外特药责任、常用概念和理赔规则，给DTP药房、院外处方和高值创新药支付提供更可复制的合同基础。",
+    "role": "真正的患者可及性仍取决于保险公司是否采用示范条款、产品是否续保、免赔额和赔付比例如何设置，以及药品是否有稳定供应和处方流转。",
+    "tags": [
+      "商业健康保险",
+      "商保药品推荐清单",
+      "院外特药",
+      "DTP",
+      "CAR-T",
+      "医疗险",
+      "惠民保",
+      "患者支付"
+    ],
+    "sources": [
+      {
+        "title": "中国保险行业协会：示范条款和58款商保药品保障推荐清单（第一版）",
+        "url": "https://www.iachina.cn/art/2026/11/10/art_22_109383.html"
+      },
+      {
+        "title": "财新：中保协推出首版商业保险药品清单",
+        "url": "https://www.caixin.com/2026-11-10/102503367.html"
+      },
+      {
+        "title": "北京日报：58款药械纳入推荐清单，示范文本不具有强制性",
+        "url": "https://news.bjd.com.cn/2026/11/11/12026651.shtml"
+      }
+    ],
+    "updates": [
+      {
+        "date": "2026-11-16",
+        "text": "与2026版国家医保局商保创新药目录分开归档，避免将两份不同用途的清单混为一谈。"
+      }
+    ]
+  },
+  {
+    "id": "china-ai-physician-engagement-20261111",
+    "date": "2026-11-11",
+    "title": "药企试探AI医学助手触达医生：反腐与院内拜访限制推动学术营销转向可追踪数字内容",
+    "category": "数字医疗 / 商业模式",
+    "summary": "Reuters报道，药企正与阿里健康、京东健康、医渡科技及专科平台讨论在医生AI助手中提供循证内容、疾病教育和定制化学术平台。阿里健康称其数百名受访医生中93%使用AI工具，高于一年前约70%；但其Hydrion尚未开始与药企合作。",
+    "detail": "已出现的实践与设想需要区分：PICA Health已将京东健康“知医”接入医生教育服务；Null Hypothesis称国内外药企已授权其KnowS搭建疾病领域医生学术平台；阿里健康讨论在相关AI回答旁展示推广研究和临床证据，但尚未启动药企合作；医渡科技表示仍未提供相应商业功能。医脉通2026年中报显示，数字精准营销服务覆盖217家医疗健康客户、509个产品，付费点击785万次，相关收入同比增长1.1%，说明数字学术营销已是实际业务，但并非所有增量都来自AI。",
+    "why": "药企预算可能从传统线下代表拜访转向医生工作流中的数字学术服务，平台因此获得新的B2B收入机会，也可能改变MNC中国的医学、市场和合规协作方式。",
+    "role": "医生使用AI不等于医生接受广告。赞助内容是否清晰标识、模型是否把商业内容混入循证答案、搜索排序是否透明、药企能否审计触达和内容版本，决定这一模式能否长期合规。",
+    "tags": [
+      "AI",
+      "医生触达",
+      "学术营销",
+      "医药代表",
+      "反腐",
+      "数字营销",
+      "京东知医",
+      "阿里健康",
+      "医脉通",
+      "MNC中国运营模式"
+    ],
+    "sources": [
+      {
+        "title": "Reuters：Drugmakers tap China AI app boom to reach doctors as crackdown upends marketing",
+        "url": "https://www.reuters.com/legal/litigation/drugmakers-tap-china-ai-app-boom-reach-doctors-crackdown-upends-marketing-2026-11-11/"
+      },
+      {
+        "title": "医脉通2026年中期业绩公告（港交所披露文件）",
+        "url": "https://doc.irasia.com/listco/hk/medlive/interim/2026/int.pdf"
+      }
+    ],
+    "updates": [
+      {
+        "date": "2026-11-16",
+        "text": "作为数字医疗与MNC中国运营模式的长期Evidence归档；本周不升级为重点深度卡，因为多个平台仍处于讨论或早期试点阶段。"
+      }
+    ]
+  },
+  {
+    "id": "lilly-orforglipron-china-approval-20261112",
+    "date": "2026-11-12",
+    "title": "礼来奥氟格列隆在中国获批：首个口服小分子GLP-1减重药，BMI适用范围与国内诊断标准存在差异",
+    "category": "药品 / 创新药",
+    "summary": "国家药监局批准礼来申报的奥氟格列隆钙片（穆优达），用于成人长期体重管理，成为中国首个获批用于成人体重管理的口服GLP-1受体激动剂。公开批准信息列明BMI≥30，或BMI≥27且低于30并伴至少一种体重相关合并症；成人2型糖尿病适应证仍在审评中。",
+    "detail": "奥氟格列隆是非肽类小分子GLP-1受体激动剂，每日一次，可在任意时间服用且不受饮食、饮水限制。ATTAIN-1研究中，最高剂量组持续治疗72周平均减重12.4kg，约40%受试者减重超过15%。礼来计划未来十年在华累计投资最高30亿美元，扩展供应链并推进口服固体制剂本土生产。价格、实际上市时间和可购买渠道仍待确认。",
+    "why": "口服剂型把GLP-1竞争从注射依从性进一步推向给药便利性、适用人群、价格和供给；中国BMI标签与国内指南并不完全一致，可能影响实际可触达人群。",
+    "role": "获批不等于立即放量，也不等于医保支付。2026版医保目录中的玛仕度肽、埃诺格列肽等GLP-1药物对应的是成人2型糖尿病支付范围，不能外推为减重适应证已获医保覆盖。",
+    "tags": [
+      "GLP-1",
+      "奥氟格列隆",
+      "穆优达",
+      "肥胖",
+      "口服减重",
+      "BMI",
+      "礼来",
+      "司美格鲁肽",
+      "玛仕度肽",
+      "埃诺格列肽"
+    ],
+    "sources": [
+      {
+        "title": "礼来公司新闻稿（PR Newswire Asia）：奥氟格列隆在中国获批",
+        "url": "https://www.prnasia.com/story/556023-1.shtml"
+      },
+      {
+        "title": "医药魔方转载国家药监局批准信息，列出适用BMI和合并症条件",
+        "url": "https://bydrug.pharmcube.com/news/detail/26182031afffea6be2f4297431e22012"
+      },
+      {
+        "title": "每日经济新闻：口服减重药抢先获批，但适用人群较国内标准收窄",
+        "url": "https://www.nbd.com.cn/articles/2026-11-12/4646034.html"
+      },
+      {
+        "title": "Reuters Breakingviews：中国成为全球肥胖药物研发与BD的重要来源",
+        "url": "https://www.reuters.com/commentary/breakingviews/china-emerges-obesity-drug-lab-big-pharma-2026-11-11/"
+      }
+    ],
+    "updates": [
+      {
+        "date": "2026-11-16",
+        "text": "已升级为本周重点深度卡；重点追踪说明书、定价、正式上市、口服司美格鲁肽进度和医保适应证边界。"
+      }
+    ]
+  },
+  {
+    "id": "nhsa-2026-nrdl-commercial-list-20261114",
+    "date": "2026-11-14",
+    "title": "2026国家医保与商保创新药双目录发布：107种新增、51个1类创新药，首个CAR-T进入基本医保",
+    "category": "政策 / 支付",
+    "summary": "国家医保局、人社部公布2026年基本医保药品目录和商保创新药目录：医保新增107种，其中51个1类创新药，调出34种，净增78个编号，目录总数达3331个；商保创新药目录新增12种、总数28种，2个2025年商保目录品种转入基本医保。新版目录自2027年1月1日起执行。",
+    "detail": "药明巨诺瑞基奥仑赛注射液成为首个进入国家基本医保目录的CAR-T产品；百利天恒宜泽康实现上市首年纳入。信达玛仕度肽和埃诺格列肽等GLP-1药物按成人2型糖尿病适应证纳入，不能外推为减重适应证已获医保。医保局同时明确省级挂网、医院药事会、双通道电子处方、DRG/DIP特例单议、云药房和商保衔接安排。",
+    "why": "政策重点从“谈判进目录”进一步转向“进院、支付、供应、院外找药和商保赔付”的完整执行链，创新药商业化不再只看医保谈判结果。",
+    "role": "目录纳入并不自动等于所有医院配备或所有商业保险赔付；支付范围仍受说明书和医保限定约束，部分支付标准标记为“*”的品种不得公开。",
+    "tags": [
+      "医保目录",
+      "商保创新药目录",
+      "CAR-T",
+      "瑞基奥仑赛",
+      "创新药",
+      "DRG",
+      "DIP",
+      "双通道",
+      "云药房",
+      "GLP-1",
+      "玛仕度肽",
+      "埃诺格列肽",
+      "基层用药"
+    ],
+    "sources": [
+      {
+        "title": "国家医保局：2026版医保目录和商保创新药目录发布",
+        "url": "https://www.nhsa.gov.cn/art/2026/11/14/art_14_23385.html"
+      },
+      {
+        "title": "国家医保局、人社部：2026版目录落地执行通知及支付、挂网、进院、云药房规则",
+        "url": "https://www.nhsa.gov.cn/art/2026/11/14/art_53_23387.html"
+      },
+      {
+        "title": "每日经济新闻：CAR-T首次进医保、宜泽康上市首年纳入及产品变化",
+        "url": "https://www.nbd.com.cn/articles/2026-11-14/4647861.html"
+      },
+      {
+        "title": "苏州市政府：首版商保创新药目录截至10月底的配备、使用和销售数据",
+        "url": "https://www.suzhou.gov.cn/szsrmzf/szyw/202611/190594f127374ee4b125d539428096a2.shtml"
+      },
+      {
+        "title": "财新：中保协58款商保药品推荐清单，补充院外特药保障",
+        "url": "https://www.caixin.com/2026-11-10/102503367.html"
+      },
+      {
+        "title": "中国保险行业协会：58款商保药品保障推荐清单（第一版）",
+        "url": "https://www.iachina.cn/art/2026/11/10/art_22_109383.html"
+      }
+    ],
+    "updates": [
+      {
+        "date": "2026-11-16",
+        "text": "本周重点深度卡同时整合11月10日四部门创新药进院通知和中保协58款院外特药推荐清单，明确区分三套不同目录。"
+      }
+    ]
+  },
+  {
+    "id": "akeso-summit-ivonescimab-fda-crl-20261115",
+    "date": "2026-11-15",
+    "title": "依沃西单抗美国BLA收到FDA完整回复函：全球III期OS未达统计学显著，PFS单独不足以支持批准",
+    "category": "药品 / 创新药出海",
+    "summary": "Summit Therapeutics披露，FDA对依沃西单抗联合含铂化疗治疗既往EGFR-TKI治疗后局部晚期或转移性非鳞状NSCLC的BLA发出Complete Response Letter。FDA认为HARMONi全球III期虽显著改善PFS，但主要OS分析未达到统计学显著，PFS获益单独不足以支持正向获益风险判断。",
+    "detail": "HARMONi主要分析中PFS中位数6.8个月对4.4个月，HR 0.52；OS中位数16.8个月对14.0个月，HR 0.79，p=0.057。2026年6月更新OS HR改善至0.76，名义p=0.0151，但属于后续数据切点；西方亚组HR 0.76、95%CI 0.52–1.10，仍跨越1。该CRL只针对这一BLA适应证，不等于依沃西单抗所有适应证或PD-1/VEGF机制整体失败。",
+    "why": "中国创新资产全球化的检验点正在从“有无全球III期数据”转向预设终点能否按统计方案兑现、OS成熟度、地区人群代表性和全球监管沟通。",
+    "role": "FDA完整回复函全文尚未公开；目前可确认的公开理由集中在OS统计学显著性不足。中国已获批的适应证及其他HARMONi研究不因这一封CRL自动失效。",
+    "tags": [
+      "依沃西单抗",
+      "ivonescimab",
+      "PD-1",
+      "VEGF",
+      "HARMONi",
+      "FDA",
+      "CRL",
+      "License-out",
+      "Akeso",
+      "Summit",
+      "全球临床",
+      "OS",
+      "PFS"
+    ],
+    "sources": [
+      {
+        "title": "Summit Therapeutics：2026年11月15日FDA完整回复函公告",
+        "url": "https://www.smmttx.com/news/press-releases/news-details/2026/Summit-Therapeutics-Provides-Update-Regarding-Ivonescimab-Biologics-License-Application/"
+      },
+      {
+        "title": "Reuters：FDA拒绝批准依沃西单抗，关键在于OS未达统计学显著",
+        "url": "https://www.reuters.com/legal/litigation/us-fda-declines-approve-summit-lung-cancer-drug-after-trial-misses-key-survival-2026-11-15/"
+      },
+      {
+        "title": "Fierce Biotech：CRL与HARMONi试验局限、竞争格局和后续HARMONi-3",
+        "url": "https://www.fiercebiotech.com/pharma/fda-rejects-summit-therapeutics-pd-1-vegf-ivonescimab-nsclc"
+      },
+      {
+        "title": "美国SEC：Summit披露2026年6月HARMONi更新OS数据",
+        "url": "https://www.sec.gov/Archives/edgar/data/1599298/000159929826000068/smmt-20260630.htm"
+      },
+      {
+        "title": "Akeso：2022年与Summit的授权交易公告",
+        "url": "https://akesobio.com/en/media/akeso-news/20221206/"
+      },
+      {
+        "title": "美国SEC：Summit披露upfront、监管/商业里程碑和royalty结构",
+        "url": "https://www.sec.gov/Archives/edgar/data/1599298/000159929823000074/pressreleaseq2june2023.htm"
+      },
+      {
+        "title": "Reddit r/biotech：行业参与者讨论OS、PFS和西方人群数据的分歧（观点线索）",
+        "url": "https://www.reddit.com/r/biotech/comments/1xwx1it/summits_ivonescimab_pd1_vegf_bla_rejected_by_the/"
+      },
+      {
+        "title": "BioMed Nexus：对CRL、预设OS终点和后续路径的独立拆解",
+        "url": "https://biomednexus.com/summit-ivonescimab-crl-overall-survival/"
+      }
+    ],
+    "updates": [
+      {
+        "date": "2026-11-16",
+        "text": "已升级为本周重点深度卡；继续跟踪Summit是否与FDA沟通重申报路径，以及HARMONi-3等不同适应证研究的后续数据。"
+      }
+    ]
+  }
+]
 ];
